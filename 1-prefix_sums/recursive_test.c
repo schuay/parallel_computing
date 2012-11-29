@@ -3,21 +3,6 @@
 #include "common.h"
 #include "recursive.h"
 
-static TYPE *prefix_sums_ref(const TYPE *x, size_t n) {
-    TYPE *y = malloc(sizeof(TYPE) * n);
-    if (y == NULL) {
-        return y;
-    }
-
-    TYPE sum = 0;
-    for (size_t i = 0; i < n; i++) {
-        sum += x[i];
-        y[i] = sum;
-    }
-
-    return y;
-}
-
 START_TEST(test_recursive_odd) {
     TYPE nrs[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
     size_t len = sizeof(nrs) / sizeof(nrs[0]);

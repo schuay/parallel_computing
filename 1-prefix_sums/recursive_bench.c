@@ -39,24 +39,36 @@ int main(int argc, char **argv) {
             continue;
         }
 
-        perf_t *perf = perf_create(threads);
-        if (perf == NULL) {
-            return -1;
-        }
-
         TYPE *nrs = random_array(len, time(NULL));
         if (nrs == NULL) {
             return -1;
         }
 
+        /* Bench the sequential implementation. */
+
         double start = omp_get_wtime();
+        TYPE *seq = prefix_sums_ref(nrs, len);
+        double seq_time = omp_get_wtime() - start;
+
+        free(seq);
+
+        /* Bench the parallel implementation. */
+
+        perf_t *perf = perf_create(threads);
+        if (perf == NULL) {
+            return -1;
+        }
+
+        start = omp_get_wtime();
         if (prefix_sums(nrs, len, perf) != 0) {
             return -1;
         }
-        double end = omp_get_wtime();
+        double par_time = omp_get_wtime() - start;
 
         int counter = perf_join(perf);
-        printf("elements: %d; counter: %d; time: %f\n", len, counter, end - start);
+        printf("elements: %d; counter: %d; seq time: %f; par time: %f\n",
+                len, counter,
+                seq_time, par_time);
 
         free(nrs);
         perf_free(perf);
