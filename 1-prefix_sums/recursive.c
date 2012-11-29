@@ -190,11 +190,6 @@ static Suite *recursive_suite(void) {
 }
 
 int main(int argc, char **argv) {
-    struct opts opts;
-    if (parse_args(argc, argv, &opts) != 0) {
-        return EXIT_FAILURE;
-    }
-
     printf("omp_get_max_threads() == %d\n", omp_get_max_threads());
 
     int number_failed;
