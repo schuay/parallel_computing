@@ -24,7 +24,9 @@ void perf_free(perf_t *perf) {
 }
 
 void perf_inc(perf_t *perf, size_t n) {
-    perf->counters[n]++;
+    if (perf != NULL) {
+        perf->counters[n]++;
+    }
 }
 
 int perf_join(perf_t *perf) {

@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "perf.h"
+
 /**
  * The compile-time type of the array elements. Must have an associative +
  * operator.
@@ -18,7 +20,7 @@ inline static int is_odd(int n) {
  * at ptr with len elements of TYPE.
  * Returns 0 on success, < 0 on error.
  */
-int prefix_sums(TYPE *x, size_t n) {
+int prefix_sums(TYPE *x, size_t n, perf_t *perf) {
 
     /* All done, terminate. */
 
@@ -41,12 +43,13 @@ int prefix_sums(TYPE *x, size_t n) {
 #pragma omp for
         for (size_t i = 0; i < m; i++) {
             y[i] = x[2 * i] + x[2 * i + 1];
+            perf_inc(perf, omp_get_thread_num());
         }
     }
 
     /* Recurse. */
 
-    if (prefix_sums(y, m) != 0) {
+    if (prefix_sums(y, m, perf) != 0) {
         return -1;
     }
 
@@ -58,11 +61,13 @@ int prefix_sums(TYPE *x, size_t n) {
         for (size_t i = 1; i < m; i++) {
             x[2 * i] += y[i - 1];
             x[2 * i + 1] = y[i];
+            perf_inc(perf, omp_get_thread_num());
         }
     }
     x[1] = y[0];
     if (is_odd(n)) {
         x[n - 1] += y[m - 1];
+        perf_inc(perf, 0);
     }
 
     free(y);
@@ -104,7 +109,7 @@ START_TEST(test_recursive_odd) {
     size_t len = sizeof(nrs) / sizeof(nrs[0]);
 
     TYPE *ref = prefix_sums_ref(nrs, len);
-    prefix_sums(nrs, len);
+    prefix_sums(nrs, len, NULL);
 
     fail_unless(memcmp(nrs, ref, len) == 0,
             "Result not equal to reference implementation");
@@ -118,7 +123,7 @@ START_TEST(test_recursive_even) {
     size_t len = sizeof(nrs) / sizeof(nrs[0]);
 
     TYPE *ref = prefix_sums_ref(nrs, len);
-    prefix_sums(nrs, len);
+    prefix_sums(nrs, len, NULL);
 
     fail_unless(memcmp(nrs, ref, len) == 0,
             "Result not equal to reference implementation");
@@ -132,7 +137,7 @@ START_TEST(test_recursive_single) {
     size_t len = sizeof(nrs) / sizeof(nrs[0]);
 
     TYPE *ref = prefix_sums_ref(nrs, len);
-    prefix_sums(nrs, len);
+    prefix_sums(nrs, len, NULL);
 
     fail_unless(memcmp(nrs, ref, len) == 0,
             "Result not equal to reference implementation");
@@ -147,7 +152,7 @@ START_TEST(test_recursive_1024) {
     TYPE *nrs = random_array(len, len);
     TYPE *ref = prefix_sums_ref(nrs, len);
 
-    prefix_sums(nrs, len);
+    prefix_sums(nrs, len, NULL);
 
     fail_unless(memcmp(nrs, ref, len) == 0,
             "Result not equal to reference implementation");
@@ -163,7 +168,7 @@ START_TEST(test_recursive_16384) {
     TYPE *nrs = random_array(len, len);
     TYPE *ref = prefix_sums_ref(nrs, len);
 
-    prefix_sums(nrs, len);
+    prefix_sums(nrs, len, NULL);
 
     fail_unless(memcmp(nrs, ref, len) == 0,
             "Result not equal to reference implementation");
