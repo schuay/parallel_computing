@@ -49,12 +49,14 @@ int main(int argc, char **argv) {
             return -1;
         }
 
+        double start = omp_get_wtime();
         if (prefix_sums(nrs, len, perf) != 0) {
             return -1;
         }
+        double end = omp_get_wtime();
 
         int counter = perf_join(perf);
-        printf("%d processed, counter = %d\n", len, counter);
+        printf("elements: %d; counter: %d; time: %f\n", len, counter, end - start);
 
         free(nrs);
         perf_free(perf);
