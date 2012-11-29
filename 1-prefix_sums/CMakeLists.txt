@@ -19,14 +19,14 @@ add_executable(recursive_bench
     common.c
     perf.c
     recursive.c
-    recursive_bench.c
+    bench.c
 )
 
 add_executable(iterative_bench
     common.c
     perf.c
     iterative.c
-    recursive_bench.c
+    bench.c
 )
 
 if(CHECK_FOUND)
@@ -38,7 +38,7 @@ if(CHECK_FOUND)
         common.c
         perf.c
         recursive.c
-        recursive_test.c
+        test.c
     )
 
     target_link_libraries(recursive_test
@@ -53,7 +53,7 @@ if(CHECK_FOUND)
         common.c
         perf.c
         iterative.c
-        recursive_test.c
+        test.c
     )
 
     target_link_libraries(iterative_test
