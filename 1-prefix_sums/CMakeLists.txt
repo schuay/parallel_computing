@@ -21,17 +21,30 @@ include_directories(
     ${CHECK_INCLUDE_DIRS}
 )
 
-add_executable(recursive
-    recursive.c
+add_executable(recursive_bench
+    common.c
     perf.c
+    recursive.c
+    recursive_bench.c
 )
 
-target_link_libraries(recursive
+target_link_libraries(recursive_bench
+    ${CHECK_LIBRARIES}
+)
+
+add_executable(recursive_test
+    common.c
+    perf.c
+    recursive.c
+    recursive_test.c
+)
+
+target_link_libraries(recursive_test
     ${CHECK_LIBRARIES}
 )
 
 add_test(test_recursive
-    ${CMAKE_CURRENT_BINARY_DIR}/recursive
+    ${CMAKE_CURRENT_BINARY_DIR}/recursive_test
 )
 
 # vim:set ts=4 sw=4 et:

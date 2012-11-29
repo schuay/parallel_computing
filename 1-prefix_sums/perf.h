@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 typedef struct {
     int *counters;
     size_t len;
