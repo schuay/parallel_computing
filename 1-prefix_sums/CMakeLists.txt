@@ -10,7 +10,7 @@ if(OPENMP_FOUND)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    add_definitions("-Wall -Wextra -pedantic")
+    add_definitions("-Wall -Wextra -pedantic -std=c99")
 endif()
 
 set(SRC
