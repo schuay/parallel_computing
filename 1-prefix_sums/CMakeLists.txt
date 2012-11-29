@@ -23,6 +23,7 @@ include_directories(
 
 add_executable(recursive
     recursive.c
+    perf.c
 )
 
 target_link_libraries(recursive
