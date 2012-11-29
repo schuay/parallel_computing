@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 2.8.0)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/../CMakeModules/")
+enable_testing()
+
 project(pc1)
 
+find_package(Check REQUIRED)
 find_package(OpenMP REQUIRED)
 
 if(OPENMP_FOUND)
@@ -13,12 +17,20 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     add_definitions("-Wall -Wextra -pedantic -std=c99")
 endif()
 
-set(SRC
+include_directories(
+    ${CHECK_INCLUDE_DIRS}
+)
+
+add_executable(recursive
     recursive.c
 )
 
-add_executable(main
-    ${SRC}
+target_link_libraries(recursive
+    ${CHECK_LIBRARIES}
+)
+
+add_test(test_recursive
+    ${CMAKE_CURRENT_BINARY_DIR}/recursive
 )
 
 # vim:set ts=4 sw=4 et:
