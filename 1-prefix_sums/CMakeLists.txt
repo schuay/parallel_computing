@@ -22,6 +22,13 @@ add_executable(recursive_bench
     recursive_bench.c
 )
 
+add_executable(iterative_bench
+    common.c
+    perf.c
+    iterative.c
+    recursive_bench.c
+)
+
 if(CHECK_FOUND)
     include_directories(
         ${CHECK_INCLUDE_DIRS}
@@ -40,6 +47,21 @@ if(CHECK_FOUND)
 
     add_test(test_recursive
         ${CMAKE_CURRENT_BINARY_DIR}/recursive_test
+    )
+
+    add_executable(iterative_test
+        common.c
+        perf.c
+        iterative.c
+        recursive_test.c
+    )
+
+    target_link_libraries(iterative_test
+        ${CHECK_LIBRARIES}
+    )
+
+    add_test(test_iterative
+        ${CMAKE_CURRENT_BINARY_DIR}/iterative_test
     )
 endif()
 

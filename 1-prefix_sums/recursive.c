@@ -2,13 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "recursive.h"
+#include "prefix.h"
 
 inline static int is_odd(int n) {
     return n & 0x01;
 }
 
-int prefix_sums(TYPE *x, size_t n, perf_t *perf) {
+static int prefix_sums_(TYPE *x, size_t n, perf_t *perf, TYPE *y) {
 
     /* All done, terminate. */
 
@@ -19,10 +19,6 @@ int prefix_sums(TYPE *x, size_t n, perf_t *perf) {
     /* Create our accumulation array. */
 
     const size_t m = n / 2;
-    TYPE *y = malloc(m * sizeof(TYPE));
-    if (y == NULL) {
-        return -1;
-    }
 
     /* Accumulate pairs. */
 
@@ -37,7 +33,7 @@ int prefix_sums(TYPE *x, size_t n, perf_t *perf) {
 
     /* Recurse. */
 
-    if (prefix_sums(y, m, perf) != 0) {
+    if (prefix_sums_(y, m, perf, y + m) != 0) {
         return -1;
     }
 
@@ -58,7 +54,18 @@ int prefix_sums(TYPE *x, size_t n, perf_t *perf) {
         perf_inc(perf, 0);
     }
 
+    return 0;
+}
+
+int prefix_sums(TYPE *x, size_t n, perf_t *perf) {
+    TYPE *y = malloc(n * sizeof(TYPE));
+    if (y == NULL) {
+        return -1;
+    }
+
+    int ret = prefix_sums_(x, n, perf, y);
+
     free(y);
 
-    return 0;
+    return ret;
 }

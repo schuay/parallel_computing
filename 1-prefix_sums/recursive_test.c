@@ -1,7 +1,7 @@
 #include <check.h>
 
 #include "common.h"
-#include "recursive.h"
+#include "prefix.h"
 
 START_TEST(test_recursive_odd) {
     TYPE nrs[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
