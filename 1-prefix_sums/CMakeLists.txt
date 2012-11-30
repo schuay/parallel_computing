@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 2.8.0)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/../CMakeModules/")
-enable_testing()
 
 project(pc1)
 
@@ -29,7 +28,16 @@ add_executable(iterative_bench
     bench.c
 )
 
+add_executable(hillis-steele_bench
+    common.c
+    perf.c
+    hillis-steele.c
+    bench.c
+)
+
 if(CHECK_FOUND)
+    enable_testing()
+
     include_directories(
         ${CHECK_INCLUDE_DIRS}
     )
@@ -62,6 +70,21 @@ if(CHECK_FOUND)
 
     add_test(test_iterative
         ${CMAKE_CURRENT_BINARY_DIR}/iterative_test
+    )
+
+    add_executable(hillis-steele_test
+        common.c
+        perf.c
+        hillis-steele.c
+        test.c
+    )
+
+    target_link_libraries(hillis-steele_test
+        ${CHECK_LIBRARIES}
+    )
+
+    add_test(test_hillis-steele
+        ${CMAKE_CURRENT_BINARY_DIR}/hillis-steele_test
     )
 endif()
 
