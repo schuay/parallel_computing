@@ -4,6 +4,8 @@
 
 #include "prefix.h"
 
+const char *algorithm_name = "iterative";
+
 int prefix_sums(TYPE *x, size_t n, perf_t *perf) {
     size_t kk = 2;
 

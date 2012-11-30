@@ -4,6 +4,8 @@
 
 #include "prefix.h"
 
+const char *algorithm_name = "recursive";
+
 inline static int is_odd(int n) {
     return n & 0x01;
 }

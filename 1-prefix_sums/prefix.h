@@ -12,3 +12,5 @@
  * Returns 0 on success, < 0 on error.
  */
 int prefix_sums(TYPE *x, size_t n, perf_t *perf);
+
+extern const char *algorithm_name;

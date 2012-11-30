@@ -4,6 +4,8 @@
 
 #include "prefix.h"
 
+const char *algorithm_name = "hillis-steele";
+
 int prefix_sums(TYPE *x, size_t n, perf_t *perf) {
     return 0;
 }

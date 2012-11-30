@@ -3,7 +3,7 @@
 #include "common.h"
 #include "prefix.h"
 
-START_TEST(test_recursive_odd) {
+START_TEST(test_odd) {
     TYPE nrs[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
     size_t len = sizeof(nrs) / sizeof(nrs[0]);
 
@@ -17,7 +17,7 @@ START_TEST(test_recursive_odd) {
 }
 END_TEST
 
-START_TEST(test_recursive_even) {
+START_TEST(test_even) {
     TYPE nrs[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     size_t len = sizeof(nrs) / sizeof(nrs[0]);
 
@@ -31,7 +31,7 @@ START_TEST(test_recursive_even) {
 }
 END_TEST
 
-START_TEST(test_recursive_single) {
+START_TEST(test_single) {
     TYPE nrs[] = { 0 };
     size_t len = sizeof(nrs) / sizeof(nrs[0]);
 
@@ -45,7 +45,7 @@ START_TEST(test_recursive_single) {
 }
 END_TEST
 
-START_TEST(test_recursive_1024) {
+START_TEST(test_1024) {
     const size_t len = 1024;
 
     TYPE *nrs = random_array(len, len);
@@ -61,7 +61,7 @@ START_TEST(test_recursive_1024) {
 }
 END_TEST
 
-START_TEST(test_recursive_16384) {
+START_TEST(test_16384) {
     const size_t len = 16384;
 
     TYPE *nrs = random_array(len, len);
@@ -77,16 +77,16 @@ START_TEST(test_recursive_16384) {
 }
 END_TEST
 
-static Suite *recursive_suite(void) {
-    Suite *s = suite_create("recursive");
+static Suite *create_suite(void) {
+    Suite *s = suite_create(algorithm_name);
 
     TCase *tc_core = tcase_create("core");
 
-    tcase_add_test(tc_core, test_recursive_odd);
-    tcase_add_test(tc_core, test_recursive_even);
-    tcase_add_test(tc_core, test_recursive_single);
-    tcase_add_test(tc_core, test_recursive_1024);
-    tcase_add_test(tc_core, test_recursive_16384);
+    tcase_add_test(tc_core, test_odd);
+    tcase_add_test(tc_core, test_even);
+    tcase_add_test(tc_core, test_single);
+    tcase_add_test(tc_core, test_1024);
+    tcase_add_test(tc_core, test_16384);
 
     suite_add_tcase(s, tc_core);
 
@@ -95,7 +95,7 @@ static Suite *recursive_suite(void) {
 
 int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))) {
     int number_failed;
-    Suite *s = recursive_suite();
+    Suite *s = create_suite();
     SRunner *sr = srunner_create(s);
     srunner_run_all(sr, CK_NORMAL);
     number_failed = srunner_ntests_failed(sr);
