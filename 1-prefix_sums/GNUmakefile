@@ -3,7 +3,7 @@ bake:
 	cd build; cmake -DCMAKE_BUILD_TYPE="Debug" ..; make -j3
 
 test: bake
-	cd build; make test
+	cd build; ctest --output-on-failure
 
 clean:
 	rm -r build
