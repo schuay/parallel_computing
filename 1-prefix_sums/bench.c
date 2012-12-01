@@ -31,7 +31,7 @@ static int safe_strtol(const char *s) {
 int main(int argc, char **argv) {
 
     const int threads = omp_get_max_threads();
-    printf("omp_get_max_threads() == %d\n\n", threads);
+    printf("%s. omp_get_max_threads() == %d\n\n", algorithm_name, threads);
 
     for (int i = 1; i < argc; i++) {
         int len = safe_strtol(argv[i]);
@@ -65,10 +65,10 @@ int main(int argc, char **argv) {
         }
         double par_time = omp_get_wtime() - start;
 
-        int counter = perf_join(perf);
-        printf("elements: %d; counter: %d; seq time: %f; par time: %f\n",
-                len, counter,
-                seq_time, par_time);
+        printf("elements: %d; seq time: %f; par time: %f\n",
+                len, seq_time, par_time);
+        perf_summary(perf);
+        printf("\n");
 
         free(nrs);
         perf_free(perf);

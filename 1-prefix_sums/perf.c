@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "perf.h"
 
@@ -29,11 +30,13 @@ void perf_inc(perf_t *perf, size_t n) {
     }
 }
 
-int perf_join(perf_t *perf) {
+int perf_summary(perf_t *perf) {
     int sum = 0;
     for (size_t i = 0; i < perf->len; i++) {
         sum += perf->counters[i];
+        printf("Thread %02d: %d counters\n", (int)i, perf->counters[i]);
     }
+    printf("Total: %d counters\n", sum);
     return sum;
 }
 
