@@ -24,13 +24,10 @@ static int prefix_sums_(TYPE *x, size_t n, perf_t *perf, TYPE *y) {
 
     /* Accumulate pairs. */
 
-#pragma omp parallel
-    {
-#pragma omp for
-        for (size_t i = 0; i < m; i++) {
-            y[i] = x[2 * i] + x[2 * i + 1];
-            perf_inc(perf, omp_get_thread_num());
-        }
+#pragma omp parallel for
+    for (size_t i = 0; i < m; i++) {
+        y[i] = x[2 * i] + x[2 * i + 1];
+        perf_inc(perf, omp_get_thread_num());
     }
 
     /* Recurse. */
@@ -41,14 +38,11 @@ static int prefix_sums_(TYPE *x, size_t n, perf_t *perf, TYPE *y) {
 
     /* Combine. */
 
-#pragma omp parallel
-    {
-#pragma omp for
-        for (size_t i = 1; i < m; i++) {
-            x[2 * i] += y[i - 1];
-            x[2 * i + 1] = y[i];
-            perf_inc(perf, omp_get_thread_num());
-        }
+#pragma omp parallel for
+    for (size_t i = 1; i < m; i++) {
+        x[2 * i] += y[i - 1];
+        x[2 * i + 1] = y[i];
+        perf_inc(perf, omp_get_thread_num());
     }
     x[1] = y[0];
     if (is_odd(n)) {
