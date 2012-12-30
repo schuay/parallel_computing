@@ -9,6 +9,7 @@ REMOTEDIR = ~/project1
 SOURCE = .
 
 ALGORITHMS = recursive iterative hillis-steele
+INPUT_SIZES = 10 100 1000000 100000000
 
 bake:
 	mkdir -p build
@@ -18,7 +19,7 @@ test: bake
 	cd build; ctest --output-on-failure
 
 bench: bake
-	for alg in $(ALGORITHMS); do build/$${alg}_bench 10 100 1000000 100000000; done
+	for alg in $(ALGORITHMS); do build/$${alg}_bench $(INPUT_SIZES); done
 
 hand-in:
 	$(RSYNC) $(RFLAGS) $(SOURCE) $(HOST):$(REMOTEDIR)
