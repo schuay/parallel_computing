@@ -2,8 +2,3 @@
 .ssh-cfg
 build/
 data/
-report.aux
-report.log
-report.pdf
-report.tex
-report.toc
