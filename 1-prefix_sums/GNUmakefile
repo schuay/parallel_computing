@@ -28,6 +28,6 @@ remote-bench: hand-in
 	$(SSH) $(SFLAGS) $(HOST) 'cd $(REMOTEDIR); make clean bench'
 
 clean:
-	rm -r build
+	rm -rf build
 
 
