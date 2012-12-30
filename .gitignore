@@ -1,6 +1,7 @@
 *.swp
 .ssh-cfg
 build/
+data/
 report.aux
 report.log
 report.pdf
