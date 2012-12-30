@@ -29,7 +29,12 @@ int main(int argc, const char **argv) {
     TYPE a[] = {0,2,4,6,8,10,12,14,16,18,20};
     TYPE b[] = {1,3,5,7,9,11,13,15,17,19,21};
 
-    merge(a, 11, b, 11, NULL);
+    TYPE *c = merge(a, 11, b, 11, NULL);
+
+    for (int i = 0; i < 22; i++) printf("%d ", c[i]);
+    printf("\n");
+
+    free(c);
 
     return 0;
 }

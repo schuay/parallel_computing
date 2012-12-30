@@ -88,8 +88,10 @@ static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
             iteration, start, length, a[start]);
 
     int b_start = binary_search(a[start], b, m);
+    int b_length = (iteration == partitions - 1) ?
+        m - b_start : binary_search(a[next_start], b, m);
 
-    DEBUG("b partition from %d\n", b_start);
+    DEBUG("b partition from %d, length %d\n", b_start, b_length);
 }
 
 static int binary_search(TYPE needle, const TYPE *haystack, int n)
