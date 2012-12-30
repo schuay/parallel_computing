@@ -84,14 +84,16 @@ static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
     const int next_start = (iteration + 1) * size;
     const int length = (iteration == partitions - 1) ? n - start : next_start - start;
 
-    DEBUG("iteration %d says hello. from %d, length %d, starts with %d\n",
-            iteration, start, length, a[start]);
-
     int b_start = binary_search(a[start], b, m);
     int b_length = (iteration == partitions - 1) ?
-        m - b_start : binary_search(a[next_start], b, m);
+        m - b_start : binary_search(a[next_start], b, m) - b_start;
 
-    DEBUG("b partition from %d, length %d\n", b_start, b_length);
+    DEBUG("iteration %d says hello. from %d, length %d, starts with %d."
+          "b partition from %d, length %d\n",
+            iteration, start, length, a[start],
+            b_start, b_length);
+
+    merge_seq_private(a + start, length, b + b_start, b_length, c + start + b_start);
 }
 
 static int binary_search(TYPE needle, const TYPE *haystack, int n)
