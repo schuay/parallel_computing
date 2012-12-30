@@ -4,3 +4,5 @@ report.out
 report.pdf
 report.tex
 report.toc
+*-eps-converted-to.pdf
+*.eps
