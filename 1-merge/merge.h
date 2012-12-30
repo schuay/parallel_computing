@@ -14,3 +14,8 @@
  * be freed by the caller.
  */
 TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf);
+
+/**
+ * The sequential reference implementation.
+ */
+TYPE *merge_seq(const TYPE *a, int n, const TYPE *b, int m);

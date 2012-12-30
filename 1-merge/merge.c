@@ -19,6 +19,27 @@ static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
  */
 static int binary_search(TYPE needle, const TYPE *haystack, int n);
 
+TYPE *merge_seq(const TYPE *a, int n, const TYPE *b, int m)
+{
+    TYPE *c = calloc(n + m, sizeof(TYPE));
+    if (c == NULL) {
+        return NULL;
+    }
+
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    while (i < n && j < m) {
+        c[k++] = ((a[i] < b[j]) ? a[i++] : b[j++]);
+    }
+
+    while (i < n) c[k++] = a[i++];
+    while (j < m) c[k++] = b[j++];
+
+    return c;
+}
+
 TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf)
 {
     TYPE *c = calloc(n + m, sizeof(TYPE));

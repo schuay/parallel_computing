@@ -9,7 +9,7 @@
         size_t n = sizeof(a) / sizeof(a[0]); \
         size_t m = sizeof(b) / sizeof(b[0]); \
  \
-        TYPE *ref = merge_ref(a, n, b, m); \
+        TYPE *ref = merge_seq(a, n, b, m); \
         TYPE *tst = merge(a, n, b, m, NULL); \
  \
         fail_unless(memcmp(ref, tst, sizeof(TYPE) * (n + m)) == 0, \
@@ -18,27 +18,6 @@
         free(ref); \
         free(tst); \
     } while (0);
-
-TYPE *merge_ref(const TYPE *a, int n, const TYPE *b, int m)
-{
-    TYPE *c = calloc(n + m, sizeof(TYPE));
-    if (c == NULL) {
-        return NULL;
-    }
-
-    int i = 0;
-    int j = 0;
-    int k = 0;
-
-    while (i < n && j < m) {
-        c[k++] = ((a[i] < b[j]) ? a[i++] : b[j++]);
-    }
-
-    while (i < n) c[k++] = a[i++]; 
-    while (j < m) c[k++] = b[j++]; 
-
-    return c;
-}
 
 START_TEST(test_singles)
 {
