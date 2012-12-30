@@ -29,20 +29,18 @@ if(CHECK_FOUND)
         ${CHECK_INCLUDE_DIRS}
     )
 
-#    add_executable(recursive_test
-#        common.c
-#        perf.c
-#        recursive.c
-#        test.c
-#    )
+    add_executable(merge_test
+        merge.c
+        test.c
+    )
 
-#    target_link_libraries(recursive_test
-#        ${CHECK_LIBRARIES}
-#    )
+    target_link_libraries(merge_test
+        ${CHECK_LIBRARIES}
+    )
 
-#    add_test(test_recursive
-#        ${CMAKE_CURRENT_BINARY_DIR}/recursive_test
-#    )
+    add_test(test_merge
+        ${CMAKE_CURRENT_BINARY_DIR}/merge_test
+    )
 endif()
 
 # vim:set ts=4 sw=4 et:
