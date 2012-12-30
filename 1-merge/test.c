@@ -3,6 +3,7 @@
 
 #include "merge.h"
 
+#define LARGE_N (500000)
 #define MERGE_TEST(a, b) \
     do { \
         size_t n = sizeof(a) / sizeof(a[0]); \
@@ -87,6 +88,57 @@ START_TEST(test_block_interleaved)
 }
 END_TEST
 
+START_TEST(test_interleaved_large)
+{
+    TYPE *a = calloc(LARGE_N, sizeof(TYPE));
+    TYPE *b = calloc(LARGE_N, sizeof(TYPE));
+
+    for (int i = 0; i < LARGE_N; i++) a[i] = i * 2;
+    for (int i = 0; i < LARGE_N; i++) b[i] = i * 2 + 1;
+
+    MERGE_TEST(a, b);
+
+    free(a);
+    free(b);
+}
+END_TEST
+
+START_TEST(test_random_large)
+{
+    TYPE *a = calloc(LARGE_N, sizeof(TYPE));
+    TYPE *b = calloc(LARGE_N, sizeof(TYPE));
+
+    /* Get two random sequences of unique numbers by first filling
+     * an array with the available number set, then picking numbers
+     * from this array in some random order. */
+
+    int k = LARGE_N * 2;
+    TYPE *c = calloc(k, sizeof(TYPE));
+
+    for (int i = 0; i < k; i++) c[i] = i;
+
+    srand(42);
+
+    for (int i = 0; i < LARGE_N; i++) {
+        int j = rand() % k;
+        a[i] = c[j];
+        c[j] = c[--k];
+    }
+    for (int i = 0; i < LARGE_N; i++) {
+        int j = rand() % k;
+        b[i] = c[j];
+        c[j] = c[--k];
+    }
+
+    free(c);
+
+    MERGE_TEST(a, b);
+
+    free(a);
+    free(b);
+}
+END_TEST
+
 static Suite *create_suite(void)
 {
     Suite *s = suite_create("merge");
@@ -98,6 +150,8 @@ static Suite *create_suite(void)
     tcase_add_test(tc_core, test_b_lt_a);
     tcase_add_test(tc_core, test_interleaved);
     tcase_add_test(tc_core, test_block_interleaved);
+    tcase_add_test(tc_core, test_interleaved_large);
+    tcase_add_test(tc_core, test_random_large);
 
     suite_add_tcase(s, tc_core);
 
