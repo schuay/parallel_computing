@@ -84,7 +84,7 @@ static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
     const int next_start = (iteration + 1) * size;
     const int length = (iteration == partitions - 1) ? n - start : next_start - start;
 
-    int b_start = binary_search(a[start], b, m);
+    int b_start = (iteration == 0) ? 0 : binary_search(a[start], b, m);
     int b_length = (iteration == partitions - 1) ?
         m - b_start : binary_search(a[next_start], b, m) - b_start;
 
