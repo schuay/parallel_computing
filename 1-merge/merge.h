@@ -1,3 +1,5 @@
+#include "perf.h"
+
 /**
  * The datatype of array elements.
  */
@@ -11,4 +13,4 @@
  * the resulting array of length n + m is returned and must
  * be freed by the caller.
  */
-TYPE *merge(const TYPE *a, int n, const TYPE *b, int m);
+TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf);

@@ -14,9 +14,13 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     add_definitions("-Wall -Wextra -pedantic -std=c99")
 endif()
 
+include_directories(
+    ../common
+)
+
 add_executable(recursive_bench
     common.c
-    perf.c
+    ../common/perf.c
     recursive.c
     csv.c
     bench.c
@@ -24,7 +28,7 @@ add_executable(recursive_bench
 
 add_executable(iterative_bench
     common.c
-    perf.c
+    ../common/perf.c
     iterative.c
     csv.c
     bench.c
@@ -32,7 +36,7 @@ add_executable(iterative_bench
 
 add_executable(hillis-steele_bench
     common.c
-    perf.c
+    ../common/perf.c
     hillis-steele.c
     csv.c
     bench.c
@@ -47,7 +51,7 @@ if(CHECK_FOUND)
 
     add_executable(recursive_test
         common.c
-        perf.c
+        ../common/perf.c
         recursive.c
         test.c
     )
@@ -62,7 +66,7 @@ if(CHECK_FOUND)
 
     add_executable(iterative_test
         common.c
-        perf.c
+        ../common/perf.c
         iterative.c
         test.c
     )
@@ -77,7 +81,7 @@ if(CHECK_FOUND)
 
     add_executable(hillis-steele_test
         common.c
-        perf.c
+        ../common/perf.c
         hillis-steele.c
         test.c
     )
