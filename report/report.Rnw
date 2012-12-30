@@ -1,0 +1,46 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{comment}
+\usepackage[utf8]{inputenc}
+
+\title{Introduction to Parallel Computing, WS 2012}
+\author{
+    Jakob Gruber, 0203440 \\
+    Mino Sharkhawy, 1025887
+}
+
+\begin{document}
+
+\maketitle
+
+\clearpage
+\tableofcontents
+
+\clearpage
+\section{OpenMP}
+
+\subsection{Parallel Prefix Sums}
+
+% A useful Sweave tutorial can be found at http://users.stat.umn.edu/~geyer/Sweave/.
+
+<<two>>=
+2 + 2
+@
+
+\subsection{...}
+
+\clearpage
+\section{Cilk}
+
+\subsection{...}
+
+\clearpage
+\section{MPI}
+
+\subsection{...}
+
+\subsection{...}
+
+\subsection{...}
+
+\end{document}
