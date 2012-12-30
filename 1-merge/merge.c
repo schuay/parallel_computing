@@ -14,6 +14,11 @@ static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
         int iteration, int partitions, perf_t *perf);
 
 /**
+ * Performs the actual sequential merge within the given memory areas.
+ */
+static void merge_seq_private(const TYPE *a, int n, const TYPE *b, int m, TYPE *c);
+
+/**
  * Searches the haystack of size n for needle and returns
  * the closest index it can find.
  */
@@ -26,6 +31,13 @@ TYPE *merge_seq(const TYPE *a, int n, const TYPE *b, int m)
         return NULL;
     }
 
+    merge_seq_private(a, n, b, m, c);
+
+    return c;
+}
+
+static void merge_seq_private(const TYPE *a, int n, const TYPE *b, int m, TYPE *c)
+{
     int i = 0;
     int j = 0;
     int k = 0;
@@ -36,8 +48,6 @@ TYPE *merge_seq(const TYPE *a, int n, const TYPE *b, int m)
 
     while (i < n) c[k++] = a[i++];
     while (j < m) c[k++] = b[j++];
-
-    return c;
 }
 
 TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf)
