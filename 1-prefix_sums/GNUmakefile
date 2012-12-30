@@ -8,6 +8,7 @@ HOST = saturn
 REMOTEDIR = ~/project1
 SOURCE = .
 
+CSV_FILE = bench.csv
 ALGORITHMS = recursive iterative hillis-steele
 INPUT_SIZES = 10 100 1000000 100000000
 NUM_THREADS = 1 2 4 0 # 0 means use the default
@@ -21,9 +22,10 @@ test: bake
 	cd build; ctest --output-on-failure
 
 bench: bake
+	mkdir -p data
 	for inSize in $(INPUT_SIZES); do \
 		for alg in $(ALGORITHMS); do \
-			build/$${alg}_bench $${inSize} $(NUM_THREADS); \
+			build/$${alg}_bench data/$(CSV_FILE) $${inSize} $(NUM_THREADS); \
 		done; \
 	done
 
@@ -35,5 +37,6 @@ remote-bench: hand-in
 
 clean:
 	rm -rf build
+	rm -rf data
 
 

@@ -18,6 +18,7 @@ add_executable(recursive_bench
     common.c
     perf.c
     recursive.c
+    csv.c
     bench.c
 )
 
@@ -25,6 +26,7 @@ add_executable(iterative_bench
     common.c
     perf.c
     iterative.c
+    csv.c
     bench.c
 )
 
@@ -32,6 +34,7 @@ add_executable(hillis-steele_bench
     common.c
     perf.c
     hillis-steele.c
+    csv.c
     bench.c
 )
 

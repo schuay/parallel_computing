@@ -6,6 +6,7 @@
 #include <time.h>
 
 #include "common.h"
+#include "csv.h"
 #include "prefix.h"
 
 static int safe_strtol(const char *s) {
@@ -32,12 +33,17 @@ int main(int argc, char **argv) {
 
     const int maxThreads = omp_get_max_threads();
 
-    if (argc < 3) {
-        fprintf(stderr, "Usage: bench <input size> <num threads> [<num threads> ...]\n");
+    if (argc < 4) {
+        fprintf(stderr, "Usage: bench <csv file> <input size> <num threads> [<num threads> ...]\n");
         return -1;
     }
 
-    const int len = safe_strtol(argv[1]);
+    FILE *const csvFile = csv_open(argv[1]);
+    if (csvFile == NULL) {
+        return -1;
+    }
+
+    const int len = safe_strtol(argv[2]);
     if (len < 1) {
         fprintf(stderr, "Input size must be positive\n");
         return -1;
@@ -56,7 +62,9 @@ int main(int argc, char **argv) {
 
     free(seq);
 
-    for (int i = 2; i < argc; i++) {
+    fprintf(csvFile, "sequential reference,1,%d,%f\n", len, seq_time);
+
+    for (int i = 3; i < argc; i++) {
         int threads = safe_strtol(argv[i]);
         if (threads < 1) {
             threads = maxThreads;
@@ -84,9 +92,13 @@ int main(int argc, char **argv) {
         printf("\n");
 
         perf_free(perf);
+
+        fprintf(csvFile, "%s,%d,%d,%f\n", algorithm_name, threads, len, par_time);
     }
 
     free(nrs);
+
+    csv_close(csvFile);
 
     return 0;
 }
