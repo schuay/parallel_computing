@@ -4,7 +4,8 @@
 
 #include "merge.h"
 
-static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, perf_t *perf);
+static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
+        int iteration, int partitions, perf_t *perf);
 
 TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf)
 {
@@ -23,16 +24,7 @@ TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf)
 
 #pragma omp parallel for
     for (int i = 0; i < p; i++) {
-        const int me = omp_get_thread_num();
-
-        printf("thread %d says hello\n", me);
-
-        const int part_start = i * (n / p);
-        const int next_part_start = (i + 1) * (n / p);
-        const int part_len = (next_part_start > n) ?
-            n - part_start : next_part_start - part_start;
-
-        merge_part(a + part_start, part_len, b, m, c, perf);
+        merge_part(a, n, b, m, c, i, p, perf);
     }
 
     return c;
@@ -40,11 +32,18 @@ TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf)
 
 /**
  * This function is run on a single thread and handles merging a subsequence.
- * a points to the subsequence of length n. c points to the point in the result
- * array in which the subsequence should start being merged.
+ * a points to the subsequence of length n. c points to the result array.
  */
-static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, perf_t *perf)
+static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
+        int iteration, int partitions, perf_t *perf)
 {
     /* TODO: If blocks are larger than (m + n) / p, divide further by partitioning
      * the section of b. */
+
+    const int size = n / partitions;
+    const int start = iteration * size;
+    const int next_start = (iteration + 1) * size;
+    const int length = (iteration == partitions - 1) ? n - start : next_start - start;
+
+    printf("iteration %d says hello. from %d, length %d\n", iteration, start, length);
 }
