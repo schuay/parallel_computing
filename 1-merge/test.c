@@ -9,6 +9,9 @@
         size_t n = sizeof(a) / sizeof(a[0]); \
         size_t m = sizeof(b) / sizeof(b[0]); \
  \
+        qsort(a, n, sizeof(a[0]), less_than); \
+        qsort(b, n, sizeof(a[0]), less_than); \
+ \
         TYPE *ref = merge_seq(a, n, b, m); \
         TYPE *tst = merge(a, n, b, m, NULL); \
  \
@@ -18,6 +21,12 @@
         free(ref); \
         free(tst); \
     } while (0);
+
+static int less_than(const void *a, const void *b) {
+    TYPE *_a = (TYPE *)a;
+    TYPE *_b = (TYPE *)b;
+    return (int)(*_a - *_b);
+}
 
 START_TEST(test_singles)
 {
