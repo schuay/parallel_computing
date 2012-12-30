@@ -47,12 +47,57 @@ START_TEST(test_singles)
 }
 END_TEST
 
+START_TEST(test_singles_reversed)
+{
+    TYPE a[] = {1};
+    TYPE b[] = {0};
+    MERGE_TEST(a, b);
+}
+END_TEST
+
+START_TEST(test_a_lt_b)
+{
+    TYPE a[] = {6,1,2,7,3,4,8,5,9};
+    TYPE b[] = {16, 11, 12, 17, 13, 14, 18, 16, 19};
+    MERGE_TEST(a, b);
+}
+END_TEST
+
+START_TEST(test_b_lt_a)
+{
+    TYPE a[] = {16, 11, 12, 17, 13, 14, 18, 16, 19};
+    TYPE b[] = {6,1,2,7,3,4,8,5,9};
+    MERGE_TEST(a, b);
+}
+END_TEST
+
+START_TEST(test_interleaved)
+{
+    TYPE a[] = {0, 2, 4, 8, 10};
+    TYPE b[] = {1, 3, 5, 9, 11};
+    MERGE_TEST(a, b);
+}
+END_TEST
+
+START_TEST(test_block_interleaved)
+{
+    TYPE a[] = {0, 2, 4, 20, 22, 24, 8, 10};
+    TYPE b[] = {1, 3, 5, 21, 23, 25, 9, 11};
+    MERGE_TEST(a, b);
+}
+END_TEST
+
 static Suite *create_suite(void)
 {
     Suite *s = suite_create("merge");
     TCase *tc_core = tcase_create("core");
 
     tcase_add_test(tc_core, test_singles);
+    tcase_add_test(tc_core, test_singles_reversed);
+    tcase_add_test(tc_core, test_a_lt_b);
+    tcase_add_test(tc_core, test_b_lt_a);
+    tcase_add_test(tc_core, test_interleaved);
+    tcase_add_test(tc_core, test_block_interleaved);
 
     suite_add_tcase(s, tc_core);
 
