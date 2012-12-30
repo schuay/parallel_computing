@@ -30,27 +30,40 @@ static int safe_strtol(const char *s) {
 
 int main(int argc, char **argv) {
 
-    const int threads = omp_get_max_threads();
-    printf("%s. omp_get_max_threads() == %d\n\n", algorithm_name, threads);
+    const int maxThreads = omp_get_max_threads();
 
-    for (int i = 1; i < argc; i++) {
-        int len = safe_strtol(argv[i]);
-        if (len < 1) {
-            continue;
+    if (argc < 3) {
+        fprintf(stderr, "Usage: bench <input size> <num threads> [<num threads> ...]\n");
+        return -1;
+    }
+
+    const int len = safe_strtol(argv[1]);
+    if (len < 1) {
+        fprintf(stderr, "Input size must be positive\n");
+        return -1;
+    }
+
+    TYPE *nrs = random_array(len, time(NULL));
+    if (nrs == NULL) {
+        return -1;
+    }
+
+    /* Bench the sequential implementation. */
+
+    double start = omp_get_wtime();
+    TYPE *seq = prefix_sums_ref(nrs, len);
+    double seq_time = omp_get_wtime() - start;
+
+    free(seq);
+
+    for (int i = 2; i < argc; i++) {
+        int threads = safe_strtol(argv[i]);
+        if (threads < 1) {
+            threads = maxThreads;
         }
 
-        TYPE *nrs = random_array(len, time(NULL));
-        if (nrs == NULL) {
-            return -1;
-        }
-
-        /* Bench the sequential implementation. */
-
-        double start = omp_get_wtime();
-        TYPE *seq = prefix_sums_ref(nrs, len);
-        double seq_time = omp_get_wtime() - start;
-
-        free(seq);
+        omp_set_num_threads(threads);
+        printf("%s. omp_get_max_threads() == %d\n\n", algorithm_name, threads);
 
         /* Bench the parallel implementation. */
 
@@ -70,9 +83,10 @@ int main(int argc, char **argv) {
         perf_summary(perf);
         printf("\n");
 
-        free(nrs);
         perf_free(perf);
     }
+
+    free(nrs);
 
     return 0;
 }

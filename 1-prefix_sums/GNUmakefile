@@ -21,15 +21,9 @@ test: bake
 	cd build; ctest --output-on-failure
 
 bench: bake
-	for nThreads in $(NUM_THREADS); do \
-		if [ $${nThreads} -eq 0 ]; then \
-			for alg in $(ALGORITHMS); do \
-				build/$${alg}_bench $(INPUT_SIZES); \
-			done; \
-			continue; \
-		fi; \
+	for inSize in $(INPUT_SIZES); do \
 		for alg in $(ALGORITHMS); do \
-			OMP_NUM_THREADS=$${nThreads} build/$${alg}_bench $(INPUT_SIZES); \
+			build/$${alg}_bench $${inSize} $(NUM_THREADS); \
 		done; \
 	done
 
