@@ -1,6 +1,7 @@
 \documentclass[a4paper,10pt]{article}
 
 \usepackage{comment}
+\usepackage[pdfborder={0 0 0}]{hyperref}
 \usepackage[utf8]{inputenc}
 
 \title{Introduction to Parallel Computing, WS 2012}
