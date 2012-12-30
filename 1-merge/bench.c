@@ -1,8 +1,12 @@
 #include <omp.h>
 #include <stdio.h>
+#include <time.h>
 
 #include "common.h"
 #include "merge.h"
+
+static TYPE *random_unique_sorted_array(int size);
+static int less_than(const void *a, const void *b);
 
 int main(int argc, const char **argv) {
     if (argc < 3) {
@@ -24,17 +28,50 @@ int main(int argc, const char **argv) {
 
     omp_set_num_threads(threads);
 
-    printf("Merging dummy sequences...\n");
+    int n = size / 2;
+    int m = size - n;
 
-    TYPE a[] = {0,2,4,6,8,10,12,14,16,18,20};
-    TYPE b[] = {1,3,5,7,9,11,13,15,17,19,21};
+    TYPE *a = random_unique_sorted_array(size);
+    TYPE *b = a + n;
 
-    TYPE *c = merge(a, 11, b, 11, NULL);
+    qsort(a, n, sizeof(a[0]), less_than);
+    qsort(b, m, sizeof(a[0]), less_than);
 
-    for (int i = 0; i < 22; i++) printf("%d ", c[i]);
+    TYPE *c = merge(a, n, b, m, NULL);
+
+    for (int i = 0; i < n + m; i++) printf("%d ", c[i]);
     printf("\n");
 
+    free(a);
     free(c);
 
     return 0;
+}
+
+static int less_than(const void *a, const void *b) {
+    TYPE *_a = (TYPE *)a;
+    TYPE *_b = (TYPE *)b;
+    return (int)(*_a - *_b);
+}
+
+static TYPE *random_unique_sorted_array(int size)
+{
+    TYPE *seq = calloc(size, sizeof(TYPE));
+
+    for (int i = 0; i < size; i++) seq[i] = i;
+
+    srand(time(NULL));
+
+    TYPE *a = calloc(size, sizeof(TYPE));
+
+    int k = size;
+    for (int i = 0; i < size; i++) {
+        int j = rand() % k;
+        a[i] = seq[j];
+        seq[j] = seq[--k];
+    }
+
+    free(seq);
+
+    return a;
 }
