@@ -10,4 +10,4 @@ bake:
 	$(LATEX) $(LFILE)
 
 clean:
-	rm -rf *.tex *.aux *.log *.pdf *.toc
+	rm -rf *.tex *.aux *.log *.pdf *.toc *.eps
