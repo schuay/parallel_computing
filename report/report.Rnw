@@ -74,7 +74,35 @@ Test and benchmark the implementations, for OpenMP compare performance to
 2 + 2
 @
 
-\subsection{...}
+\subsection{A Work-Optimal Merge Algorithm}
+
+\subsubsection{Specification}
+
+Implement a work-optimal merge algorithm for merging two
+sorted arrays of size n and m in O((m+n)/p+log n +log m) steps.
+The implementation shall work for all n and m, any C base
+datatype, but may assume that elements in the two array are all
+different
+
+Implement either:
+
+\begin{enumerate}
+\item binary search from block starts of array a into array b. Merge (in
+parallel) all pairs no larger than (m+n)/p; handle larger pairs by binary
+search from array b to a
+\item binary search from block starts of a and block starts of b. Describe
+briefly the special cases for the binary search for locating subarrays, and how
+this leads to all sub- merge problems having size O(n/p+m/p)
+\end{enumerate}
+
+Argue for correctness by testing. Benchmark and compare to standard, sequential
+merge implementation from lecture (or better one, if known), report speed-up
+
+\subsubsection{Results}
+
+<<two>>=
+2 + 2
+@
 
 \clearpage
 \section{Cilk}
