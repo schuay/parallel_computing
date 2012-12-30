@@ -18,13 +18,11 @@ include_directories(
     ../common
 )
 
-#add_executable(merge_bench
-#    common.c
-#    perf.c
-#    recursive.c
-#    csv.c
-#    bench.c
-#)
+add_executable(merge_bench
+    ../common/perf.c
+    merge.c
+    bench.c
+)
 
 if(CHECK_FOUND)
     enable_testing()
