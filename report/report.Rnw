@@ -9,6 +9,34 @@
     Mino Sharkhawy, 1025887
 }
 
+\begin{comment}
+A useful Sweave tutorial can be found at http://users.stat.umn.edu/~geyer/Sweave/.
+
+Short report, 1-3 pages (depending) per project plus
+performance plots (1-5 pages). Be ready to discuss this at
+presentation, also program code
+
+Be concise, clear, brief:
+•What you have done
+•How you tested (main test cases, problems encountered)
+•What you have not done (assumption like: „the program
+assumes p is even“, „n must be a power of two“, ...)
+•Be honest – things that don‘t work
+•What you intend to show with the experiments
+
+Note will be based on presentation/discussion, and hand-in.
+
+Criteria:
+•Correctness, by argument (e.g. merging, prefix-sums), and test
+•Well chosen test cases, in principle exhaustive, show that you
+have thought about what needs to be tested
+•Program actually working, given stated restrictions
+•Good plots/tables showing the properties (speed-up, work) of
+the implementations
+•Achieved performance improvement – don‘t be too depressed if
+speed-up is modest and less than p
+\end{comment}
+
 \begin{document}
 
 \maketitle
@@ -21,7 +49,26 @@
 
 \subsection{Parallel Prefix Sums}
 
-% A useful Sweave tutorial can be found at http://users.stat.umn.edu/~geyer/Sweave/.
+\subsubsection{Specification}
+
+Implement the 3 parallel prefix sums algorithms from the lecture:
+
+\begin{enumerate}
+\item Recursive parallel prefix with auxiliary array y
+\item In-place iterative algorithm
+\item O(nlog n) work algorithm (Hillis-Steele)
+\end{enumerate}
+
+All algorithms shall work on arrays of some basetype given at compile time
+(int, double, ...) with the ``+'' operator.
+Implement non-intrusive ``performance counters'' for documenting that the work
+is indeed O(n) and O(n log n).
+The implementations shall be correct for all array sizes n, and any number of
+threads, 1,...,max.
+Test and benchmark the implementations, for OpenMP compare performance to
+``reduction'' clause.
+
+\subsubsection{Results}
 
 <<two>>=
 2 + 2
