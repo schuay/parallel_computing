@@ -1,5 +1,6 @@
 RSYNC = rsync
 SSH = ssh
+SCP = scp
 
 SFLAGS = -F "../.ssh-cfg"
 RFLAGS = --recursive --progress --copy-links --exclude=build/ -e "$(SSH) $(SFLAGS)"
@@ -34,6 +35,8 @@ hand-in:
 
 remote-bench: hand-in
 	$(SSH) $(SFLAGS) $(HOST) 'cd $(REMOTEDIR); make NUM_THREADS="$(NUM_THREADS_REMOTE)" clean bench'
+	mkdir -p data
+	$(SCP) $(SFLAGS) $(HOST):$(REMOTEDIR)/data/$(CSV_FILE) data/$(CSV_FILE)
 
 clean:
 	rm -rf build
