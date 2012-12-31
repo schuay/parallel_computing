@@ -14,13 +14,18 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     add_definitions("-Wall -Wextra -pedantic -std=c99")
 endif()
 
+set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../common")
+if(NOT EXISTS "${COMMON_DIR}")
+    set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/common")
+endif()
+
 include_directories(
-    ../common
+    ${COMMON_DIR}
 )
 
 add_executable(recursive_bench
     common.c
-    ../common/perf.c
+    ${COMMON_DIR}/perf.c
     recursive.c
     csv.c
     bench.c
@@ -28,7 +33,7 @@ add_executable(recursive_bench
 
 add_executable(iterative_bench
     common.c
-    ../common/perf.c
+    ${COMMON_DIR}/perf.c
     iterative.c
     csv.c
     bench.c
@@ -36,7 +41,7 @@ add_executable(iterative_bench
 
 add_executable(hillis-steele_bench
     common.c
-    ../common/perf.c
+    ${COMMON_DIR}/perf.c
     hillis-steele.c
     csv.c
     bench.c
@@ -51,7 +56,7 @@ if(CHECK_FOUND)
 
     add_executable(recursive_test
         common.c
-        ../common/perf.c
+        ${COMMON_DIR}/perf.c
         recursive.c
         test.c
     )
@@ -66,7 +71,7 @@ if(CHECK_FOUND)
 
     add_executable(iterative_test
         common.c
-        ../common/perf.c
+        ${COMMON_DIR}/perf.c
         iterative.c
         test.c
     )
@@ -81,7 +86,7 @@ if(CHECK_FOUND)
 
     add_executable(hillis-steele_test
         common.c
-        ../common/perf.c
+        ${COMMON_DIR}/perf.c
         hillis-steele.c
         test.c
     )
