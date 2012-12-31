@@ -6,7 +6,7 @@ RFLAGS = --recursive --progress --copy-links --exclude=build/ -e "$(SSH) $(SFLAG
 
 HOST = saturn
 REMOTEDIR = ~/project1
-SOURCE = .
+SOURCE = . ../common
 
 CSV_FILE = bench.csv
 INPUT_SIZES = 10 100 1000000 100000000
