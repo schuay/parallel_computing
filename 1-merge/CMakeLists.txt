@@ -25,6 +25,7 @@ include_directories(
 
 add_executable(merge_bench
     ${COMMON_DIR}/perf.c
+    ${COMMON_DIR}/csv.c
     merge.c
     merge_par.c
     bench.c

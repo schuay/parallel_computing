@@ -3,6 +3,7 @@
 #include <time.h>
 
 #include "common.h"
+#include "csv.h"
 #include "merge.h"
 
 static TYPE *random_unique_sorted_array(int size);
@@ -14,13 +15,13 @@ int main(int argc, const char **argv) {
         return -1;
     }
 
-    const int size = safe_strtol(argv[1]);
+    const int size = safe_strtol(argv[2]);
     if (size < 1) {
         fprintf(stderr, "Input size must be greater than 0\n");
         return -1;
     }
 
-    const int threads = safe_strtol(argv[2]);
+    int threads = safe_strtol(argv[3]);
     if (threads < 1) {
         threads = omp_get_max_threads();
     }
@@ -36,11 +37,26 @@ int main(int argc, const char **argv) {
     qsort(a, n, sizeof(a[0]), less_than);
     qsort(b, m, sizeof(a[0]), less_than);
 
-    TYPE *c = merge(a, n, b, m, NULL);
+    FILE *const csvFile = csv_open(argv[1]);
+    if (csvFile == NULL) {
+        return -1;
+    }
 
+    printf("%s. omp_get_max_threads() == %d\n\n", algorithm_name, threads);
+
+    double start = omp_get_wtime();
+    TYPE *c = merge(a, n, b, m, NULL);
+    double par_time = omp_get_wtime() - start;
+
+    printf("elements: %d; par time: %f\n\n",
+            size, par_time);
+
+    fprintf(csvFile, "%s,%d,%d,%f\n", algorithm_name, threads, size, par_time);
 
     free(a);
     free(c);
+
+    csv_close(csvFile);
 
     return 0;
 }
