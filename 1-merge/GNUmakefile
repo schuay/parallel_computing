@@ -24,7 +24,9 @@ test: bake
 bench: bake
 	mkdir -p data
 	for inSize in $(INPUT_SIZES); do \
-		build/merge_bench data/$(CSV_FILE) $${inSize} $(NUM_THREADS); \
+		for nThreads in $(NUM_THREADS); do \
+			build/merge_bench data/$(CSV_FILE) $${inSize} $${nThreads}; \
+		done \
 	done
 
 hand-in:
