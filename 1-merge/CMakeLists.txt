@@ -14,12 +14,17 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     add_definitions("-Wall -Wextra -pedantic -std=c99")
 endif()
 
+set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../common")
+if(NOT EXISTS "${COMMON_DIR}")
+    set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/common")
+endif()
+
 include_directories(
-    ../common
+    ${COMMON_DIR}
 )
 
 add_executable(merge_bench
-    ../common/perf.c
+    ${COMMON_DIR}/perf.c
     merge.c
     merge_par.c
     bench.c
