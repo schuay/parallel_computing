@@ -27,7 +27,7 @@ add_executable(recursive_bench
     common.c
     ${COMMON_DIR}/perf.c
     recursive.c
-    csv.c
+    ${COMMON_DIR}/csv.c
     bench.c
 )
 
@@ -35,7 +35,7 @@ add_executable(iterative_bench
     common.c
     ${COMMON_DIR}/perf.c
     iterative.c
-    csv.c
+    ${COMMON_DIR}/csv.c
     bench.c
 )
 
@@ -43,7 +43,7 @@ add_executable(hillis-steele_bench
     common.c
     ${COMMON_DIR}/perf.c
     hillis-steele.c
-    csv.c
+    ${COMMON_DIR}/csv.c
     bench.c
 )
 
