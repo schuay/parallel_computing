@@ -31,6 +31,14 @@ add_executable(merge_bench
     bench.c
 )
 
+add_executable(merge_seq_bench
+    ${COMMON_DIR}/perf.c
+    ${COMMON_DIR}/csv.c
+    merge.c
+    merge_ref.c
+    bench.c
+)
+
 if(CHECK_FOUND)
     enable_testing()
 
