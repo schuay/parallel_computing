@@ -22,8 +22,7 @@ int main(int argc, const char **argv) {
 
     const int threads = safe_strtol(argv[2]);
     if (threads < 1) {
-        fprintf(stderr, "Thread count must be greater than 0\n");
-        return -1;
+        threads = omp_get_max_threads();
     }
 
     omp_set_num_threads(threads);
