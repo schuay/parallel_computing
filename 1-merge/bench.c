@@ -9,8 +9,8 @@ static TYPE *random_unique_sorted_array(int size);
 static int less_than(const void *a, const void *b);
 
 int main(int argc, const char **argv) {
-    if (argc < 3) {
-        fprintf(stderr, "Usage: bench <input size> <num threads>\n");
+    if (argc < 4) {
+        fprintf(stderr, "Usage: bench <csv file> <input size> <num threads>\n");
         return -1;
     }
 
