@@ -38,8 +38,6 @@ int main(int argc, const char **argv) {
 
     TYPE *c = merge(a, n, b, m, NULL);
 
-    for (int i = 0; i < n + m; i++) printf("%d ", c[i]);
-    printf("\n");
 
     free(a);
     free(c);
