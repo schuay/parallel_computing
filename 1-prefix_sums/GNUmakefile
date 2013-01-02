@@ -6,7 +6,7 @@ SFLAGS = -F "../.ssh-cfg"
 RFLAGS = --recursive --progress --copy-links --exclude=build/ -e "$(SSH) $(SFLAGS)"
 
 HOST = saturn
-REMOTEDIR = ~/project1
+REMOTEDIR = ~/project1-prefix_sums
 SOURCE = . ../common
 
 CSV_FILE = bench.csv
