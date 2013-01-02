@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-FILE *csv_open(char *filename);
+FILE *csv_open(const char *filename);
 int csv_close(FILE *file);
 
 #endif /* __CSV_H */

@@ -1,6 +1,6 @@
 #include "csv.h"
 
-FILE *csv_open(char *filename) {
+FILE *csv_open(const char *filename) {
     if (filename == NULL || filename[0] == '\0') {
         return NULL;
     }
