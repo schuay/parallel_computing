@@ -11,7 +11,7 @@
  * a points to the subsequence of length n. c points to the result array.
  */
 static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
-        int iteration, int partitions, perf_t *perf);
+        int iteration, int partitions, int nsplit, perf_t *perf);
 
 /**
  * Performs the actual sequential merge within the given memory areas.
@@ -67,18 +67,15 @@ TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf)
 
 #pragma omp parallel for
     for (int i = 0; i < p; i++) {
-        merge_part(a, n, b, m, c, i, p, perf);
+        merge_part(a, n, b, m, c, i, p, 1, perf);
     }
 
     return c;
 }
 
 static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
-        int iteration, int partitions, perf_t *perf)
+        int iteration, int partitions, int nsplit, perf_t *perf)
 {
-    /* TODO: If blocks are larger than (m + n) / p, divide further by partitioning
-     * the section of b. */
-
     const int size = n / partitions;
     const int start = iteration * size;
     const int next_start = (iteration + 1) * size;
@@ -87,6 +84,21 @@ static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
     int b_start = (iteration == 0) ? 0 : binary_search(a[start], b, m);
     int b_length = (iteration == partitions - 1) ?
         m - b_start : binary_search(a[next_start], b, m) - b_start;
+
+    if ((length + b_length) > ((m + n) / partitions) && nsplit <= 1) {
+        const int threads = omp_get_max_threads();
+        const int p = (threads <= b_length) ? threads : b_length;
+
+#pragma omp parallel for
+        for (int i = 0; i < p; i++) {
+            merge_part(b + b_start, b_length,
+                    a + start, length,
+                    c + start + b_start,
+                    i, p, nsplit + 1, perf);
+        }
+
+        return;
+    }
 
     DEBUG("iteration %d says hello. from %d, length %d, starts with %d."
           "b partition from %d, length %d\n",
