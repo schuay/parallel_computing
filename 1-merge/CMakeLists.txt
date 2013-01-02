@@ -21,6 +21,7 @@ include_directories(
 add_executable(merge_bench
     ../common/perf.c
     merge.c
+    merge_par.c
     bench.c
 )
 
@@ -33,6 +34,7 @@ if(CHECK_FOUND)
 
     add_executable(merge_test
         merge.c
+        merge_par.c
         test.c
     )
 

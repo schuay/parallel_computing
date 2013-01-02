@@ -5,6 +5,8 @@
  */
 #define TYPE int
 
+extern const char *algorithm_name;
+
 /**
  * a and b are sorted arrays of lengths n and m.
  * No element occurs twice within a and b.
@@ -16,6 +18,11 @@
 TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf);
 
 /**
+ * Performs the actual sequential merge within the given memory areas.
+ */
+void merge_seq(const TYPE *a, int n, const TYPE *b, int m, TYPE *c);
+
+/**
  * The sequential reference implementation.
  */
-TYPE *merge_seq(const TYPE *a, int n, const TYPE *b, int m);
+TYPE *merge_ref(const TYPE *a, int n, const TYPE *b, int m);
