@@ -23,6 +23,14 @@ include_directories(
     ${COMMON_DIR}
 )
 
+add_executable(reference_bench
+    common.c
+    ${COMMON_DIR}/perf.c
+    reference.c
+    ${COMMON_DIR}/csv.c
+    bench.c
+)
+
 add_executable(recursive_bench
     common.c
     ${COMMON_DIR}/perf.c

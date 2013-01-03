@@ -25,6 +25,7 @@ test: bake
 bench: bake
 	mkdir -p data
 	for inSize in $(INPUT_SIZES); do \
+		build/reference_bench data/$(CSV_FILE) $${inSize} 1; \
 		for alg in $(ALGORITHMS); do \
 			build/$${alg}_bench data/$(CSV_FILE) $${inSize} $(NUM_THREADS); \
 		done; \
