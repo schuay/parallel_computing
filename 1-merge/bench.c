@@ -43,13 +43,13 @@ int main(int argc, const char **argv) {
         return -1;
     }
 
-    printf("%s. omp_get_max_threads() == %d\n\n", algorithm_name, threads);
+    printf("%s. omp_get_max_threads() == %d\n", algorithm_name, threads);
 
     double start = omp_get_wtime();
     TYPE *c = merge(a, n, b, m, NULL);
     double par_time = omp_get_wtime() - start;
 
-    printf("elements: %d; par time: %f\n\n",
+    printf("elements: %d; time: %f\n\n",
             size, par_time);
 
     fprintf(csvFile, "%s,%d,%d,%f\n", algorithm_name, threads, size, par_time);
