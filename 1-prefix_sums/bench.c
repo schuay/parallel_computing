@@ -54,16 +54,6 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    /* Bench the sequential implementation. */
-
-    double start = omp_get_wtime();
-    TYPE *seq = prefix_sums_ref(nrs, len);
-    double seq_time = omp_get_wtime() - start;
-
-    free(seq);
-
-    fprintf(csvFile, "sequential reference,1,%d,%f\n", len, seq_time);
-
     for (int i = 3; i < argc; i++) {
         int threads = safe_strtol(argv[i]);
         if (threads < 1) {
@@ -80,14 +70,14 @@ int main(int argc, char **argv) {
             return -1;
         }
 
-        start = omp_get_wtime();
+        double start = omp_get_wtime();
         if (prefix_sums(nrs, len, perf) != 0) {
             return -1;
         }
         double par_time = omp_get_wtime() - start;
 
-        printf("elements: %d; seq time: %f; par time: %f\n",
-                len, seq_time, par_time);
+        printf("elements: %d; par time: %f\n\n",
+                len, par_time);
         perf_summary(perf);
         printf("\n");
 
