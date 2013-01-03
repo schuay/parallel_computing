@@ -65,23 +65,14 @@ int main(int argc, char **argv) {
 
         /* Bench the parallel implementation. */
 
-        perf_t *perf = perf_create(threads);
-        if (perf == NULL) {
-            return -1;
-        }
-
         double start = omp_get_wtime();
-        if (prefix_sums(nrs, len, perf) != 0) {
+        if (prefix_sums(nrs, len, NULL) != 0) {
             return -1;
         }
         double par_time = omp_get_wtime() - start;
 
         printf("elements: %d; par time: %f\n\n",
                 len, par_time);
-        perf_summary(perf);
-        printf("\n");
-
-        perf_free(perf);
 
         fprintf(csvFile, "%s,%d,%d,%f\n", algorithm_name, threads, len, par_time);
     }
