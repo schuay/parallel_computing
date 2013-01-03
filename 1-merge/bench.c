@@ -27,6 +27,7 @@ int main(int argc, const char **argv) {
     }
 
     omp_set_num_threads(threads);
+    omp_set_nested(1);
 
     int n = size / 2;
     int m = size - n;
