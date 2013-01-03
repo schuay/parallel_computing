@@ -16,7 +16,7 @@ int prefix_sums(TYPE *x, size_t n, perf_t *perf) {
 #pragma omp parallel for
         for (size_t i = kk - 1; i < n; i += kk) {
             x[i] += x[i - k];
-            perf_inc(perf, omp_get_thread_num());
+            PERF_INC(perf, omp_get_thread_num());
         }
     }
 
@@ -27,7 +27,7 @@ int prefix_sums(TYPE *x, size_t n, perf_t *perf) {
 #pragma omp parallel for
         for (size_t i = k - 1; i < n - kk; i += k) {
             x[i + kk] += x[i];
-            perf_inc(perf, omp_get_thread_num());
+            PERF_INC(perf, omp_get_thread_num());
         }
     }
 
