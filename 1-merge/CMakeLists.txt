@@ -30,6 +30,7 @@ add_executable(merge_bench
     merge_par.c
     bench.c
 )
+SET_TARGET_PROPERTIES(merge_bench PROPERTIES COMPILE_DEFINITIONS "NOPERF")
 
 add_executable(merge_seq_bench
     ${COMMON_DIR}/perf.c
@@ -38,6 +39,7 @@ add_executable(merge_seq_bench
     merge_ref.c
     bench.c
 )
+SET_TARGET_PROPERTIES(merge_seq_bench PROPERTIES COMPILE_DEFINITIONS "NOPERF")
 
 if(CHECK_FOUND)
     enable_testing()
