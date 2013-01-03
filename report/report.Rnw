@@ -75,13 +75,13 @@ Test and benchmark the implementations, for OpenMP compare performance to
 REF <- "sequential reference"
 fidx <- 0
 
-texPlot <- function(x, y, pch, text, xlab, ylab, main) {
+texPlot <- function(x, y, pch, text, xlab, ylab, main, log) {
 	file=paste("graph", fidx, ".eps", sep="")  
 	fidx <<- fidx + 1
 
 	postscript(file=file, paper="special", width=8, height=8, horizontal=FALSE)  
 
-	matplot(x,y, pch=pch, type='b', xlab=xlab, ylab=ylab, main=main)
+	matplot(x,y, pch=pch, type='b', xlab=xlab, ylab=ylab, main=main, log=log)
 	legend("topleft", text, col=pch, pch=pch)
 
 	dev.off()  
@@ -106,7 +106,7 @@ plotByNumThreads <- function(par, seq, prefix) {
 	y <- seq[,4]
 	sapply(pars, FUN=addPar)
 
-	texPlot(x,y, pch, txt, "input size", "time(s)", sprintf("%s: Time as function of input size (%d thread(s))", prefix, nThreads))
+	texPlot(x,y, pch, txt, "input size", "time(s)", sprintf("%s: Time as function of input size (%d thread(s))", prefix, nThreads), "xy")
 }
 
 plotByInputSize <- function(par, prefix) {
@@ -126,7 +126,7 @@ plotByInputSize <- function(par, prefix) {
 	y <- NULL
 	sapply(pars, FUN=addPar)
 
-	texPlot(x,y, pch, txt, "number of threads", "time(s)", sprintf("%s: Time as function of the number of threads (input size = %d)", prefix, nInput))
+	texPlot(x,y, pch, txt, "number of threads", "time(s)", sprintf("%s: Time as function of the number of threads (input size = %d)", prefix, nInput), "")
 }
 
 makePlots <- function(times, prefix) {
