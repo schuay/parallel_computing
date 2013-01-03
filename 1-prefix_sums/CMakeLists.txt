@@ -30,6 +30,7 @@ add_executable(reference_bench
     ${COMMON_DIR}/csv.c
     bench.c
 )
+SET_TARGET_PROPERTIES(reference_bench PROPERTIES COMPILE_DEFINITIONS "NOPERF")
 
 add_executable(recursive_bench
     common.c
@@ -38,6 +39,7 @@ add_executable(recursive_bench
     ${COMMON_DIR}/csv.c
     bench.c
 )
+SET_TARGET_PROPERTIES(recursive_bench PROPERTIES COMPILE_DEFINITIONS "NOPERF")
 
 add_executable(iterative_bench
     common.c
@@ -46,6 +48,7 @@ add_executable(iterative_bench
     ${COMMON_DIR}/csv.c
     bench.c
 )
+SET_TARGET_PROPERTIES(iterative_bench PROPERTIES COMPILE_DEFINITIONS "NOPERF")
 
 add_executable(hillis-steele_bench
     common.c
@@ -54,6 +57,7 @@ add_executable(hillis-steele_bench
     ${COMMON_DIR}/csv.c
     bench.c
 )
+SET_TARGET_PROPERTIES(hillis-steele_bench PROPERTIES COMPILE_DEFINITIONS "NOPERF")
 
 if(CHECK_FOUND)
     enable_testing()
