@@ -1,3 +1,6 @@
+#ifndef __PERF_H
+#define __PERF_H
+
 #include <stdlib.h>
 
 typedef struct {
@@ -15,3 +18,4 @@ void perf_inc(perf_t *perf, size_t n);
  * Return the sum of all counters. */
 int perf_summary(perf_t *perf);
 
+#endif /* __PERF_H */
