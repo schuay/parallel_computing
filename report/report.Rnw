@@ -178,8 +178,8 @@ merge implementation from lecture (or better one, if known), report speed-up
 
 \subsubsection{Results}
 
-<<two>>=
-2 + 2
+<<results=tex,echo=FALSE>>=
+readAndPlot("../1-merge/data/bench.csv")
 @
 
 \clearpage
