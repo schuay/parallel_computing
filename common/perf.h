@@ -3,6 +3,12 @@
 
 #include <stdlib.h>
 
+#define PERF_INC(perf, n) perf_inc(perf, n);
+#ifdef NOPERF
+    #undef PERF_INC
+    #define PERF_INC(perf, n)
+#endif /* NOPERF */
+
 typedef struct {
     int *counters;
     size_t len;
