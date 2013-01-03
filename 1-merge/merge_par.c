@@ -4,7 +4,8 @@
 
 #include "merge.h"
 
-#define DEBUG(...) fprintf(stderr, __VA_ARGS__)
+/* #define DEBUG(...) fprintf(stderr, __VA_ARGS__) */
+#define DEBUG(...)
 
 const char *algorithm_name = "parallel merge";
 
