@@ -3,7 +3,7 @@ SSH = ssh
 SCP = scp
 
 SFLAGS = -F "../.ssh-cfg"
-RFLAGS = --recursive --progress --copy-links --exclude=build/ -e "$(SSH) $(SFLAGS)"
+RFLAGS = --recursive --progress --copy-links -e "$(SSH) $(SFLAGS)"
 CFLAGS = -D_XOPEN_SOURCE=600 -I ../common -I /usr/include/cilk
 
 HOST = saturn
@@ -27,7 +27,7 @@ bake:
 test: bake
 	./build/*_test
 
-bench: bake
+bench: build/reference_bench build/recursive_bench
 	mkdir -p data
 	for inSize in $(INPUT_SIZES); do \
 		build/reference_bench data/$(CSV_FILE) $${inSize} 1; \
@@ -39,8 +39,8 @@ bench: bake
 hand-in:
 	$(RSYNC) $(RFLAGS) $(SOURCE) $(HOST):$(REMOTEDIR)
 
-remote-bench: hand-in
-	$(SSH) $(SFLAGS) $(HOST) 'cd $(REMOTEDIR); make NUM_THREADS="$(NUM_THREADS_REMOTE)" clean bench'
+remote-bench: bake hand-in
+	$(SSH) $(SFLAGS) $(HOST) 'cd $(REMOTEDIR); make NUM_THREADS="$(NUM_THREADS_REMOTE)" bench'
 	mkdir -p data
 	$(SCP) $(SFLAGS) $(HOST):$(REMOTEDIR)/data/$(CSV_FILE) data/$(CSV_FILE)
 
