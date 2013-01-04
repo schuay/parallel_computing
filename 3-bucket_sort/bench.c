@@ -12,23 +12,28 @@ extern const char *algorithm_name;
 
 int main(int argc, char **argv)
 {
+    int ret = 0;
+
     MPI_Init(&argc, &argv);
 
     if (argc < 4) {
         fprintf(stderr, "Usage: bench <csv file> <input size> <input upper bound>\n");
-        return -1;
+        ret = -1;
+        goto out;
     }
 
     const int size = safe_strtol(argv[2]);
     if (size < 1) {
         fprintf(stderr, "Input size must be greater than 0\n");
-        return -1;
+        ret = -1;
+        goto out;
     }
 
     const int upper_bound = safe_strtol(argv[3]);
     if (size < 1) {
         fprintf(stderr, "Input upper bound must be greater than 0\n");
-        return -1;
+        ret = -1;
+        goto out;
     }
 
     int processes;
@@ -75,7 +80,8 @@ int main(int argc, char **argv)
         csv_close(csvFile);
     }
 
+out:
     MPI_Finalize();
 
-    return 0;
+    return ret;
 }
