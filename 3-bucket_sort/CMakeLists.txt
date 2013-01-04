@@ -18,12 +18,20 @@ if(NOT EXISTS "${COMMON_DIR}")
     set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/common")
 endif()
 
+# Saturn still has old an FindMPI.cmake version without
+# MPI_C_LIBRARIES. Hack in a fix here:
+if(NOT DEFINED MPI_C_LIBRARIES)
+    set(MPI_C_LIBRARIES
+        /usr/lib/libmpich.so
+        /usr/lib/libopa.a
+        /usr/lib/libpthread.so
+        /usr/lib/librt.so)
+endif()
+
 include_directories(
     ${COMMON_DIR}
     ${MPI_INCLUDE_PATH}
 )
-
-message("${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG}")
 
 add_executable(bucket_bench
     bench.c
@@ -32,7 +40,7 @@ add_executable(bucket_bench
 )
 
 target_link_libraries(bucket_bench
-    ${MPI_LIBRARIES}
+    ${MPI_C_LIBRARIES}
 )
 
 if(CHECK_FOUND)
