@@ -19,9 +19,9 @@ bake:
 	mkdir -p build
 	cd build
 	cilkc ${CFLAGS} -lcheck recursive.cilk merge.c test.c -o build/recursive_test
-	cilkc ${CFLAGS} -lcheck recursive.cilk merge.c bench.c ../common/perf.c ../common/csv.c \
+	cilkc ${CFLAGS} -static recursive.cilk merge.c bench.c ../common/perf.c ../common/csv.c \
 	    -o build/recursive_bench
-	cilkc ${CFLAGS} -lcheck reference.cilk merge.c bench.c ../common/perf.c ../common/csv.c \
+	cilkc ${CFLAGS} -static reference.cilk merge.c bench.c ../common/perf.c ../common/csv.c \
 	    -o build/reference_bench
 
 test: bake
