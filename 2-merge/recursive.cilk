@@ -1,0 +1,68 @@
+#include "merge.h"
+
+/* #define DEBUG(...) fprintf(stderr, __VA_ARGS__) */
+#define DEBUG(...)
+
+const char *algorithm_name = "parallel merge";
+
+static int binary_search(TYPE needle, const TYPE *haystack, int n)
+{
+    int low = 0;
+    int high = n;
+
+    while (low < high) {
+        int mid = (low + high) / 2;
+        if (needle < haystack[mid]) {
+            high = mid;
+        } else {
+            low = mid + 1;
+        }
+    }
+
+    return low;
+}
+
+cilk void merge_recursive(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, perf_t *perf)
+{
+    /* TODO: replace merge_seq with something more parallel. */
+    int r, s;
+
+    if (n == 0) {
+        merge_seq(a, n, b, m, c);
+        return;
+    }
+
+    if (m == 0) {
+        merge_seq(a, n, b, m, c);
+        return;
+    }
+
+    if (n < m) {
+        spawn merge_recursive(b, m, a, n, c, perf);
+        return;
+    }
+
+    r = n / 2;
+    s = binary_search(a[r], b, m);
+
+    /* Everything in a is already smaller than everything in b. */
+    if (r == 0 || s == 0) {
+        merge_seq(a, n, b, m, c);
+        return;
+    }
+
+    spawn merge_recursive(a, r, b, s, c, perf);
+    spawn merge_recursive(a + r, n - r, b + s, m - s, c + r + s, perf);
+
+    sync;
+}
+
+cilk TYPE *merge_impl(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf)
+{
+    TYPE *c = calloc(n + m, sizeof(TYPE));
+
+    spawn merge_recursive(a, n, b, m, c, perf);
+    sync;
+
+    return c;
+}
