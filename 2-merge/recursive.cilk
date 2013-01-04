@@ -1,5 +1,7 @@
 #include "merge.h"
 
+#include <string.h>
+
 /* #define DEBUG(...) fprintf(stderr, __VA_ARGS__) */
 #define DEBUG(...)
 
@@ -24,16 +26,16 @@ static int binary_search(TYPE needle, const TYPE *haystack, int n)
 
 cilk void merge_recursive(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, perf_t *perf)
 {
-    /* TODO: replace merge_seq with something more parallel. */
+    /* TODO: replace memcpy with something more parallel. */
     int r, s;
 
     if (n == 0) {
-        merge_seq(a, n, b, m, c);
+        memcpy(c, b, m * sizeof(TYPE));
         return;
     }
 
     if (m == 0) {
-        merge_seq(a, n, b, m, c);
+        memcpy(c, a, n * sizeof(TYPE));
         return;
     }
 
@@ -45,9 +47,10 @@ cilk void merge_recursive(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, p
     r = n / 2;
     s = binary_search(a[r], b, m);
 
-    /* Everything in a is already smaller than everything in b. */
-    if (r == 0 || s == 0) {
-        merge_seq(a, n, b, m, c);
+    /* a and b both have only one element, with a[0] < b[0] */
+    if (r == 0 && s == 0) {
+        c[0] = a[0];
+        c[1] = b[0];
         return;
     }
 
