@@ -50,10 +50,9 @@ int main(int argc, char **argv)
 
     /* Everything is set up, start sorting and time how long it takes. */
 
-    float start = MPI_Wtime();
+    double start = MPI_Wtime();
     TYPE *c = bucket_sort(a, size, upper_bound, NULL);
-    MPI_Barrier(MPI_COMM_WORLD);
-    float time = MPI_Wtime() - start;
+    double end = MPI_Wtime();
 
     free(a);
     free(c);
@@ -62,7 +61,7 @@ int main(int argc, char **argv)
 
     if (rank == MASTER) {
         printf("elements: %d; upper bound: %d; time: %f\n\n",
-                size, upper_bound, time);
+                size, upper_bound, end - start);
 
         /* Persist this run in our csv file. */
 
@@ -71,7 +70,7 @@ int main(int argc, char **argv)
             return -1;
         }
 
-        fprintf(csvFile, "%s,%d,%d,%f\n", algorithm_name, processes, size, time);
+        fprintf(csvFile, "%s,%d,%d,%f\n", algorithm_name, processes, size, end - start);
 
         csv_close(csvFile);
     }
