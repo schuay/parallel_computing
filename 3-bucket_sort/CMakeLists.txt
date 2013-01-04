@@ -50,12 +50,18 @@ if(CHECK_FOUND)
         ${CHECK_INCLUDE_DIRS}
     )
 
-#    target_link_libraries(bucket_test
-#        ${CHECK_LIBRARIES}
-#    )
+    add_executable(bucket_test
+        bucket.c
+        test.c
+    )
 
-    add_test(bucket_test
-        ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${CMAKE_CURRENT_BINARY_DIR}/bucket_bench
+    target_link_libraries(bucket_test
+        ${CHECK_LIBRARIES}
+        ${MPI_C_LIBRARIES}
+    )
+
+    add_test(bucket-test
+        ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${CMAKE_CURRENT_BINARY_DIR}/bucket_test
     )
 endif()
 

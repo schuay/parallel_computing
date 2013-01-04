@@ -6,7 +6,8 @@
 const char *algorithm_name = "parallel bucket";
 
 TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf) {
-    return NULL;
+    TYPE *out = calloc(n, sizeof(TYPE));
+    return out;
 }
 
 TYPE *random_array(int size, int upper_bound, int seed)
