@@ -4,6 +4,7 @@ SCP = scp
 
 SFLAGS = -F "../.ssh-cfg"
 RFLAGS = --recursive --progress --copy-links --exclude=build/ -e "$(SSH) $(SFLAGS)"
+CFLAGS = -D_XOPEN_SOURCE=600 -I ../common
 
 HOST = saturn
 REMOTEDIR = ~/project2-merge
@@ -16,17 +17,22 @@ NUM_THREADS_REMOTE = 8 16 32 0
 
 bake:
 	mkdir -p build
-	cd build; cilkc -O3 ../main.cilk -o merge;
+	cd build
+	cilkc ${CFLAGS} -lcheck recursive.cilk merge.c test.c -o build/recursive_test
+	cilkc ${CFLAGS} -lcheck recursive.cilk merge.c bench.c ../common/perf.c ../common/csv.c \
+	    -o build/recursive_bench
+	cilkc ${CFLAGS} -lcheck reference.cilk merge.c bench.c ../common/perf.c ../common/csv.c \
+	    -o build/reference_bench
 
 test: bake
-	cd build; ctest --output-on-failure
+	./build/*_test
 
 bench: bake
 	mkdir -p data
 	for inSize in $(INPUT_SIZES); do \
-		build/merge_seq_bench data/$(CSV_FILE) $${inSize} 1; \
+		build/reference_bench data/$(CSV_FILE) $${inSize} 1; \
 		for nThreads in $(NUM_THREADS); do \
-			build/merge_bench data/$(CSV_FILE) $${inSize} $${nThreads}; \
+			build/recursive_bench data/$(CSV_FILE) $${inSize} $${nThreads}; \
 		done \
 	done
 
