@@ -29,15 +29,11 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
         counts[xs[i]]++;
     }
 
-    DEBUG("Local range: ");
+    DEBUG("Local range of %d: ", rank);
     for (int i = start; i < next_start; i++) DEBUG("%d ", xs[i]);
     DEBUG("\n");
 
-    DEBUG("Local counts: ");
-    for (int i = 0; i < upper_bound; i++) DEBUG("%d ", counts[i]);
-    DEBUG("\n");
-
-    /* Sum up these counts over all processes. */
+    /* Sum up these counts over all processes and do a local exscan. */
 
     int summed_counts[upper_bound];
     int ret = MPI_Allreduce(counts, summed_counts, upper_bound,
@@ -46,8 +42,25 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
         return NULL;
     }
 
-    DEBUG("Summed counts: ");
-    for (int i = 0; i < upper_bound; i++) DEBUG("%d ", summed_counts[i]);
+    int exscan_counts[upper_bound];
+    exscan_counts[0] = 0;
+    for (int i = 1; i < upper_bound; i++) {
+        exscan_counts[i] =  exscan_counts[i - 1] + summed_counts[i - 1];
+    }
+
+    /* Determine starting indexes for each bucket in the final sorted
+     * array. */
+
+    int starting_indexes[upper_bound];
+    memset(starting_indexes, 0, sizeof(starting_indexes));
+    ret = MPI_Exscan(counts, starting_indexes, upper_bound,
+            MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+    if (ret != MPI_SUCCESS) {
+        return NULL;
+    }
+
+    DEBUG("Combined starting indexes of %d: ", rank);
+    for (int i = 0; i < upper_bound; i++) DEBUG("%d ", exscan_counts[i] + starting_indexes[i]);
     DEBUG("\n");
 
     TYPE *out = calloc(n, sizeof(TYPE));
