@@ -1,20 +1,32 @@
-#include <stdio.h>
 #include <mpi.h>
+#include <stdio.h>
 
-int main(int argc, char **argv) {
-    int my_rank, numprocs;
+#include "bucket.h"
 
-    // MPI initializations
-    MPI_Status status;
-    MPI_Init (&argc, &argv);
-    MPI_Comm_size (MPI_COMM_WORLD, &numprocs);
-    MPI_Comm_rank (MPI_COMM_WORLD, &my_rank);
+const char *algorithm_name = "parallel bucket";
 
-    double time_start = MPI_Wtime();
-    printf("Hello World, my rank is %d %f\n", my_rank, MPI_Wtime() - time_start);
+TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf) {
+    return NULL;
+}
 
-    // End MPI
-    MPI_Finalize ();
+TYPE *random_array(int size, int upper_bound, int seed)
+{
+    TYPE *seq = calloc(size, sizeof(TYPE));
 
-    return 0;
-} 
+    for (int i = 0; i < size; i++) seq[i] = i % upper_bound;
+
+    srand(seed);
+
+    TYPE *a = calloc(size, sizeof(TYPE));
+
+    int k = size;
+    for (int i = 0; i < size; i++) {
+        int j = rand() % k;
+        a[i] = seq[j];
+        seq[j] = seq[--k];
+    }
+
+    free(seq);
+
+    return a;
+}

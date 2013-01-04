@@ -26,7 +26,9 @@ include_directories(
 message("${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG}")
 
 add_executable(bucket_bench
+    bench.c
     bucket.c
+    ${COMMON_DIR}/csv.c
 )
 
 target_link_libraries(bucket_bench
