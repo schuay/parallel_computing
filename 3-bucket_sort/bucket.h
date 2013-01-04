@@ -1,6 +1,7 @@
 #include "perf.h"
 
-#define DEBUG(...) printf(__VA_ARGS__)
+// #define DEBUG(...) printf(__VA_ARGS__)
+#define DEBUG(...)
 
 #define TYPE int
 
