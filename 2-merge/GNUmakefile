@@ -4,7 +4,7 @@ SCP = scp
 
 SFLAGS = -F "../.ssh-cfg"
 RFLAGS = --recursive --progress --copy-links --exclude=build/ -e "$(SSH) $(SFLAGS)"
-CFLAGS = -D_XOPEN_SOURCE=600 -I ../common
+CFLAGS = -D_XOPEN_SOURCE=600 -I ../common -I /usr/include/cilk
 
 HOST = saturn
 REMOTEDIR = ~/project2-merge
