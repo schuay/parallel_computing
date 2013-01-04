@@ -32,7 +32,8 @@ void perf_inc(perf_t *perf, size_t n) {
 
 int perf_summary(perf_t *perf) {
     int sum = 0;
-    for (size_t i = 0; i < perf->len; i++) {
+    size_t i;
+    for (i = 0; i < perf->len; i++) {
         sum += perf->counters[i];
         printf("Thread %02d: %d counters\n", (int)i, perf->counters[i]);
     }
