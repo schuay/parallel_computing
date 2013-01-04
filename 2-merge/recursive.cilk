@@ -61,12 +61,8 @@ cilk void merge_recursive(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, p
     sync;
 }
 
-cilk TYPE *merge_impl(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf)
+cilk void merge_impl(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, perf_t *perf)
 {
-    TYPE *c = calloc(n + m, sizeof(TYPE));
-
     spawn merge_recursive(a, n, b, m, c, perf);
     sync;
-
-    return c;
 }
