@@ -63,7 +63,40 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
     for (int i = 0; i < upper_bound; i++) DEBUG("%d ", exscan_counts[i] + starting_indexes[i]);
     DEBUG("\n");
 
+    /* TODO: I'm not sure what exactly steps 5-8 in the algorithm description
+     * are supposed to do. The only interpretation I can think of transfers
+     * all local elements in another processes 'range' to that process, after
+     * which every process can sort its own range.
+     *
+     * However, this does not result in a complete sorted array, and we still
+     * need to do an Allgather to get the entire range.
+     *
+     * While this works, since we know the target index of each element, we could
+     * accomplish this in a simpler way by just moving the elements to
+     * their appropriate spot and then doing an Allreduce. We will implement this
+     * way until further clarifications.
+     */
+
+    TYPE *local_out = calloc(n, sizeof(TYPE));
+
+    for (int i = start; i < next_start; i++) {
+        int src = xs[i];
+        int dest_index = exscan_counts[src] + starting_indexes[src];
+        exscan_counts[src]++;
+        local_out[dest_index] = src;
+    }
+
     TYPE *out = calloc(n, sizeof(TYPE));
+    ret = MPI_Allreduce(local_out, out, n, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+    free(local_out);
+    if (ret != MPI_SUCCESS) {
+        return NULL;
+    }
+
+    DEBUG("Sorted sequence of %d: ", rank);
+    for (int i = 0; i < n; i++) DEBUG("%d ", out[i]);
+    DEBUG("\n");
+
     return out;
 }
 
