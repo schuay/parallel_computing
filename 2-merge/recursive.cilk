@@ -41,6 +41,7 @@ cilk void merge_recursive(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, p
 
     if (n < m) {
         spawn merge_recursive(b, m, a, n, c, perf);
+        sync;
         return;
     }
 
