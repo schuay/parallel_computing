@@ -87,3 +87,32 @@ int matrix_save(const matrix_t *matrix, FILE *file)
 
     return ret;
 }
+
+matrix_t *matrix_load(FILE *file)
+{
+    int m, n;
+
+    int read = fscanf(file, "%d %d\n", &m, &n);
+    if (read != 2) {
+        return NULL;
+    }
+
+    matrix_t *out = matrix_create(m, n);
+
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            float elem;
+            read = fscanf(file, "%f ", &elem);
+
+            if (read != 1) {
+                free(out);
+                return NULL;
+            }
+
+            matrix_set(out, i, j, elem);
+        }
+        fscanf(file, "\n");
+    }
+
+    return out;
+}
