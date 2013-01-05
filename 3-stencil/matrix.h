@@ -8,6 +8,7 @@ matrix_t *matrix_create(int m, int n);
 matrix_t *matrix_random(int m, int n, int seed);
 void matrix_free(matrix_t *matrix);
 
+void matrix_dims(const matrix_t *matrix, int *m, int *n);
 double matrix_get(const matrix_t *matrix, int i, int j);
 void matrix_set(matrix_t *matrix, int i, int j, double elem);
 

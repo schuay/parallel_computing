@@ -51,6 +51,12 @@ void matrix_free(matrix_t *matrix)
     free(matrix);
 }
 
+void matrix_dims(const matrix_t *matrix, int *m, int *n)
+{
+    *m = matrix->m;
+    *n = matrix->n;
+}
+
 static inline int matrix_index(const matrix_t *matrix, int i, int j)
 {
     return i * matrix->n + j;
