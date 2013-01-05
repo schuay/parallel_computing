@@ -3,9 +3,23 @@
 #include "common.h"
 #include "matrix.h"
 
+#define SAVE_INTERVAL (100)
+
 static void usage(void);
+
+/**
+ * Saves the matrix into a file, encoding the dimensions, seed
+ * and iteration into the filename.
+ */
 static int save_matrix_at_iteration(const matrix_t *matrix,
         int seed, int iteration);
+
+/**
+ * Applies a jacobi iteration to the given matrix, and
+ * returns the result as a new matrix. The old matrix is
+ * freed.
+ */
+static matrix_t *jacobi_iteration(matrix_t *matrix);
 
 /**
  * Generates a random n x m matrix with seed s and runs x Jacobi-iterations
@@ -25,10 +39,20 @@ int main(int argc, char **argv)
     const int s = safe_strtol(argv[3]);
     const int x = safe_strtol(argv[4]);
 
+    if (n < 1 || m < 1 || s < 1 || x < 1) {
+        usage();
+    }
+
     matrix_t *matrix = matrix_random(m, n, s);
 
-    save_matrix_at_iteration(matrix, s, 0);
+    for (int i = 0; i < x; i++) {
+        if (i % SAVE_INTERVAL == 0) {
+            save_matrix_at_iteration(matrix, s, i);
+        }
+        matrix = jacobi_iteration(matrix);
+    }
 
+    save_matrix_at_iteration(matrix, s, x);
     matrix_free(matrix);
 
     return 0;
@@ -68,4 +92,42 @@ static int save_matrix_at_iteration(const matrix_t *matrix,
     fclose(file);
 
     return ret;
+}
+
+static matrix_t *jacobi_iteration(matrix_t *matrix)
+{
+    int m, n;
+    matrix_dims(matrix, &m, &n);
+
+    matrix_t *next = matrix_create(m, n);
+
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            int count = 0;
+            double sum = 0;
+
+            if (i != 0) {
+                count++;
+                sum += matrix_get(matrix, i - 1, j);
+            }
+            if (j != 0) {
+                count++;
+                sum += matrix_get(matrix, i, j - 1);
+            }
+            if (i != m - 1) {
+                count++;
+                sum += matrix_get(matrix, i + 1, j);
+            }
+            if (j != n - 1) {
+                count++;
+                sum += matrix_get(matrix, i, j + 1);
+            }
+
+            matrix_set(next, i, j, sum / count);
+        }
+    }
+
+    matrix_free(matrix);
+
+    return next;
 }
