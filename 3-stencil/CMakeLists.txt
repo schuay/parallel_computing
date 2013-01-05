@@ -39,6 +39,10 @@ add_executable(stencil_ref
     ${COMMON_DIR}/csv.c
 )
 
+target_link_libraries(stencil_ref
+    ${MPI_C_LIBRARIES}
+)
+
 if(CHECK_FOUND)
     enable_testing()
 

@@ -1,3 +1,4 @@
+#include <mpi.h>
 #include <stdio.h>
 
 #include "common.h"
@@ -30,6 +31,8 @@ static matrix_t *jacobi_iteration(matrix_t *matrix);
  */
 int main(int argc, char **argv)
 {
+    MPI_Init(&argc, &argv);
+
     if (argc != 5) {
         usage();
     }
@@ -45,15 +48,22 @@ int main(int argc, char **argv)
 
     matrix_t *matrix = matrix_random(m, n, s);
 
+    double start = MPI_Wtime();
     for (int i = 0; i < x; i++) {
         if (i % SAVE_INTERVAL == 0) {
             save_matrix_at_iteration(matrix, s, i);
         }
         matrix = jacobi_iteration(matrix);
     }
+    double end = MPI_Wtime();
 
     save_matrix_at_iteration(matrix, s, x);
     matrix_free(matrix);
+
+    printf("%dx%d, %d iterations, %f seconds\n",
+            m, n, x, end - start);
+
+    MPI_Finalize();
 
     return 0;
 }
