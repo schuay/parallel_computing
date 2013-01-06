@@ -50,19 +50,20 @@ if(CHECK_FOUND)
         ${CHECK_INCLUDE_DIRS}
     )
 
-#    add_executable(bucket_test
-#        bucket.c
-#        test.c
-#    )
+    add_executable(stencil_test
+        matrix.c
+        stencil.c
+        test.c
+    )
 
-#    target_link_libraries(bucket_test
-#        ${CHECK_LIBRARIES}
-#        ${MPI_C_LIBRARIES}
-#    )
+    target_link_libraries(stencil_test
+        ${CHECK_LIBRARIES}
+        ${MPI_C_LIBRARIES}
+    )
 
-#    add_test(bucket-test
-#        ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${CMAKE_CURRENT_BINARY_DIR}/bucket_test
-#    )
+    add_test(stencil-test
+        ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${CMAKE_CURRENT_BINARY_DIR}/stencil_test
+    )
 endif()
 
 # vim:set ts=4 sw=4 et:

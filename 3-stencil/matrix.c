@@ -1,8 +1,10 @@
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 #include "matrix.h"
 
+#define MAX_DELTA (0.1f)
 #define UPPER_BOUND (500000)
 
 struct __matrix_t {
@@ -47,6 +49,10 @@ matrix_t *matrix_random(int m, int n, int seed)
 
 void matrix_free(matrix_t *matrix)
 {
+    if (matrix == NULL) {
+        return;
+    }
+
     free(matrix->elems);
     free(matrix);
 }
@@ -70,6 +76,22 @@ double matrix_get(const matrix_t *matrix, int i, int j)
 void matrix_set(matrix_t *matrix, int i, int j, double elem)
 {
     matrix->elems[matrix_index(matrix, i, j)] = elem;
+}
+
+int matrix_equals(const matrix_t *a, const matrix_t *b)
+{
+    if (a->m != b->m || a->n != b->n) {
+        return 0;
+    }
+    
+    for (int i = 0; i < a->m * a->n; i++) {
+        double delta = fabs(a->elems[i] - b->elems[i]);
+        if (delta > MAX_DELTA) {
+            return 0;
+        }
+    }    
+
+    return 1;
 }
 
 int matrix_save(const matrix_t *matrix, FILE *file)
