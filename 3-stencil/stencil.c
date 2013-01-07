@@ -51,6 +51,7 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
         return;
     }
 
+    MPI_Comm_size(comm, &processes);
     MPI_Comm_rank(comm, &rank);
 
     int coords[NDIMS];
@@ -77,7 +78,33 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
             fprintf(stderr, "GURU MEDITATION\n");
             break;
         }
+
     }
+
+    /* Gather all resulting submatrices. */
+
+    double submatrices[m * n];
+    ret = MPI_Allgather(submatrix->elems, subm * subn, MPI_DOUBLE,
+            submatrices, subm * subn, MPI_DOUBLE, comm);
+    if (ret == -1) {
+        fprintf(stderr, "GURU MEDITATION\n");
+    }
+
+    for (int i = 0; i < processes; i++) {
+        int peer_coords[NDIMS];
+        MPI_Cart_coords(comm, i, NDIMS, peer_coords);
+
+        submatrix_t s;
+
+        s.m = subm;
+        s.n = subn;
+        s.i = peer_coords[DIM_I] * subm;
+        s.j = peer_coords[DIM_J] * subn;
+
+        s.elems = submatrices + i * subm * subn;
+        matrix_cram(matrix, &s);
+    }
+
 
     submatrix_free(submatrix);
 
