@@ -2,6 +2,8 @@
 
 #include <string.h>
 
+#include <cilk-lib.cilkh>
+
 /* #define DEBUG(...) fprintf(stderr, __VA_ARGS__) */
 #define DEBUG(...)
 
@@ -66,9 +68,11 @@ static cilk void merge_recursive(const TYPE *a, int n, const TYPE *b, int m, TYP
     sync;
 }
 
-cilk void merge_impl(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, perf_t *perf)
+cilk void merge_impl(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
+        perf_t *perf, int *nproc)
 {
     int p = Cilk_active_size;
+    *nproc = p;
 
     spawn merge_recursive(a, n, b, m, c, (m + n) / p, perf);
     sync;

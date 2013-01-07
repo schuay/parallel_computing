@@ -101,7 +101,8 @@ static void merge_datapara(int i, void *args)
     merge_seq(a + a_start, a_length, b + b_start, b_length, c + a_start + b_start);
 }
 
-cilk void merge_impl(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, perf_t *perf)
+cilk void merge_impl(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
+        perf_t *perf, int *nproc)
 {
     int p = Cilk_active_size;
     int *rankA = calloc(p, sizeof(int));
@@ -109,6 +110,8 @@ cilk void merge_impl(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, perf_t
 
     struct bsearch_args_t bsearch_args = { rankA, rankB, a, n, b, m, p };
     struct merge_args_t merge_args = { rankA, rankB, a, n, b, m, p, c };
+
+    *nproc = p;
 
     spawn datapara(0, p, 1, binary_search_datapara, &bsearch_args);
     sync;

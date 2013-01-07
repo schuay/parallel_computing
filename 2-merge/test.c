@@ -6,6 +6,7 @@
 #define LARGE_N (500000)
 #define MERGE_TEST(a, b) \
     do { \
+        int nproc; \
         size_t n = sizeof(a) / sizeof(a[0]); \
         size_t m = sizeof(b) / sizeof(b[0]); \
  \
@@ -13,7 +14,7 @@
         qsort(b, n, sizeof(a[0]), less_than); \
  \
         TYPE *ref = merge_ref(a, n, b, m); \
-        TYPE *tst = merge(a, n, b, m, NULL, "0"); \
+        TYPE *tst = merge(a, n, b, m, NULL, "0", &nproc); \
  \
         fail_unless(memcmp(ref, tst, sizeof(TYPE) * (n + m)) == 0, \
                 "Result not equal to reference implementation"); \

@@ -40,18 +40,19 @@ int main(int argc, const char **argv) {
         return -1;
     }
 
-    /* TODO: display the actual number of threads. */
-    printf("%s. nproc == %s\n", algorithm_name, threads);
+    int nproc;
 
     Cilk_time start = Cilk_get_wall_time();
-    TYPE *c = merge(a, n, b, m, NULL, threads);
+    TYPE *c = merge(a, n, b, m, NULL, threads, &nproc);
     Cilk_time elapsed = Cilk_get_wall_time() - start;
     double par_time = Cilk_wall_time_to_sec(elapsed);
+
+    printf("%s. nproc == %d\n", algorithm_name, nproc);
 
     printf("elements: %d; time: %f\n\n",
             size, par_time);
 
-    fprintf(csvFile, "%s,%s,%d,%f\n", algorithm_name, threads, size, par_time);
+    fprintf(csvFile, "%s,%d,%d,%f\n", algorithm_name, nproc, size, par_time);
 
     free(a);
     free(c);
