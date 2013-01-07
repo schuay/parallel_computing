@@ -24,7 +24,7 @@ static int binary_search(TYPE needle, const TYPE *haystack, int n)
     return low;
 }
 
-cilk void merge_recursive(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, perf_t *perf)
+static cilk void merge_recursive(const TYPE *a, int n, const TYPE *b, int m, TYPE *c, perf_t *perf)
 {
     /* TODO: replace memcpy with something more parallel. */
     int r, s;
