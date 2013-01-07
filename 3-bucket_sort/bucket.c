@@ -6,6 +6,8 @@
 
 const char *algorithm_name = "parallel bucket";
 
+static int less_than(const void *a, const void *b);
+
 TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
 {
     int p, rank;
@@ -19,86 +21,116 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
     const int m = n / p;
     const int start = rank * m;
     const int next_start = (rank == p - 1) ? n : (rank + 1) * m;
+    const int range_len = upper_bound / p;
 
-    /* Count the number of occurences of each element in our range. */
-
-    int counts[upper_bound];
-    memset(counts, 0, sizeof(counts));
-
+    DEBUG("Rank %d, assigned range: ", rank);
     for (int i = start; i < next_start; i++) {
-        counts[xs[i]]++;
+        DEBUG("%d ", xs[i]);
     }
-
-    DEBUG("Local range of %d: ", rank);
-    for (int i = start; i < next_start; i++) DEBUG("%d ", xs[i]);
     DEBUG("\n");
 
-    /* Sum up these counts over all processes and do a local exscan. */
+    /* Sort our subarray and count the number of elements belonging to each
+     * processes range. */
 
-    int summed_counts[upper_bound];
-    int ret = MPI_Allreduce(counts, summed_counts, upper_bound,
-            MPI_INT, MPI_SUM, MPI_COMM_WORLD);
-    if (ret != MPI_SUCCESS) {
-        return NULL;
-    }
+    qsort(xs + start, next_start - start, sizeof(TYPE), less_than);
 
-    int exscan_counts[upper_bound];
-    exscan_counts[0] = 0;
-    for (int i = 1; i < upper_bound; i++) {
-        exscan_counts[i] =  exscan_counts[i - 1] + summed_counts[i - 1];
-    }
-
-    /* Determine starting indexes for each bucket in the final sorted
-     * array. */
-
-    int starting_indexes[upper_bound];
-    memset(starting_indexes, 0, sizeof(starting_indexes));
-    ret = MPI_Exscan(counts, starting_indexes, upper_bound,
-            MPI_INT, MPI_SUM, MPI_COMM_WORLD);
-    if (ret != MPI_SUCCESS) {
-        return NULL;
-    }
-
-    DEBUG("Combined starting indexes of %d: ", rank);
-    for (int i = 0; i < upper_bound; i++) DEBUG("%d ", exscan_counts[i] + starting_indexes[i]);
-    DEBUG("\n");
-
-    /* TODO: I'm not sure what exactly steps 5-8 in the algorithm description
-     * are supposed to do. The only interpretation I can think of transfers
-     * all local elements in another processes 'range' to that process, after
-     * which every process can sort its own range.
-     *
-     * However, this does not result in a complete sorted array, and we still
-     * need to do an Allgather to get the entire range.
-     *
-     * While this works, since we know the target index of each element, we could
-     * accomplish this in a simpler way by just moving the elements to
-     * their appropriate spot and then doing an Allreduce. We will implement this
-     * way until further clarifications.
-     *
-     * UPDATE: We can apparently choose our own implementation as long as
-     * it isn't slower. I'm tending towards splitting up local elements to
-     * other processes, which then sort sequentially.
-     */
-
-    TYPE *local_out = calloc(n, sizeof(TYPE));
+    int tx_elems[p];
+    memset(tx_elems, 0, sizeof(tx_elems));
 
     for (int i = start; i < next_start; i++) {
-        int src = xs[i];
-        int dest_index = exscan_counts[src] + starting_indexes[src];
-        exscan_counts[src]++;
-        local_out[dest_index] = src;
+        int target = xs[i] / range_len;
+        if (target >= p) {
+            target = p -1;
+        }
+        tx_elems[target]++;
     }
 
-    TYPE *out = calloc(n, sizeof(TYPE));
-    ret = MPI_Allreduce(local_out, out, n, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
-    free(local_out);
+    int tx_locs[p];
+    memset(tx_locs, 0, sizeof(tx_locs));
+
+    for (int i = 1; i < p; i++) {
+        tx_locs[i] = tx_locs[i - 1] + tx_elems[i - 1];
+    }
+
+    /* Exchange the count of elements to transfer with all processes. */
+
+    int rx_elems[p];
+    memset(rx_elems, 0, sizeof(rx_elems));
+
+    int ret = MPI_Alltoall(tx_elems, 1, MPI_INT, rx_elems, 1, MPI_INT, MPI_COMM_WORLD);
     if (ret != MPI_SUCCESS) {
         return NULL;
     }
 
-    DEBUG("Sorted sequence of %d: ", rank);
-    for (int i = 0; i < n; i++) DEBUG("%d ", out[i]);
+    int rx_locs[p];
+    memset(rx_locs, 0, sizeof(rx_locs));
+
+    for (int i = 1; i < p; i++) {
+        rx_locs[i] = rx_locs[i - 1] + rx_elems[i - 1];
+    }
+
+    DEBUG("Rank %d, rx_elems: ", rank);
+    for (int i = 0; i < p; i++) {
+        DEBUG("%d ", rx_elems[i]);
+    }
+    DEBUG("\n");
+
+    /* Allocate space for all elements to be received. */
+
+    int elems = 0;
+    for (int i = 0; i < p; i++) {
+        elems += rx_elems[i];
+    }
+
+    TYPE ys[elems];
+
+    /* Actually exchange the elements with all processes. */
+
+    ret = MPI_Alltoallv(xs + start, tx_elems, tx_locs, MPI_INT,
+        ys, rx_elems, rx_locs, MPI_INT, MPI_COMM_WORLD);
+    if (ret != MPI_SUCCESS) {
+        return NULL;
+    }
+
+    /* Sort the local range. */
+
+    qsort(ys, elems, sizeof(TYPE), less_than);
+
+    DEBUG("Rank %d, sorted subarray: ", rank);
+    for (int i = 0; i < elems; i++) {
+        DEBUG("%d ", ys[i]);
+    }
+    DEBUG("\n");
+
+    /* Exchange the count of elements to transfer with all processes.
+     * This time, we are exchanging the entire owned range with all other processes. */
+
+    memset(rx_elems, 0, sizeof(rx_elems));
+
+    ret = MPI_Allgather(&elems, 1, MPI_INT, rx_elems, 1, MPI_INT, MPI_COMM_WORLD);
+    if (ret != MPI_SUCCESS) {
+        return NULL;
+    }
+
+    memset(rx_locs, 0, sizeof(rx_locs));
+
+    for (int i = 1; i < p; i++) {
+        rx_locs[i] = rx_locs[i - 1] + rx_elems[i - 1];
+    }
+
+    /* Other code expects the full range to be returned, so gather it all here. */
+
+    TYPE *out = malloc(sizeof(TYPE) * n);
+
+    ret = MPI_Allgatherv(ys, elems, MPI_INT, out, rx_elems, rx_locs, MPI_INT, MPI_COMM_WORLD);
+    if (ret != MPI_SUCCESS) {
+        return NULL;
+    }
+
+    DEBUG("Rank %d, sorted array: ", rank);
+    for (int i = 0; i < n; i++) {
+        DEBUG("%d ", out[i]);
+    }
     DEBUG("\n");
 
     return out;
@@ -124,4 +156,10 @@ TYPE *random_array(int size, int upper_bound, int seed)
     free(seq);
 
     return a;
+}
+
+static int less_than(const void *a, const void *b) {
+    TYPE *_a = (TYPE *)a;
+    TYPE *_b = (TYPE *)b;
+    return (int)(*_a - *_b);
 }
