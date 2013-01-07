@@ -75,6 +75,10 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
      * accomplish this in a simpler way by just moving the elements to
      * their appropriate spot and then doing an Allreduce. We will implement this
      * way until further clarifications.
+     *
+     * UPDATE: We can apparently choose our own implementation as long as
+     * it isn't slower. I'm tending towards splitting up local elements to
+     * other processes, which then sort sequentially.
      */
 
     TYPE *local_out = calloc(n, sizeof(TYPE));
