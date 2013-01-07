@@ -61,8 +61,9 @@ cilk void datapara(int i, int j, int unit, void (*f)(int, void*), void *optargs)
             f(k, optargs);
         }
     } else {
-        spawn datapara(i, j / 2, unit, f, optargs);
-        spawn datapara(j / 2, j, unit, f, optargs);
+        int m = (i + j) / 2;
+        spawn datapara(i, m, unit, f, optargs);
+        spawn datapara(m, j, unit, f, optargs);
         sync;
     }
 }
