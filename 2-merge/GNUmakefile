@@ -19,15 +19,19 @@ bake:
 	mkdir -p build
 	cd build
 	cilkc ${CFLAGS} -lcheck recursive.cilk merge.c test.c -o build/recursive_test
+	cilkc ${CFLAGS} -lcheck binsearch.cilk merge.c test.c -o build/binsearch_test
 	cilkc ${CFLAGS} -static recursive.cilk merge.c bench.c ../common/perf.c ../common/csv.c \
 	    -o build/recursive_bench
+	cilkc ${CFLAGS} -static binsearch.cilk merge.c bench.c ../common/perf.c ../common/csv.c \
+	    -o build/binsearch_bench
 	cilkc ${CFLAGS} -static reference.cilk merge.c bench.c ../common/perf.c ../common/csv.c \
 	    -o build/reference_bench
 
-test: bake
-	./build/*_test
+test: build/recursive_test build/binsearch_test
+	./build/recursive_test
+	./build/binsearch_test
 
-bench: build/reference_bench build/recursive_bench
+bench: build/reference_bench build/recursive_bench build/binsearch_bench
 	mkdir -p data
 	for inSize in $(INPUT_SIZES); do \
 		build/reference_bench data/$(CSV_FILE) $${inSize} 1; \
