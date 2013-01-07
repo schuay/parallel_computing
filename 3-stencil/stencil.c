@@ -1,13 +1,25 @@
 #include <mpi.h>
+#include <string.h>
 
 #include "matrix.h"
 #include "stencil.h"
 
 #define NDIMS (2)
+#define DIM_I (0)
+#define DIM_J (1)
+#define SHIFT_UP (1)
+#define SHIFT_DOWN (-1)
+
+enum tags_t {
+    TAG_TOP,
+    TAG_BOTTOM,
+    TAG_LEFT,
+    TAG_RIGHT,
+};
 
 const char *algorithm_name = "stencil";
 
-static void stencil_iteration(void) { }
+static int stencil_iteration(MPI_Comm comm, submatrix_t *submatrix);
 
 void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
 {
@@ -33,7 +45,7 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
     MPI_Comm comm;
 
     int dims[] = { r, c };
-    int periods[] = { 0, 0};
+    int periods[] = { 0, 0 };
     int ret = MPI_Cart_create(MPI_COMM_WORLD, NDIMS, dims, periods, 1, &comm);
     if (ret != MPI_SUCCESS) {
         return;
@@ -44,15 +56,139 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
     int coords[NDIMS];
     MPI_Cart_coords(comm, rank, NDIMS, coords);
 
-    DEBUG("Rank %d has coords (%d, %d)\n", rank, coords[0], coords[1]);
-
     /* Extract submatrices. */
+
+    const int subm = m / r;
+    const int subn = n / c;
+    const int subi = coords[DIM_I] * subm;
+    const int subj = coords[DIM_J] * subn;
+
+    DEBUG("Rank %d has coords (%d, %d), submatrix %dx%d from (%d, %d)\n",
+            rank, coords[DIM_I], coords[DIM_J],
+            subm, subn, subi, subj);
+
+    submatrix_t *submatrix = matrix_extract(matrix, subm, subn, subi, subj);
 
     /* Perform stencil iterations. */
 
     for (int i = 0; i < iters; i++) {
-        stencil_iteration();
+        ret = stencil_iteration(comm, submatrix);
+        if (ret == -1) {
+            fprintf(stderr, "GURU MEDITATION\n");
+            break;
+        }
     }
 
+    submatrix_free(submatrix);
+
     MPI_Comm_free(&comm);
+}
+
+static int stencil_iteration(MPI_Comm comm, submatrix_t *submatrix)
+{
+    const int m = submatrix->m;
+    const int n = submatrix->n;
+
+    MPI_Status status;
+    int ret, from, to;
+
+    /* From here on, it seems easier to work directly with the
+     * double arrays contained in the submatrix. First of all,
+     * extract the matrix edges and shift them through our topology.
+     *
+     * Let's start by shifting the top row.
+     */
+
+    double top[n];
+    int has_top = 1;
+    memcpy(top, submatrix->elems, n * sizeof(double));
+
+    ret = MPI_Cart_shift(comm, DIM_I, SHIFT_DOWN, &from, &to);
+    if (ret != MPI_SUCCESS) {
+        return -1;
+    }
+
+    if (from == MPI_PROC_NULL) {
+        has_top = 0;
+    }
+
+    ret = MPI_Sendrecv_replace(top, n, MPI_DOUBLE, to, TAG_TOP,
+            from, TAG_TOP, comm, &status);
+    if (ret != MPI_SUCCESS) {
+        return -1;
+    }
+
+    /* Now the bottom. */
+
+    double bottom[n];
+    int has_bottom = 1;
+    memcpy(bottom, submatrix->elems + submatrix_index(submatrix, m - 1, 0), n * sizeof(double));
+
+    ret = MPI_Cart_shift(comm, DIM_I, SHIFT_UP, &from, &to);
+    if (ret != MPI_SUCCESS) {
+        return -1;
+    }
+
+    if (from == MPI_PROC_NULL) {
+        has_bottom = 0;
+    }
+
+    ret = MPI_Sendrecv_replace(bottom, n, MPI_DOUBLE, to, TAG_BOTTOM,
+            from, TAG_BOTTOM, comm, &status);
+    if (ret != MPI_SUCCESS) {
+        return -1;
+    }
+
+    /* Left. */
+
+    double left[m];
+    int has_left = 1;
+
+    for (int i = 0; i < m; i++) {
+        left[i] = submatrix->elems[submatrix_index(submatrix, i, 0)];
+    }
+
+    ret = MPI_Cart_shift(comm, DIM_J, SHIFT_DOWN, &from, &to);
+    if (ret != MPI_SUCCESS) {
+        return -1;
+    }
+
+    if (from == MPI_PROC_NULL) {
+        has_left = 0;
+    }
+
+    ret = MPI_Sendrecv_replace(left, m, MPI_DOUBLE, to, TAG_LEFT,
+            from, TAG_LEFT, comm, &status);
+    if (ret != MPI_SUCCESS) {
+        return -1;
+    }
+
+    /* Right. */
+
+    double right[m];
+    int has_right = 1;
+
+    for (int i = 0; i < m; i++) {
+        right[i] = submatrix->elems[submatrix_index(submatrix, i, n - 1)];
+    }
+
+    ret = MPI_Cart_shift(comm, DIM_J, SHIFT_UP, &from, &to);
+    if (ret != MPI_SUCCESS) {
+        return -1;
+    }
+
+    if (from == MPI_PROC_NULL) {
+        has_right = 0;
+    }
+
+    ret = MPI_Sendrecv_replace(right, m, MPI_DOUBLE, to, TAG_RIGHT,
+            from, TAG_RIGHT, comm, &status);
+    if (ret != MPI_SUCCESS) {
+        return -1;
+    }
+
+    /* We have now gathered all edges from neighboring processes, proceed with
+     * a local sequential stencil iteration. */
+
+    return 0;
 }
