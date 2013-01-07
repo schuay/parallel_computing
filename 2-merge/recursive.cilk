@@ -5,7 +5,7 @@
 /* #define DEBUG(...) fprintf(stderr, __VA_ARGS__) */
 #define DEBUG(...)
 
-const char *algorithm_name = "parallel merge";
+const char *algorithm_name = "recursive parallel merge";
 
 static int binary_search(TYPE needle, const TYPE *haystack, int n)
 {
