@@ -188,7 +188,54 @@ static int stencil_iteration(MPI_Comm comm, submatrix_t *submatrix)
     }
 
     /* We have now gathered all edges from neighboring processes, proceed with
-     * a local sequential stencil iteration. */
+     * a local sequential stencil iteration.
+     *
+     * Note that the naming can be confusing since edges are named from the sender's
+     * perspective. */
+
+    double next[n * m];
+
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            int count = 0;
+            double sum = 0;
+
+            if (i != 0) {
+                count++;
+                sum += submatrix->elems[submatrix_index(submatrix, i - 1, j)];
+            } else if (has_bottom) {
+                count++;
+                sum += bottom[j];
+            }
+            if (j != 0) {
+                count++;
+                sum += submatrix->elems[submatrix_index(submatrix, i, j - 1)];
+            } else if (has_right) {
+                count++;
+                sum += right[i];
+            }
+            if (i != m - 1) {
+                count++;
+                sum += submatrix->elems[submatrix_index(submatrix, i + 1, j)];
+            } else if (has_top) {
+                count++;
+                sum += top[j];
+            }
+            if (j != n - 1) {
+                count++;
+                sum += submatrix->elems[submatrix_index(submatrix, i, j + 1)];
+            } else if (has_left) {
+                count++;
+                sum += left[i];
+            }
+
+            next[submatrix_index(submatrix, i, j)] = sum / count;
+        }
+    }
+
+    /* Finally, copy over the results to the original submatrix. */
+
+    memcpy(submatrix->elems, next, m * n * sizeof(double));
 
     return 0;
 }
