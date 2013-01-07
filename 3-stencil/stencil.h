@@ -4,6 +4,9 @@
 #include "matrix.h"
 #include "perf.h"
 
+#define DEBUG(...) printf(__VA_ARGS__)
+// #define DEBUG(...)
+
 /**
  * Performs iters Jacobi iterations on matrix, which is distributed
  * into n/c x m/r blocks (c * r = p).

@@ -43,6 +43,17 @@ target_link_libraries(stencil_ref
     ${MPI_C_LIBRARIES}
 )
 
+add_executable(stencil_bench
+    ${COMMON_DIR}/csv.c
+    bench.c
+    matrix.c
+    stencil.c
+)
+
+target_link_libraries(stencil_bench
+    ${MPI_C_LIBRARIES}
+)
+
 if(CHECK_FOUND)
     enable_testing()
 
