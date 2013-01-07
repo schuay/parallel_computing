@@ -37,6 +37,7 @@ bench: build/reference_bench build/recursive_bench build/binsearch_bench
 		build/reference_bench data/$(CSV_FILE) $${inSize} 1; \
 		for nThreads in $(NUM_THREADS); do \
 			build/recursive_bench data/$(CSV_FILE) $${inSize} $${nThreads}; \
+			build/binsearch_bench data/$(CSV_FILE) $${inSize} $${nThreads}; \
 		done \
 	done
 
