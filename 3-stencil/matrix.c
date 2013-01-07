@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "matrix.h"
 
@@ -137,4 +138,66 @@ matrix_t *matrix_load(FILE *file)
     }
 
     return out;
+}
+
+submatrix_t *matrix_extract(const matrix_t *matrix, int m, int n, int i, int j)
+{
+    if (m + i > matrix->m || n + j > matrix->n) {
+        return NULL;
+    }
+
+    submatrix_t *sub = malloc(sizeof(submatrix_t));
+
+    sub->elems = malloc(m * n * sizeof(double));
+    if (sub->elems == NULL) {
+        free(sub);
+        return NULL;
+    }
+
+    sub->m = m;
+    sub->n = n;
+    sub->i = i;
+    sub->j = j;
+
+    for (int ii = 0; ii < m; ii++) {
+        for (int jj = 0; jj < n; jj++) {
+            const int to = submatrix_index(sub, ii, jj);
+            sub->elems[to] = matrix_get(matrix, i + ii, j + jj);
+        }
+    }
+
+    return sub;
+}
+
+int matrix_cram(matrix_t *matrix, const submatrix_t *submatrix)
+{
+    if (submatrix->m + submatrix->i > matrix->m ||
+            submatrix->n + submatrix->j > matrix->n) {
+        return -1;
+    }
+
+    for (int ii = 0; ii < submatrix->m; ii++) {
+        for (int jj = 0; jj < submatrix->n; jj++) {
+            const int from = submatrix_index(submatrix, ii, jj);
+            matrix_set(matrix, ii + submatrix->i, jj + submatrix->j,
+                    submatrix->elems[from]);
+        }
+    }
+
+    return 0;
+}
+
+int submatrix_index(const submatrix_t *matrix, int i, int j)
+{
+    return i * matrix->n + j;
+}
+
+void submatrix_free(submatrix_t *submatrix)
+{
+    if (submatrix == NULL) {
+        return;
+    }
+
+    free(submatrix->elems);
+    free(submatrix);
 }
