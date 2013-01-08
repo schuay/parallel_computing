@@ -21,8 +21,21 @@ const char *algorithm_name = "stencil";
 
 static int stencil_iteration(MPI_Comm comm, submatrix_t *submatrix);
 
+/* Complexity: O(i * (m/r * n/c + m/r + n/c) + log p + m * n).
+ * The first additive term stems from the iteration calculation,
+ * the second and third from the subsequent combination of results.
+ * Leaving the recombination out and limiting ourselves to a single
+ * iteration, the complexity reduces to O(m/r * n/c + m/r + n/c).
+ *
+ * According to this analysis, r and c should be chosen such that
+ * m/r + n/c is minimal.
+ */
+
 void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
 {
+    /* Complexity: O(1), assuming MPI_Comm_size, MPI_Comm_rank, MPI_Cart_create,
+     * MPI_Cart_coords are all O(1). */
+
     int processes, rank;
     MPI_Comm_size(MPI_COMM_WORLD, &processes);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -68,9 +81,12 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
             rank, coords[DIM_I], coords[DIM_J],
             subm, subn, subi, subj);
 
+    /* Complexity: O(m/r * n/c). */
+
     submatrix_t *submatrix = matrix_extract(matrix, subm, subn, subi, subj);
 
-    /* Perform stencil iterations. */
+    /* Perform stencil iterations.
+     * Complexity: O(i * inner complexity) = O(i * m/r * n/c). */
 
     for (int i = 0; i < iters; i++) {
         ret = stencil_iteration(comm, submatrix);
@@ -81,7 +97,10 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
 
     }
 
-    /* Gather all resulting submatrices. */
+    /* Gather all resulting submatrices.
+     * Complexity: O(x + log p) with x total data per process and p total processes.
+     * In this case x = m/r * n/c, therefore:
+     * O(m/r * n/c + log p). */
 
     double submatrices[m * n];
     ret = MPI_Allgather(submatrix->elems, subm * subn, MPI_DOUBLE,
@@ -89,6 +108,8 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
     if (ret == -1) {
         fprintf(stderr, "GURU MEDITATION\n");
     }
+
+    /* Complexity: O(c * r * m/r * n/c) = O(m * n). */
 
     for (int i = 0; i < processes; i++) {
         int peer_coords[NDIMS];
@@ -111,6 +132,8 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
     MPI_Comm_free(&comm);
 }
 
+/* Complexity: O(m/r * n/c). */
+
 static int stencil_iteration(MPI_Comm comm, submatrix_t *submatrix)
 {
     const int m = submatrix->m;
@@ -124,6 +147,8 @@ static int stencil_iteration(MPI_Comm comm, submatrix_t *submatrix)
      * extract the matrix edges and shift them through our topology.
      *
      * Let's start by shifting the top row.
+     *
+     * Complexity: O(n/c).
      */
 
     double top[n];
@@ -166,7 +191,10 @@ static int stencil_iteration(MPI_Comm comm, submatrix_t *submatrix)
         return -1;
     }
 
-    /* Left. */
+    /* Left.
+     *
+     * Complexity: O(m/r).
+     */
 
     double left[m];
     int has_left = 1;
@@ -218,7 +246,10 @@ static int stencil_iteration(MPI_Comm comm, submatrix_t *submatrix)
      * a local sequential stencil iteration.
      *
      * Note that the naming can be confusing since edges are named from the sender's
-     * perspective. */
+     * perspective.
+     *
+     * Complexity: O(m/r * n/c).
+     */
 
     double next[n * m];
 
@@ -260,7 +291,10 @@ static int stencil_iteration(MPI_Comm comm, submatrix_t *submatrix)
         }
     }
 
-    /* Finally, copy over the results to the original submatrix. */
+    /* Finally, copy over the results to the original submatrix.
+     *
+     * Complexity: O(m/r * n/c).
+     */
 
     memcpy(submatrix->elems, next, m * n * sizeof(double));
 
