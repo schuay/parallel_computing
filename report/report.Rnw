@@ -1,8 +1,24 @@
 \documentclass[a4paper,10pt]{article}
 
 \usepackage{comment}
+\usepackage{listings}
 \usepackage[pdfborder={0 0 0}]{hyperref}
 \usepackage[utf8]{inputenc}
+
+\lstset{
+    language=C,                             % Code langugage
+    basicstyle=\ttfamily,                   % Code font, Examples:
+                                            % \footnotesize, \ttfamily
+    keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+    commentstyle=\color{gray},              % Comments font
+    captionpos=b,                           % Caption-position = bottom
+    breaklines=true,                        % Automatic line breaking?
+    breakatwhitespace=false,                % Automatic breaks only at
+                                            % whitespace?
+    showspaces=false,                       % Dont make spaces visible
+    showtabs=false,                         % Dont make tabs visible
+    morekeywords={__attribute__},           % Specific keywords
+}
 
 \title{Introduction to Parallel Computing, WS 2012}
 \author{
