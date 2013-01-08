@@ -27,17 +27,17 @@ static int less_than(const void *a, const void *b) {
 
 START_TEST(test_singles)
 {
-    TYPE a[] = {0, 1};
+    TYPE a[] = {0, 1, 2, 4};
     int n = sizeof(a) / sizeof(a[0]);
-    BUCKET_TEST(a, n, 2);
+    BUCKET_TEST(a, n, 4);
 }
 END_TEST
 
 START_TEST(test_singles_reversed)
 {
-    TYPE a[] = {1, 0};
+    TYPE a[] = {3, 2, 1, 0};
     int n = sizeof(a) / sizeof(a[0]);
-    BUCKET_TEST(a, n, 2);
+    BUCKET_TEST(a, n, 4);
 }
 END_TEST
 

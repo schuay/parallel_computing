@@ -11,6 +11,8 @@
  *
  * bucket_sort returns a new array containing all elements of
  * xs in ascending order.
+ *
+ * It is assumed that the process count is >= n.
  */
 TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf);
 
