@@ -8,8 +8,16 @@ const char *algorithm_name = "parallel bucket";
 
 static int less_than(const void *a, const void *b);
 
+/* Complexity: O(n/p log (n/p) + p + n/p log p).
+ * 
+ * Without gathering results after conclusion, this reduces to
+ * O(n/p log (n/p) + p).
+ */
+
 TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
 {
+    /* Complexity: O(1). */
+
     int p, rank;
     MPI_Comm_size(MPI_COMM_WORLD, &p);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -30,12 +38,19 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
     DEBUG("\n");
 
     /* Sort our subarray and count the number of elements belonging to each
-     * processes range. */
+     * processes range.
+     *
+     * Complexity: O((n/p) log (n/p)).
+     */
 
     qsort(xs + start, next_start - start, sizeof(TYPE), less_than);
 
+    /* Complexity: O(p). */
+
     int tx_elems[p];
     memset(tx_elems, 0, sizeof(tx_elems));
+
+    /* Complexity: O(n/p). */
 
     for (int i = start; i < next_start; i++) {
         int target = xs[i] / range_len;
@@ -45,6 +60,8 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
         tx_elems[target]++;
     }
 
+    /* Complexity: O(p). */
+
     int tx_locs[p];
     memset(tx_locs, 0, sizeof(tx_locs));
 
@@ -52,7 +69,10 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
         tx_locs[i] = tx_locs[i - 1] + tx_elems[i - 1];
     }
 
-    /* Exchange the count of elements to transfer with all processes. */
+    /* Exchange the count of elements to transfer with all processes.
+     *
+     * Complexity: O(p + log p).
+     */
 
     int rx_elems[p];
     memset(rx_elems, 0, sizeof(rx_elems));
@@ -84,7 +104,10 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
 
     TYPE ys[elems];
 
-    /* Actually exchange the elements with all processes. */
+    /* Actually exchange the elements with all processes.
+     *
+     * Complexity: O(n/p + log p)
+     */
 
     ret = MPI_Alltoallv(xs + start, tx_elems, tx_locs, MPI_INT,
         ys, rx_elems, rx_locs, MPI_INT, MPI_COMM_WORLD);
@@ -92,7 +115,10 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
         return NULL;
     }
 
-    /* Sort the local range. */
+    /* Sort the local range.
+     *
+     * Complexity: O((n/p) log (n/p)).
+     */
 
     qsort(ys, elems, sizeof(TYPE), less_than);
 
@@ -103,7 +129,10 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
     DEBUG("\n");
 
     /* Exchange the count of elements to transfer with all processes.
-     * This time, we are exchanging the entire owned range with all other processes. */
+     * This time, we are exchanging the entire owned range with all other processes.
+     *
+     * Complexity: O(p + n/p).
+     */
 
     memset(rx_elems, 0, sizeof(rx_elems));
 
@@ -118,7 +147,10 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
         rx_locs[i] = rx_locs[i - 1] + rx_elems[i - 1];
     }
 
-    /* Other code expects the full range to be returned, so gather it all here. */
+    /* Other code expects the full range to be returned, so gather it all here.
+     *
+     * Complexity: O((n/p) log p).
+     */
 
     TYPE *out = malloc(sizeof(TYPE) * n);
 
