@@ -5,7 +5,7 @@ SCP = scp
 SFLAGS = -F "../.ssh-cfg"
 RFLAGS = --recursive --progress --copy-links --exclude=build/ -e "$(SSH) $(SFLAGS)"
 
-HOST = saturn
+HOST = jupiter
 REMOTEDIR = ~/project3-bucket_sort
 SOURCE = . ../common
 
