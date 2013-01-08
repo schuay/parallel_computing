@@ -136,6 +136,8 @@ readAndPlot("../1-merge/data/bench.csv")
 \clearpage
 \section{MPI}
 
+% TODO: Mention testing issues with MPI -> CK_FORK=no
+
 \subsection{Parallel Stencil Computation}
 
 \subsubsection{Specification}
@@ -234,6 +236,11 @@ sequential C \lstinline|qsort| function. The test suite includes:
 \item a sequence consisting of several interleaved ranges
 \item a large pseudorandom sequence with $n = 500000$ and $u = 400000$
 \end{itemize}
+
+We initially ran into minor issues with test cases in which the process count $p$
+was greater than the size of the sequence $n$. This problem was circumvented
+by requiring $p \leq n$. Another possible solution would have been to create a new
+\lstinline|MPI_Comm| containing a suitable subset of processes.
 
 \subsubsection{Results}
 
