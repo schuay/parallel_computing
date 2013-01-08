@@ -22,6 +22,11 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
     MPI_Comm_size(MPI_COMM_WORLD, &p);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
+    if (p > n) {
+        fprintf(stderr, "Process count must be less or equal to n\n");
+        return NULL;
+    }
+
     /* Our assigned index range is [start, next_start[.
      * There are m elements in this range (except the last process,
      * which may have a shorter range). */
