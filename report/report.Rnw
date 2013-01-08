@@ -72,84 +72,8 @@ Test and benchmark the implementations, for OpenMP compare performance to
 \subsubsection{Results}
 
 <<results=tex,echo=FALSE>>=
-REF <- "sequential reference"
-fidx <- 0
-
-texPlot <- function(x, y, pch, text, xlab, ylab, main, log) {
-	file=paste("graph", fidx, ".eps", sep="")  
-	fidx <<- fidx + 1
-
-	postscript(file=file, paper="special", width=8, height=8, horizontal=FALSE)  
-
-	matplot(x,y, pch=pch, type='b', xlab=xlab, ylab=ylab, main=main, log=log)
-	legend("topleft", text, col=pch, pch=pch)
-
-	dev.off()  
-
-	cat("\\includegraphics{", file, "}\n\n", sep="")
-}
-
-plotByNumThreads <- function(par, seq, prefix) {
-	pars <- split(par, par[,1])
-	pch <- 1:length(pars)
-	addPar <- function(p) {
-		if (nrow(p) > 0) {
-			x <<- cbind(x,p[,3])
-			y <<- cbind(y,p[,4])
-			nThreads <<- p[1,2]
-			txt <<- c(txt,as.character(p[1,1]))
-		}
-	}
-	nThreads <- 1
-	txt <- REF
-	x <- seq[,3]
-	y <- seq[,4]
-	sapply(pars, FUN=addPar)
-
-	texPlot(x,y, pch, txt, "input size", "time(s)", sprintf("%s: Time as function of input size (%d thread(s))", prefix, nThreads), "xy")
-}
-
-plotByInputSize <- function(par, prefix) {
-	pars <- split(par, par[,1])
-	pch <- 1:(length(pars)-1)
-	addPar <- function(p) {
-		if (nrow(p) > 0) {
-			x <<- cbind(x,p[,2])
-			y <<- cbind(y,p[,4])
-			nInput <<- p[1,3]
-			txt <<- c(txt,as.character(p[1,1]))
-		}
-	}
-	nInput <- 1
-	txt <- NULL
-	x <- NULL
-	y <- NULL
-	sapply(pars, FUN=addPar)
-
-	texPlot(x,y, pch, txt, "number of threads", "time(s)", sprintf("%s: Time as function of the number of threads (input size = %d)", prefix, nInput), "")
-}
-
-makePlots <- function(times, prefix) {
-	ref <- times[times[,1] == REF,]
-	pars <- times[times[,1] != REF,]
-	byNumThreads <- split(pars, pars[,2])
-	byInputSize <- split(pars, pars[,3])
-	unused <- sapply(byNumThreads, FUN=plotByNumThreads, ref, prefix)
-	unused <- sapply(byInputSize, FUN=plotByInputSize, prefix)
-}
-
-readAndPlot <- function(file) {
-	results <- read.table(file, sep=",")
-
-	time_mean <- aggregate(results[,4], by=list(results[,1],results[,2],results[,3]), FUN=mean)
-	time_best <- aggregate(results[,4], by=list(results[,1],results[,2],results[,3]), FUN=min)
-
-	unused <- makePlots(time_mean, "Avg")
-	unused <- makePlots(time_best, "Min")
-}
-
+\SweaveInput{functions.Rnw}
 readAndPlot("../1-prefix_sums/data/bench.csv")
-
 @
 
 \clearpage
