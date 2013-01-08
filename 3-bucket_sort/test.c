@@ -41,6 +41,14 @@ START_TEST(test_singles_reversed)
 }
 END_TEST
 
+START_TEST(test_odd)
+{
+    TYPE a[] = {6,1,2,7,3,4,8,5,9,16,11,12,17,13,14,18,16,19,13};
+    int n = sizeof(a) / sizeof(a[0]);
+    BUCKET_TEST(a, n, 20);
+}
+END_TEST
+
 START_TEST(test_a_lt_b)
 {
     TYPE a[] = {6,1,2,7,3,4,8,5,9,16,11,12,17,13,14,18,16,19};
@@ -93,6 +101,7 @@ static Suite *create_suite(void)
 
     tcase_add_test(tc_core, test_singles);
     tcase_add_test(tc_core, test_singles_reversed);
+    tcase_add_test(tc_core, test_odd);
     tcase_add_test(tc_core, test_a_lt_b);
     tcase_add_test(tc_core, test_b_lt_a);
     tcase_add_test(tc_core, test_interleaved);
