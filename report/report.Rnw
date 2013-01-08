@@ -190,6 +190,56 @@ MPI\_Allreduce both have complexity O($m+\log p$)
 fledged radix sort. How should the radix be chosen?
 \end{itemize}
 
+\subsubsection{Implementation}
+
+Bucket sort takes an array of integers $xs$ of length $n$, with all elements
+$x \in xs$ having a value less than an upper bound $u$. It is executed in parallel
+on $p$ processes.
+The algorithm as implemented differs from the specification in the lecture
+slides. The steps are as follows:
+
+\begin{enumerate}
+\item Each process is assigned an initial index range of $xs$ and a bucket value range.
+\item The goal of this first phase is to end up with $x \in xs$ distributed such across all
+      processes such that each owned element falls within the processes bucket
+      value range. First, the owned range of $xs$ is sorted sequentially.
+\item Then, each process determines the range of elements to send to other processes, and
+\item exchanges the elements.
+\item Finally, the local elements are again sequentially sorted.
+\item As an optional step, the sorted buckets can be recombined.
+\end{enumerate}
+
+Our implementation uses \lstinline|MPI_Alltoall| and \lstinline|MPI_Alltoallv|
+to redistribute the array elements, and \lstinline|MPI_Allgather| and
+\lstinline|MPI_Allgatherv| to recombine all sorted buckets.
+
+The complexity of our implementation is $O(n/p \log (n/p) + p + n/p \log p)$ with
+the optional recombination, and $O(n/p \log (n/p) + p)$ without it.
+
+The value of $u$ is not important as long as $u >= p$ and the elements $x \in xs$
+are distributed such that each bucket is roughly equal in size.
+
+\subsubsection{Testing}
+
+The parallel bucket sort algorithm is verified by comparing results against the
+sequential C \lstinline|qsort| function. The test suite includes:
+
+\begin{itemize}
+\item a sorted 2-element sequence
+\item an unsorted 2-element sequence
+\item a sequence with an odd number of elements
+\item a sequence with a a range of smaller elements followed by larger elements
+\item a sequence with a a range of larger elements followed by smaller elements
+\item a sequence consisting of two interleaved ranges
+\item a sequence consisting of several interleaved ranges
+\item a large pseudorandom sequence with $n = 500000$ and $u = 400000$
+\end{itemize}
+
+\subsubsection{Results}
+
+% TODO: Results
+% TODO: Bonus radix sort
+
 \clearpage
 \subsection{...}
 
