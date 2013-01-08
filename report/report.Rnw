@@ -55,17 +55,17 @@ speed-up is modest and less than p
 Implement the 3 parallel prefix sums algorithms from the lecture:
 
 \begin{enumerate}
-\item Recursive parallel prefix with auxiliary array y
+\item Recursive parallel prefix with auxiliary array $y$
 \item In-place iterative algorithm
-\item O(nlog n) work algorithm (Hillis-Steele)
+\item $O(n \log n)$ work algorithm (Hillis-Steele)
 \end{enumerate}
 
 All algorithms shall work on arrays of some basetype given at compile time
 (int, double, ...) with the ``+'' operator.
 Implement non-intrusive ``performance counters'' for documenting that the work
-is indeed O(n) and O(n log n).
-The implementations shall be correct for all array sizes n, and any number of
-threads, 1,...,max.
+is indeed $O(n)$ and $O(n \log n)$.
+The implementations shall be correct for all array sizes $n$, and any number of
+threads, $1,...,max$.
 Test and benchmark the implementations, for OpenMP compare performance to
 ``reduction'' clause.
 
@@ -158,24 +158,24 @@ readAndPlot("../1-prefix_sums/data/bench.csv")
 \subsubsection{Specification}
 
 Implement a work-optimal merge algorithm for merging two
-sorted arrays of size n and m in O((m+n)/p+log n +log m) steps.
-The implementation shall work for all n and m, any C base
+sorted arrays of size $n$ and $m$ in $O((m+n)/p+\log n +\log m)$ steps.
+The implementation shall work for all $n$ and $m$, any C base
 datatype, but may assume that elements in the two array are all
-different
+different.
 
 Implement either:
 
 \begin{enumerate}
-\item binary search from block starts of array a into array b. Merge (in
-parallel) all pairs no larger than (m+n)/p; handle larger pairs by binary
-search from array b to a
-\item binary search from block starts of a and block starts of b. Describe
+\item binary search from block starts of array $a$ into array $b$. Merge (in
+parallel) all pairs no larger than $(m+n)/p$; handle larger pairs by binary
+search from array $b$ to $a$
+\item binary search from block starts of $a$ and block starts of $b$. Describe
 briefly the special cases for the binary search for locating subarrays, and how
-this leads to all sub- merge problems having size O(n/p+m/p)
+this leads to all sub- merge problems having size $O(n/p+m/p)$
 \end{enumerate}
 
 Argue for correctness by testing. Benchmark and compare to standard, sequential
-merge implementation from lecture (or better one, if known), report speed-up
+merge implementation from lecture (or better one, if known), report speed-up.
 
 \subsubsection{Results}
 
@@ -193,8 +193,57 @@ readAndPlot("../1-merge/data/bench.csv")
 
 \subsection{Parallel Stencil Computation}
 
+\subsubsection{Specification}
+
+Let A be a 2-dimensional $n$x$m$ matrix, that is to be distributed
+over the $p$ MPI processes. Implement a distributed version of
+the two-dimensional stencil-computation: each MPI process has
+a submatrix, and therefore needs to exchange (in each
+iteration?) only the elements on the border of the submatrix
+with its neighboring processes
+
+\begin{itemize}
+\item Give a ,,generic'' implementation that allows distributions of $A$
+in rows, in columns or in $n/c$ x $m/r$ blocks, where $cr = p$.
+\item Implement the border exchange with MPI\_Sendrecv
+communication (other implementations allowed!); beware of
+deadlock
+\item Try to give an ,,analytical'' estimate for the running time,
+depending on $n$ and $m$, $c$ and $r$, and the number of MPI
+processes. It can be assumed that communication time is
+dependent as $O(k)$ on the size of the data being communicated.
+\item What is the matrix distribution giving the best performance
+under this model?
+\item Benchmark the implementation, test for correctness (compare
+to sequential solution, e.g.) . Does the measured performance
+correspond to the expectations derived from the model?
+\end{itemize}
+
 \clearpage
 \subsection{Parallel Integer Bucket Sort}
+
+\subsubsection{Specification}
+
+Implement the integer bucket sort algorithm from the lecture.
+Assume an array of integers in a given range $[0,R-1]$ distributed
+in roughly equal sized blocks over the MPI processes.
+The algorithm uses MPI\_Allreduce and MPI\_Exscan to compute
+the size of the buckets and to make it possible to determine for
+each array element its position in the sorted output. The
+(implementation) difficulty is to use this information to set up
+an MPI\_Alltoallv operation to perform collectively the
+redistribution of the array elements into sorted order
+
+\begin{itemize}
+\item Show correctness by testing
+\item Benchmark and show speed-up/decrease in run-time for
+different array sizes $n$ (with $m = n/p$ elements per MPI process)
+and different ranges $R$. Is there a ,,best'' choice of R? Argue
+also theoretically, assuming that MPI\_Exscan and
+MPI\_Allreduce both have complexity O($m+\log p$)
+\item Bonus: use the bucket sort algorithm to implement a full-
+fledged radix sort. How should the radix be chosen?
+\end{itemize}
 
 \clearpage
 \subsection{...}
