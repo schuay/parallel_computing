@@ -152,6 +152,7 @@ readAndPlot("../1-prefix_sums/data/bench.csv")
 
 @
 
+\clearpage
 \subsection{A Work-Optimal Merge Algorithm}
 
 \subsubsection{Specification}
@@ -185,15 +186,17 @@ readAndPlot("../1-merge/data/bench.csv")
 \clearpage
 \section{Cilk}
 
-\subsection{...}
+\subsection{Task-Parallel vs. Data-Parallel Merge Algorithms}
 
 \clearpage
 \section{MPI}
 
-\subsection{...}
+\subsection{Parallel Stencil Computation}
 
-\subsection{...}
+\clearpage
+\subsection{Parallel Integer Bucket Sort}
 
+\clearpage
 \subsection{...}
 
 \end{document}
