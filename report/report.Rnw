@@ -20,7 +20,11 @@
     morekeywords={__attribute__},           % Specific keywords
 }
 
-\title{Introduction to Parallel Computing, WS 2012}
+\title{
+    Project Report \\
+    Introduction to Parallel Computing, WS 2012
+}
+
 \author{
     Jakob Gruber, 0203440 \\
     Mino Sharkhawy, 1025887
@@ -63,8 +67,29 @@ speed-up is modest and less than p
 
 % =============================================================================
 \clearpage
-\section{Tools}
+\section{Introduction}
 % =============================================================================
+
+This report presents our solutions to six parallel computing programming projects:
+prefix sums and work-optimal merge with OpenMP, a comparison of task-parallel
+and data-parallel merge algorithms in Cilk, and parallel stencil, bucket sort
+and % TODO
+using OpenMPI.
+
+The basic structure of each project is roughly the same. It consists of
+
+\begin{itemize}
+\item a unit test suite which runs a preset unit test suite,
+\item a benchmark executable which times the execution time with specific
+      parameters, and
+\item optionally a sequential reference implementation.
+\end{itemize}
+
+These components use pseudo-random number sequences to generate the test data.
+The seed for \lstinline|srand| is specified as a command line parameter for
+reproducability. Test cases verify parallel algorithms against a sequential
+reference implementation, the results of which are either produced on-the-fly
+or persisted on disk.
 
 In addition to the standard C and Unix toolchain (GCC, make, etc.) as well as
 special tools required by Cilk and OpenMPI, we also used
