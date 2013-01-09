@@ -302,7 +302,16 @@ $\frac{m}{r} + \frac{n}{c}$ is minimal.
 
 \subsubsection{Testing}
 
-% TODO
+As mentioned above, correctness of the parallel stencil algorithm is established
+by comparison against persisted results of the sequential reference implementation.
+
+Unit tests include:
+
+\begin{itemize}
+\item a $1000 \times 1000$ matrix distributed by columns at 100, 300, and 500 iterations
+\item a $1000 \times 1000$ matrix distributed by rows at 100, 300, and 500 iterations
+\item a $1000 \times 1000$ matrix distributed blockwise at 100, 300, and 500 iterations
+\end{itemize}
 
 \subsubsection{Results}
 
