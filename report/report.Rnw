@@ -170,7 +170,16 @@ readAndPlot("../1-merge/data/bench.csv")
 
 \subsubsection{Specification}
 
-% TODO
+Implement the recursive, task parallel merge algorithm from the
+lecture.
+
+Compare to an implementation of the binary search based
+algorithm from the lecture (also implemented in Cilk); use the
+data parallel construct to execute the desired number of binary
+searches in parallel.
+
+Comment on ease of implementation, and achieved performance.
+
 
 \subsubsection{Implementation}
 
