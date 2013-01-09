@@ -93,6 +93,10 @@ reproducability. Test cases verify parallel algorithms against a sequential
 reference implementation, the results of which are either produced on-the-fly
 or persisted on disk.
 
+The code of all projects is available at our github
+repository\footnote{\url{https://github.com/schuay/parallel_computing}}.
+% TODO: Make this public.
+
 In addition to the standard C and Unix toolchain (GCC, make, etc.) as well as
 special tools required by Cilk and OpenMPI, we also used
 CMake\footnote{\url{http://www.cmake.org/}} to manage our builds and
