@@ -9,13 +9,13 @@
 
 const char *algorithm_name = "recursive parallel merge";
 
-static int binary_search(TYPE needle, const TYPE *haystack, int n)
+static size_t binary_search(TYPE needle, const TYPE *haystack, size_t n)
 {
-    int low = 0;
-    int high = n;
+    size_t low = 0;
+    size_t high = n;
 
     while (low < high) {
-        int mid = (low + high) / 2;
+        size_t mid = (low + high) / 2;
         if (needle < haystack[mid]) {
             high = mid;
         } else {
@@ -26,11 +26,11 @@ static int binary_search(TYPE needle, const TYPE *haystack, int n)
     return low;
 }
 
-static cilk void merge_recursive(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
-        int unit, perf_t *perf)
+static cilk void merge_recursive(const TYPE *a, size_t n, const TYPE *b, size_t m, TYPE *c,
+        size_t unit, perf_t *perf)
 {
     /* TODO: replace memcpy with something more parallel. */
-    int r, s;
+    size_t r, s;
 
     if (m + n <= unit) {
         merge_seq(a, n, b, m, c);
@@ -69,10 +69,10 @@ static cilk void merge_recursive(const TYPE *a, int n, const TYPE *b, int m, TYP
     sync;
 }
 
-cilk void merge_impl(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
+cilk void merge_impl(const TYPE *a, size_t n, const TYPE *b, size_t m, TYPE *c,
         perf_t *perf, int *nproc)
 {
-    int p = Cilk_active_size;
+    size_t p = Cilk_active_size;
     *nproc = p;
 
     spawn merge_recursive(a, n, b, m, c, (m + n) / p, perf);

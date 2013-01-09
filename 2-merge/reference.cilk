@@ -2,7 +2,7 @@
 
 const char *algorithm_name = "sequential reference";
 
-cilk void merge_impl(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
+cilk void merge_impl(const TYPE *a, size_t n, const TYPE *b, size_t m, TYPE *c,
         perf_t *perf, int *nproc)
 {
     merge_seq(a, n, b, m, c);

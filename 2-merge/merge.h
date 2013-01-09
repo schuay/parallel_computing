@@ -15,15 +15,15 @@ extern const char *algorithm_name;
  * the resulting array of length n + m is returned and must
  * be freed by the caller.
  */
-TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf, const char *nproc,
+TYPE *merge(const TYPE *a, size_t n, const TYPE *b, size_t m, perf_t *perf, const char *nproc,
         int *nproc_ret);
 
 /**
  * Performs the actual sequential merge within the given memory areas.
  */
-void merge_seq(const TYPE *a, int n, const TYPE *b, int m, TYPE *c);
+void merge_seq(const TYPE *a, size_t n, const TYPE *b, size_t m, TYPE *c);
 
 /**
  * The sequential reference implementation.
  */
-TYPE *merge_ref(const TYPE *a, int n, const TYPE *b, int m);
+TYPE *merge_ref(const TYPE *a, size_t n, const TYPE *b, size_t m);

@@ -7,13 +7,13 @@
 
 const char *algorithm_name = "binary search based parallel merge";
 
-static int binary_search(TYPE needle, const TYPE *haystack, int n)
+static size_t binary_search(TYPE needle, const TYPE *haystack, size_t n)
 {
-    int low = 0;
-    int high = n;
+    size_t low = 0;
+    size_t high = n;
 
     while (low < high) {
-        int mid = (low + high) / 2;
+        size_t mid = (low + high) / 2;
         if (needle < haystack[mid]) {
             high = mid;
         } else {
@@ -25,24 +25,24 @@ static int binary_search(TYPE needle, const TYPE *haystack, int n)
 }
 
 struct bsearch_args_t {
-    int *rankA;
-    int *rankB;
+    size_t *rankA;
+    size_t *rankB;
     const TYPE *a;
-    int n;
+    size_t n;
     const TYPE *b;
-    int m;
-    int p;
+    size_t m;
+    size_t p;
 };
 
-static void binary_search_datapara(int i, void *args)
+static void binary_search_datapara(size_t i, void *args)
 {
     struct bsearch_args_t *bargs = (struct bsearch_args_t *) args;
 
     const TYPE *a = bargs->a;
-    int n = bargs->n;
+    size_t n = bargs->n;
     const TYPE *b = bargs->b;
-    int m = bargs->m;
-    int p = bargs->p;
+    size_t m = bargs->m;
+    size_t p = bargs->p;
 
     TYPE needleA = a[i * n / p];
     TYPE needleB = b[i * m / p];
@@ -53,15 +53,15 @@ static void binary_search_datapara(int i, void *args)
 
 /* TODO: not sure if I'm using this right? Is this the "data parallel construct" the
  * assignment text is referring to? */
-cilk void datapara(int i, int j, int unit, void (*f)(int, void*), void *optargs)
+cilk void datapara(size_t i, size_t j, size_t unit, void (*f)(size_t, void*), void *optargs)
 {
     if (j - i <= unit) {
-        int k;
+        size_t k;
         for (k = i; k < j; k++) {
             f(k, optargs);
         }
     } else {
-        int m = (i + j) / 2;
+        size_t m = (i + j) / 2;
         spawn datapara(i, m, unit, f, optargs);
         spawn datapara(m, j, unit, f, optargs);
         sync;
@@ -69,44 +69,44 @@ cilk void datapara(int i, int j, int unit, void (*f)(int, void*), void *optargs)
 }
 
 struct merge_args_t {
-    const int *rankA;
-    const int *rankB;
+    const size_t *rankA;
+    const size_t *rankB;
     const TYPE *a;
-    int n;
+    size_t n;
     const TYPE *b;
-    int m;
-    int p;
+    size_t m;
+    size_t p;
     TYPE *c;
 };
 
-static void merge_datapara(int i, void *args)
+static void merge_datapara(size_t i, void *args)
 {
     struct merge_args_t *margs = (struct merge_args_t *) args;
 
-    const int *rankA = margs->rankA;
-    const int *rankB = margs->rankB;
+    const size_t *rankA = margs->rankA;
+    const size_t *rankB = margs->rankB;
     const TYPE *a = margs->a;
-    int n = margs->n;
+    size_t n = margs->n;
     const TYPE *b = margs->b;
-    int m = margs->m;
-    int p = margs->p;
+    size_t m = margs->m;
+    size_t p = margs->p;
     TYPE *c = margs->c;
 
-    int a_start = (i == 0) ? 0 : rankB[i];
-    int a_length = (i == p - 1) ? n - a_start : rankB[i + 1] - a_start;
+    size_t a_start = (i == 0) ? 0 : rankB[i];
+    size_t a_length = (i == p - 1) ? n - a_start : rankB[i + 1] - a_start;
 
-    int b_start = (i == 0) ? 0 : rankA[i];
-    int b_length = (i == p - 1) ? m - b_start : rankA[i + 1] - b_start;
+    size_t b_start = (i == 0) ? 0 : rankA[i];
+    size_t b_length = (i == p - 1) ? m - b_start : rankA[i + 1] - b_start;
 
     merge_seq(a + a_start, a_length, b + b_start, b_length, c + a_start + b_start);
 }
 
-cilk void merge_impl(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
+cilk void merge_impl(const TYPE *a, size_t n, const TYPE *b, size_t m, TYPE *c,
         perf_t *perf, int *nproc)
 {
-    int p = Cilk_active_size;
-    int *rankA = calloc(p, sizeof(int));
-    int *rankB = calloc(p, sizeof(int));
+    size_t p = Cilk_active_size;
+    size_t *rankA = calloc(p, sizeof(size_t));
+    size_t *rankB = calloc(p, sizeof(size_t));
 
     struct bsearch_args_t bsearch_args = { rankA, rankB, a, n, b, m, p };
     struct merge_args_t merge_args = { rankA, rankB, a, n, b, m, p, c };
