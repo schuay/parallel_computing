@@ -61,13 +61,17 @@ speed-up is modest and less than p
 \clearpage
 \tableofcontents
 
+% =============================================================================
 \clearpage
 \section{Tools}
+% =============================================================================
 
 % TODO: cmake, make, check
 
+% =============================================================================
 \clearpage
 \section{OpenMP}
+% =============================================================================
 
 \subsection{Parallel Prefix Sums}
 
@@ -90,7 +94,17 @@ threads, $1,...,max$.
 Test and benchmark the implementations, for OpenMP compare performance to
 ``reduction'' clause.
 
+\subsubsection{Implementation}
+
+% TODO
+
+\subsubsection{Testing}
+
+% TODO
+
 \subsubsection{Results}
+
+% TODO
 
 <<results=tex,echo=FALSE>>=
 \SweaveInput{functions.Rnw}
@@ -122,19 +136,47 @@ this leads to all sub- merge problems having size $O(n/p+m/p)$
 Argue for correctness by testing. Benchmark and compare to standard, sequential
 merge implementation from lecture (or better one, if known), report speed-up.
 
+\subsubsection{Implementation}
+
+% TODO
+
+\subsubsection{Testing}
+
+% TODO
+
 \subsubsection{Results}
 
 <<results=tex,echo=FALSE>>=
 readAndPlot("../1-merge/data/bench.csv")
 @
 
+% =============================================================================
 \clearpage
 \section{Cilk}
+% =============================================================================
 
 \subsection{Task-Parallel vs. Data-Parallel Merge Algorithms}
 
+\subsubsection{Specification}
+
+% TODO
+
+\subsubsection{Implementation}
+
+% TODO
+
+\subsubsection{Testing}
+
+% TODO
+
+\subsubsection{Results}
+
+% TODO
+
+% =============================================================================
 \clearpage
 \section{MPI}
+% =============================================================================
 
 % TODO: Mention testing issues with MPI -> CK_FORK=no
 
@@ -165,6 +207,18 @@ under this model?
 to sequential solution, e.g.) . Does the measured performance
 correspond to the expectations derived from the model?
 \end{itemize}
+
+\subsubsection{Implementation}
+
+% TODO
+
+\subsubsection{Testing}
+
+% TODO
+
+\subsubsection{Results}
+
+% TODO
 
 \clearpage
 \subsection{Parallel Integer Bucket Sort}
@@ -249,5 +303,21 @@ by requiring $p \leq n$. Another possible solution would have been to create a n
 
 \clearpage
 \subsection{...}
+
+\subsubsection{Specification}
+
+% TODO
+
+\subsubsection{Implementation}
+
+% TODO
+
+\subsubsection{Testing}
+
+% TODO
+
+\subsubsection{Results}
+
+% TODO
 
 \end{document}
