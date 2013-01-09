@@ -9,11 +9,11 @@ HOST = jupiter
 REMOTEDIR = ~/project3-stencil
 SOURCE = . ../common
 
-CSV_FILE = bench.csv
-ALGORITHMS = recursive iterative hillis-steele
-INPUT_SIZES = 10 100 1000000 100000000
-NUM_THREADS = 1 2 4 0 # 0 means use the default
-NUM_THREADS_REMOTE = 8 16 32 0
+CSV_FILE = data/bench.csv
+ITERATION_COUNTS = 10 100 1000
+M=1000
+N=1000
+SEED=5
 
 bake:
 	mkdir -p build
@@ -24,20 +24,19 @@ test: bake
 
 bench: bake
 	mkdir -p data
-	for inSize in $(INPUT_SIZES); do \
-		build/reference_bench data/$(CSV_FILE) $${inSize} 1; \
-		for alg in $(ALGORITHMS); do \
-			build/$${alg}_bench data/$(CSV_FILE) $${inSize} $(NUM_THREADS); \
-		done; \
+	for ITERS in $(ITERATION_COUNTS); do \
+		build/stencil_ref $(M) $(N) $(SEED) $${ITERS}; \
+		mpiexec -np 40 build/stencil_bench $(CSV_FILE) $(M) $(N) 4 10 $(SEED) $${ITERS}; \
 	done
 
 hand-in:
 	$(RSYNC) $(RFLAGS) $(SOURCE) $(HOST):$(REMOTEDIR)
 
 remote-bench: hand-in
-	$(SSH) $(SFLAGS) $(HOST) 'cd $(REMOTEDIR); make NUM_THREADS="$(NUM_THREADS_REMOTE)" clean bench'
+	$(SSH) $(SFLAGS) $(HOST) 'cd $(REMOTEDIR); PATH=/opt/cmake/bin/:/opt/openmpi/bin/:${PATH} \
+		MPI_HOME=/opt/openmpi make clean bench'
 	mkdir -p data
-	$(SCP) $(SFLAGS) $(HOST):$(REMOTEDIR)/data/$(CSV_FILE) data/$(CSV_FILE)
+	$(SCP) $(SFLAGS) $(HOST):$(REMOTEDIR)/$(CSV_FILE) $(CSV_FILE)
 
 clean:
 	rm -rf build

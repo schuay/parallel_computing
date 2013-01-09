@@ -9,11 +9,9 @@ HOST = jupiter
 REMOTEDIR = ~/project3-bucket_sort
 SOURCE = . ../common
 
-CSV_FILE = bench.csv
-ALGORITHMS = recursive iterative hillis-steele
-INPUT_SIZES = 10 100 1000000 100000000
-NUM_THREADS = 1 2 4 0 # 0 means use the default
-NUM_THREADS_REMOTE = 8 16 32 0
+CSV_FILE = data/bench.csv
+INPUT_SIZES = 100 1000 10000 100000 1000000 10000000
+UPPER_BOUND = 100000
 
 bake:
 	mkdir -p build
@@ -24,20 +22,18 @@ test: bake
 
 bench: bake
 	mkdir -p data
-	for inSize in $(INPUT_SIZES); do \
-		build/reference_bench data/$(CSV_FILE) $${inSize} 1; \
-		for alg in $(ALGORITHMS); do \
-			build/$${alg}_bench data/$(CSV_FILE) $${inSize} $(NUM_THREADS); \
-		done; \
+	for SIZE in $(INPUT_SIZES); do \
+		mpiexec -np 48 build/bucket_bench $(CSV_FILE) $${SIZE} $(UPPER_BOUND); \
 	done
 
 hand-in:
 	$(RSYNC) $(RFLAGS) $(SOURCE) $(HOST):$(REMOTEDIR)
 
 remote-bench: hand-in
-	$(SSH) $(SFLAGS) $(HOST) 'cd $(REMOTEDIR); make NUM_THREADS="$(NUM_THREADS_REMOTE)" clean bench'
+	$(SSH) $(SFLAGS) $(HOST) 'cd $(REMOTEDIR); PATH=/opt/cmake/bin/:/opt/openmpi/bin/:${PATH} \
+		MPI_HOME=/opt/openmpi make clean bench'
 	mkdir -p data
-	$(SCP) $(SFLAGS) $(HOST):$(REMOTEDIR)/data/$(CSV_FILE) data/$(CSV_FILE)
+	$(SCP) $(SFLAGS) $(HOST):$(REMOTEDIR)/$(CSV_FILE) $(CSV_FILE)
 
 clean:
 	rm -rf build
