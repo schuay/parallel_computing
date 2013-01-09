@@ -1,7 +1,9 @@
 \documentclass[a4paper,10pt]{article}
 
+\usepackage[usenames,dvipsnames]{color}
 \usepackage{comment}
 \usepackage{listings}
+\usepackage{amssymb}
 \usepackage[pdfborder={0 0 0}]{hyperref}
 \usepackage[utf8]{inputenc}
 
@@ -227,7 +229,7 @@ Comment on ease of implementation, and achieved performance.
 
 \subsubsection{Specification}
 
-Let A be a 2-dimensional $n$x$m$ matrix, that is to be distributed
+Let A be a 2-dimensional $n \times m$ matrix, that is to be distributed
 over the $p$ MPI processes. Implement a distributed version of
 the two-dimensional stencil-computation: each MPI process has
 a submatrix, and therefore needs to exchange (in each
@@ -236,7 +238,7 @@ with its neighboring processes
 
 \begin{itemize}
 \item Give a ,,generic'' implementation that allows distributions of $A$
-in rows, in columns or in $n/c$ x $m/r$ blocks, where $cr = p$.
+in rows, in columns or in $n/c \times m/r$ blocks, where $cr = p$.
 \item Implement the border exchange with MPI\_Sendrecv
 communication (other implementations allowed!); beware of
 deadlock
@@ -247,13 +249,56 @@ dependent as $O(k)$ on the size of the data being communicated.
 \item What is the matrix distribution giving the best performance
 under this model?
 \item Benchmark the implementation, test for correctness (compare
-to sequential solution, e.g.) . Does the measured performance
+to sequential solution, e.g.). Does the measured performance
 correspond to the expectations derived from the model?
 \end{itemize}
 
 \subsubsection{Implementation}
 
-% TODO
+The stencil algorithm is implemented as a function with
+a matrix, an iteration count, and the matrix partitioning specified
+as $r$ and $c$ as arguments. We assume that $r \cdot c = p$,
+$r \cdot x = m$ and $c \cdot y = n$ for some $x, y \in \mathbb{N}$.
+
+Our opaque \lstinline|matrix_t| type is implemented as a struct with various
+utility functions for tasks such as accessing its elements, retrieving
+its dimensions, comparing matrices, saving and loading from files, and
+extracting as well as integrating submatrices.
+
+The sequential reference implementation (a simple nested loop which
+copies $B_{i,j} = (A_{i-1, j} + A_{i+1, j} + A_{i, j-1}, A_{i, j+1}) / 4$
+to a temporary matrix $B$ which is subsequently copied back to $A$ after
+each iteration) uses \lstinline|matrix_t| heavily. Results are saved to
+files for use in test verification.
+
+The parallel algorithm on the other hand works mostly with raw \lstinline|double|
+arrays. These are extracted from the main matrix with \lstinline|matrix_extract|
+and reintegrated with \lstinline|matrix_cram|. The \lstinline|submatrix_t| type
+is public, and as such each process is able to extract the required element array.
+
+The idea of the parallel stencil itself is very simple and consists only of two
+steps:
+
+\begin{enumerate}
+\item Processes are arranged in a 2D grid which have corresponding $m/r \times n/c$
+      submatrices. In this phase, each process exchanges its border elements with
+      neighbor matrices; the top row with the top neighbor, etc.
+\item Each process now has all needed information to calculate the stencil of its
+      submatrix, which is then done sequentially.
+\end{enumerate}
+
+These steps are repeated for each iteration. Upon conclusion, the main matrix is
+reformed after gathering all submatrices.
+
+The complexity of the parallel algorithm is
+$O(i \cdot (\frac{mn}{rc} + \frac{m}{r} + \frac{n}{c}) + \log p + mn)$.
+The first additive term stems from the iteration calculation,
+the second and third from the subsequent combination of results.
+Leaving the recombination out and limiting ourselves to a single
+iteration, the complexity reduces to $O(\frac{mn}{rc} + \frac{m}{r} + \frac{n}{c})$.
+
+According to this analysis, $r$ and $c$ should be chosen such that
+$\frac{m}{r} + \frac{n}{c}$ is minimal.
 
 \subsubsection{Testing}
 
