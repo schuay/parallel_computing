@@ -66,7 +66,18 @@ speed-up is modest and less than p
 \section{Tools}
 % =============================================================================
 
-% TODO: cmake, make, check
+In addition to the standard C and Unix toolchain (GCC, make, etc.) as well as
+special tools required by Cilk and OpenMPI, we also used
+CMake\footnote{\url{http://www.cmake.org/}} to manage our builds and
+Check\footnote{\url{http://check.sourceforge.net/}} for unit testing.
+
+Check is a simple unit testing framework for C, featuring a simple interface
+for defining unit tests. We ran into some trouble while testing OpenMPI
+programs with check: by default it forks each test into a separate process,
+which eventually leads to a segmentation fault at the latest when
+\lstinline|MPI_Finalize| is called. Fortunately, we were able to work around
+this issue by setting the \lstinline|CK_FORK| environment variable to ,,no'',
+which disables forking during test suite runs.
 
 % =============================================================================
 \clearpage
@@ -177,8 +188,6 @@ readAndPlot("../1-merge/data/bench.csv")
 \clearpage
 \section{MPI}
 % =============================================================================
-
-% TODO: Mention testing issues with MPI -> CK_FORK=no
 
 \subsection{Parallel Stencil Computation}
 
