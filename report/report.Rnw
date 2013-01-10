@@ -245,7 +245,7 @@ with its neighboring processes
 in rows, in columns or in $n/c \times m/r$ blocks, where $cr = p$.
 \item Implement the border exchange with MPI\_Sendrecv
 communication (other implementations allowed!); beware of
-deadlock
+deadlock.
 \item Try to give an ,,analytical'' estimate for the running time,
 depending on $n$ and $m$, $c$ and $r$, and the number of MPI
 processes. It can be assumed that communication time is
@@ -334,15 +334,15 @@ the size of the buckets and to make it possible to determine for
 each array element its position in the sorted output. The
 (implementation) difficulty is to use this information to set up
 an MPI\_Alltoallv operation to perform collectively the
-redistribution of the array elements into sorted order
+redistribution of the array elements into sorted order.
 
 \begin{itemize}
-\item Show correctness by testing
+\item Show correctness by testing.
 \item Benchmark and show speed-up/decrease in run-time for
 different array sizes $n$ (with $m = n/p$ elements per MPI process)
 and different ranges $R$. Is there a ,,best'' choice of R? Argue
 also theoretically, assuming that MPI\_Exscan and
-MPI\_Allreduce both have complexity O($m+\log p$)
+MPI\_Allreduce both have complexity O($m+\log p$).
 \item Bonus: use the bucket sort algorithm to implement a full-
 fledged radix sort. How should the radix be chosen?
 \end{itemize}
