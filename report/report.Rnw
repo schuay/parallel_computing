@@ -350,7 +350,7 @@ fledged radix sort. How should the radix be chosen?
 \subsubsection{Implementation}
 
 Bucket sort takes an array of integers $xs$ of length $n$, with all elements
-$x \in xs$ having a value less than an upper bound $u$. It is executed in parallel
+$x \in xs$ having a value less than an upper bound $R$. It is executed in parallel
 on $p$ processes.
 The algorithm as implemented differs from the specification in the lecture
 slides. The steps are as follows:
@@ -373,7 +373,7 @@ to redistribute the array elements, and \lstinline|MPI_Allgather| and
 The complexity of our implementation is $O(n/p \log (n/p) + p + n/p \log p)$ with
 the optional recombination, and $O(n/p \log (n/p) + p)$ without it.
 
-The value of $u$ is not important as long as $u >= p$ and the elements $x \in xs$
+The value of $R$ is not important as long as $R >= p$ and the elements $x \in xs$
 are distributed such that each bucket is roughly equal in size.
 
 \subsubsection{Testing}
@@ -389,7 +389,7 @@ sequential C \lstinline|qsort| function. The test suite includes:
 \item a sequence with a a range of larger elements followed by smaller elements
 \item a sequence consisting of two interleaved ranges
 \item a sequence consisting of several interleaved ranges
-\item a large pseudorandom sequence with $n = 500000$ and $u = 400000$
+\item a large pseudorandom sequence with $n = 500000$ and $R = 400000$
 \end{itemize}
 
 We initially ran into minor issues with test cases in which the process count $p$
