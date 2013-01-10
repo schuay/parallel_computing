@@ -159,7 +159,7 @@ readAndPlot("../1-prefix_sums/data/bench.csv")
 \subsubsection{Specification}
 
 Implement a work-optimal merge algorithm for merging two
-sorted arrays of size $n$ and $m$ in $O((m+n)/p+\log n +\log m)$ steps.
+sorted arrays of size $n$ and $m$ in $O(\frac{m+n}{p}+\log n +\log m)$ steps.
 The implementation shall work for all $n$ and $m$, any C base
 datatype, but may assume that elements in the two array are all
 different.
@@ -168,11 +168,11 @@ Implement either:
 
 \begin{enumerate}
 \item binary search from block starts of array $a$ into array $b$. Merge (in
-parallel) all pairs no larger than $(m+n)/p$; handle larger pairs by binary
+parallel) all pairs no larger than $\frac{m+n}{p}$; handle larger pairs by binary
 search from array $b$ to $a$
 \item binary search from block starts of $a$ and block starts of $b$. Describe
 briefly the special cases for the binary search for locating subarrays, and how
-this leads to all sub- merge problems having size $O(n/p+m/p)$
+this leads to all sub- merge problems having size $O(\frac{n}{p}+\frac{m}{p})$
 \end{enumerate}
 
 Argue for correctness by testing. Benchmark and compare to standard, sequential
@@ -340,7 +340,7 @@ redistribution of the array elements into sorted order.
 \begin{itemize}
 \item Show correctness by testing.
 \item Benchmark and show speed-up/decrease in run-time for
-different array sizes $n$ (with $m = n/p$ elements per MPI process)
+different array sizes $n$ (with $m = \frac{n}{p}$ elements per MPI process)
 and different ranges $R$. Is there a ,,best'' choice of R? Argue
 also theoretically, assuming that MPI\_Exscan and
 MPI\_Allreduce both have complexity O($m+\log p$).
@@ -371,10 +371,11 @@ Our implementation uses \lstinline|MPI_Alltoall| and \lstinline|MPI_Alltoallv|
 to redistribute the array elements, and \lstinline|MPI_Allgather| and
 \lstinline|MPI_Allgatherv| to recombine all sorted buckets.
 
-The complexity of our implementation is $O(n/p \log (n/p) + p + n/p \log p)$ with
-the optional recombination, and $O(n/p \log (n/p) + p)$ without it.
+The complexity of our implementation is $O(\frac{n}{p} \log \frac{n}{p} + p + n
++ \frac{n}{p} \log p)$ with
+the optional recombination, and $O(\frac{n}{p} \log \frac{n}{p} + p)$ without it.
 
-The value of $R$ is not important as long as $R >= p$ and the elements $x \in xs$
+The value of $R$ is not important as long as $R \geq p$ and the elements $x \in xs$
 are distributed such that each bucket is roughly equal in size.
 
 \subsubsection{Testing}

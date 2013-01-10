@@ -8,7 +8,7 @@ const char *algorithm_name = "parallel bucket";
 
 static int less_than(const void *a, const void *b);
 
-/* Complexity: O(n/p log (n/p) + p + n/p log p).
+/* Complexity: O(n/p log (n/p) + p + n + n/p log p).
  * 
  * Without gathering results after conclusion, this reduces to
  * O(n/p log (n/p) + p).
@@ -111,7 +111,7 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
 
     /* Actually exchange the elements with all processes.
      *
-     * Complexity: O(n/p + log p)
+     * Complexity: O(p + log p)
      */
 
     ret = MPI_Alltoallv(xs + start, tx_elems, tx_locs, MPI_INT,
@@ -154,7 +154,7 @@ TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf)
 
     /* Other code expects the full range to be returned, so gather it all here.
      *
-     * Complexity: O((n/p) log p).
+     * Complexity: O(n + log p).
      */
 
     TYPE *out = malloc(sizeof(TYPE) * n);

@@ -98,9 +98,9 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
     }
 
     /* Gather all resulting submatrices.
-     * Complexity: O(x + log p) with x total data per process and p total processes.
-     * In this case x = m/r * n/c, therefore:
-     * O(m/r * n/c + log p). */
+     * Complexity: O(x + log p) with x total received data per process and p total processes.
+     * In this case x = m * n, therefore:
+     * O(m * n + log p). */
 
     double submatrices[m * n];
     ret = MPI_Allgather(submatrix->elems, subm * subn, MPI_DOUBLE,
