@@ -43,7 +43,7 @@ void stencil_test(int iters, int r, int c)
 
     if (matrix == NULL || result == NULL) {
         fprintf(stderr,
-                "Matrix could not be loaded from file, run: build/stencil_ref %d %d %d %d\n",
+                "Matrix could not be loaded from file, run: build/stencil_ref /dev/null %d %d %d %d\n",
                 DIM_M, DIM_N, SEED, iters);
         fail("Could not load matrix from file");
         goto out;

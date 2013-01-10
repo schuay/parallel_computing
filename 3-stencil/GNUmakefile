@@ -25,7 +25,7 @@ test: bake
 bench: bake
 	mkdir -p data
 	for ITERS in $(ITERATION_COUNTS); do \
-		build/stencil_ref $(M) $(N) $(SEED) $${ITERS}; \
+		build/stencil_ref $(CSV_FILE) $(M) $(N) $(SEED) $${ITERS}; \
 		mpiexec -np 40 build/stencil_bench $(CSV_FILE) $(M) $(N) 4 10 $(SEED) $${ITERS}; \
 	done
 

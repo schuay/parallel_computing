@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "common.h"
+#include "csv.h"
 #include "matrix.h"
 
 #define SAVE_INTERVAL (100)
@@ -33,14 +34,15 @@ int main(int argc, char **argv)
 {
     MPI_Init(&argc, &argv);
 
-    if (argc != 5) {
+    if (argc != 6) {
         usage();
     }
 
-    const int m = safe_strtol(argv[1]);
-    const int n = safe_strtol(argv[2]);
-    const int s = safe_strtol(argv[3]);
-    const int x = safe_strtol(argv[4]);
+    const char *filename = argv[1];
+    const int m = safe_strtol(argv[2]);
+    const int n = safe_strtol(argv[3]);
+    const int s = safe_strtol(argv[4]);
+    const int x = safe_strtol(argv[5]);
 
     if (n < 1 || m < 1 || s < 1 || x < 1) {
         usage();
@@ -63,6 +65,13 @@ int main(int argc, char **argv)
     printf("%dx%d, %d iterations, %f seconds\n",
             m, n, x, end - start);
 
+    FILE *const csvFile = csv_open(filename);
+    if (csvFile != NULL) {
+        fprintf(csvFile, "%s,%d,%d,%f\n", "sequential",
+                1, n * m * x, end - start);
+        csv_close(csvFile);
+    }
+
     MPI_Finalize();
 
     return 0;
@@ -70,7 +79,7 @@ int main(int argc, char **argv)
 
 static void usage(void)
 {
-    fprintf(stderr, "Usage: stencil_ref <m> <n> <seed> <iterations>\n");
+    fprintf(stderr, "Usage: stencil_ref <csv> <m> <n> <seed> <iterations>\n");
     exit(0);
 }
 
