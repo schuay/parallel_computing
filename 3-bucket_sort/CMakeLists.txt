@@ -33,6 +33,16 @@ include_directories(
     ${MPI_INCLUDE_PATH}
 )
 
+add_executable(bucket_ref
+    ${COMMON_DIR}/csv.c
+    bucket.c
+    bucket_ref.c
+)
+
+target_link_libraries(bucket_ref
+    ${MPI_C_LIBRARIES}
+)
+
 add_executable(bucket_bench
     bench.c
     bucket.c

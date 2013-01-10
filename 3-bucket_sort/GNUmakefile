@@ -23,6 +23,7 @@ test: bake
 bench: bake
 	mkdir -p data
 	for SIZE in $(INPUT_SIZES); do \
+		build/bucket_ref $(CSV_FILE) $${SIZE} $(UPPER_BOUND); \
 		mpiexec -np 48 build/bucket_bench $(CSV_FILE) $${SIZE} $(UPPER_BOUND); \
 	done
 
