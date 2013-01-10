@@ -291,8 +291,9 @@ steps:
       submatrix, which is then done sequentially.
 \end{enumerate}
 
-These steps are repeated for each iteration. Upon conclusion, the main matrix is
-reformed after gathering all submatrices.
+These steps are repeated for each iteration. Communications through the 2D grid
+are simplified by the use of MPI cartesian topologies.
+Upon conclusion, the main matrix is reformed after gathering all submatrices.
 
 The complexity of the parallel algorithm is
 $O(i \cdot (\frac{mn}{rc} + \frac{m}{r} + \frac{n}{c}) + \log p + mn)$.
