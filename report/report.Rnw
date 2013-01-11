@@ -180,11 +180,40 @@ merge implementation from lecture (or better one, if known), report speed-up.
 
 \subsubsection{Implementation}
 
-% TODO
+For our parallel merge implementation we chose to go with the first alternative,
+in which $a$ is divided into blocks (and $b$ only if a thread's range is larger
+than $\frac{m+n}{p}$).
+
+The first parallelization occurs at the beginning of the algorithm, when
+$a$ is split into partitions which are assigned to a thread each. If
+$n < p$, $a$ is split into $n$ partitions instead.
+
+Each thread then proceeds to use a sequential binary search to determine the
+beginning and end of its partition when merged into $b$. In case the
+combined length of its $a$ and $b$ partitions exceeds $\frac{m+n}{p}$,
+the partition function is called recursively with the arguments of
+$a$ and $b$ reversed\footnote{Note that this kind of nested parallelism requires setting
+\lstinline|omp_set_nested(1)| since it is disabled by default.}.
+
+On conclusion of the partition function, its assigned ranges are merged with
+the references sequential merge implementation.
 
 \subsubsection{Testing}
 
-% TODO
+Our merge unit tests compare the sequential results against our parallel
+algorithm. Test cases include:
+
+\begin{itemize}
+\item $m, n = 1$, $a_0 < b_0$
+\item $m, n = 1$, $a_0 > b_0$
+\item $\forall i, j: a_i < b_j$
+\item $\forall i, j: a_i > b_j$
+\item fully interleaved ranges $a$ and $b$
+\item blockwise interleaved ranges $a$ and $b$
+\item large interleaved ranges $a$ and $b$ with $n = 500000$
+\item large pseudo-random ranges with $n = 500000$ (repeatable by
+      using a predetermined seed)
+\end{itemize}
 
 \subsubsection{Results}
 
