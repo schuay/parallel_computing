@@ -40,6 +40,10 @@ int main(int argc, char **argv)
     DEBUG("%s. MPI_Comm_size %d, MPI_Comm_rank %d, input size %d\n",
             getAlgorithmName(), processes, rank, size);
 
+    if (rank == MASTER) {
+        printf("%s. nproc == %d\n", getAlgorithmName(), processes);
+    }
+
     TYPE *nrs = random_array(size, seed);
     if (nrs == NULL) {
         ret = -1;
