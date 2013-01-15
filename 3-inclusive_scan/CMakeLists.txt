@@ -46,14 +46,15 @@ target_link_libraries(arrayscan_ref_bench
     ${MPI_C_LIBRARIES}
 )
 
-add_executable(arrayscan_par_bench
+add_executable(arrayscan_par_mpi_bench
     ${COMMON_DIR}/csv.c
     bench.c
     arrayscan.c
     arrayscan_par.c
+    exscan_mpi.c
 )
 
-target_link_libraries(arrayscan_par_bench
+target_link_libraries(arrayscan_par_mpi_bench
     ${MPI_C_LIBRARIES}
 )
 
@@ -64,19 +65,20 @@ if(CHECK_FOUND)
         ${CHECK_INCLUDE_DIRS}
     )
 
-    add_executable(arrayscan_par_test
+    add_executable(arrayscan_par_mpi_test
         arrayscan.c
         arrayscan_par.c
         test.c
+        exscan_mpi.c
     )
 
-    target_link_libraries(arrayscan_par_test
+    target_link_libraries(arrayscan_par_mpi_test
         ${CHECK_LIBRARIES}
         ${MPI_C_LIBRARIES}
     )
 
-    add_test(arrayscan_par-test
-        ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${CMAKE_CURRENT_BINARY_DIR}/arrayscan_par_test ${TEST_SEED}
+    add_test(arrayscan_par_mpi-test
+        ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${CMAKE_CURRENT_BINARY_DIR}/arrayscan_par_mpi_test ${TEST_SEED}
     )
 endif()
 

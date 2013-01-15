@@ -27,7 +27,7 @@ bench: bake
 	for inSize in $(INPUT_SIZES); do \
 		mpiexec -np 1 build/arrayscan_ref_bench $(CSV_FILE) $${inSize} $(SEED); \
 		for nThreads in $(NUM_THREADS); do \
-			mpiexec -np $${nThreads} build/arrayscan_par_bench $(CSV_FILE) $${inSize} $(SEED); \
+			mpiexec -np $${nThreads} build/arrayscan_par_mpi_bench $(CSV_FILE) $${inSize} $(SEED); \
 		done; \
 	done
 
