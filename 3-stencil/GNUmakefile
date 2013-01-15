@@ -3,7 +3,7 @@ SSH = ssh
 SCP = scp
 
 SFLAGS = -F "../.ssh-cfg"
-RFLAGS = --recursive --progress --copy-links --exclude=build/ -e "$(SSH) $(SFLAGS)"
+RFLAGS = --recursive --progress --copy-links --exclude=build/ -e "$(SSH) $(SFLAGS)" --exclude 'matrix_*'
 
 HOST = jupiter
 REMOTEDIR = ~/project3-stencil
