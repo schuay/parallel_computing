@@ -11,8 +11,6 @@
 /* #define DEBUG(...) fprintf(stderr, __VA_ARGS__) */
 #define DEBUG(...)
 
-extern const char *algorithm_name;
-
 int main(int argc, char **argv)
 {
     int ret = 0;
@@ -40,7 +38,7 @@ int main(int argc, char **argv)
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     DEBUG("%s. MPI_Comm_size %d, MPI_Comm_rank %d, input size %d\n",
-            algorithm_name, processes, rank, size);
+            getAlgorithmName(), processes, rank, size);
 
     TYPE *nrs = random_array(size, seed);
     if (nrs == NULL) {
@@ -72,7 +70,7 @@ int main(int argc, char **argv)
             goto out;
         }
 
-        fprintf(csvFile, "%s,%d,%d,%f\n", algorithm_name,
+        fprintf(csvFile, "%s,%d,%d,%f\n", getAlgorithmName(),
                 processes, size, end - start);
 
         csv_close(csvFile);

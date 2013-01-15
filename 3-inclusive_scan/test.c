@@ -69,7 +69,7 @@ START_TEST(test_16384) {
 END_TEST
 
 static Suite *create_suite(void) {
-    Suite *s = suite_create(algorithm_name);
+    Suite *s = suite_create(getAlgorithmName());
 
     TCase *tc_core = tcase_create("core");
 

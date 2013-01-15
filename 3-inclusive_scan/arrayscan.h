@@ -8,7 +8,7 @@
  */
 #define TYPE int
 
-extern const char *algorithm_name;
+const char *getAlgorithmName(void);
 
 TYPE *arrayscan(const TYPE A[], size_t n, MPI_Comm comm);
 
