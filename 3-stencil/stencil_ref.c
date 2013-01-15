@@ -1,5 +1,7 @@
 #include <mpi.h>
 #include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include "common.h"
 #include "csv.h"
@@ -91,9 +93,12 @@ static int save_matrix_at_iteration(const matrix_t *matrix,
     int m, n;
     matrix_dims(matrix, &m, &n);
 
+    const char *dir = "data";
+    mkdir(dir, 0755);
+
     char *filename;
-    int bytes = asprintf(&filename, "matrix_%dx%d_%d_%d",
-            m, n, seed, iteration);
+    int bytes = asprintf(&filename, "%s/matrix_%dx%d_%d_%d",
+            dir, m, n, seed, iteration);
 
     if (bytes == -1) {
         return -1;

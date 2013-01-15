@@ -18,7 +18,7 @@
 static matrix_t *load_matrix(int m, int n, int seed, int iteration)
 {
     char *filename;
-    int bytes = asprintf(&filename, "../matrix_%dx%d_%d_%d",
+    int bytes = asprintf(&filename, "../data/matrix_%dx%d_%d_%d",
             m, n, seed, iteration);
     if (bytes == -1) {
         return NULL;
