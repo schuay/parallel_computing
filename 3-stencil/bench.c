@@ -56,7 +56,8 @@ int main(int argc, char **argv)
     /* Only the master process (rank 0) outputs information. */
 
     if (rank == MASTER) {
-        printf("time: %f\n\n", end - start);
+        printf("%dx%d, rxc: %dx%d, %d iterations, %d processes, time: %f\n",
+                m, n, r, c, iterations, processes, end - start);
 
         /* Persist this run in our csv file. */
 
