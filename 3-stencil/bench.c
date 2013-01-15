@@ -66,7 +66,7 @@ int main(int argc, char **argv)
             goto out;
         }
 
-        fprintf(csvFile, "%s,%d,%d,%f\n", algorithm_name,
+        fprintf(csvFile, "%s-%dx%d,%d,%d,%f\n", algorithm_name, m / r, n / c,
                 processes, n * m * iterations, end - start);
 
         csv_close(csvFile);

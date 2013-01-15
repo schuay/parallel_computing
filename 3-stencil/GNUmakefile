@@ -10,7 +10,9 @@ REMOTEDIR = ~/project3-stencil
 SOURCE = . ../common
 
 CSV_FILE = data/bench.csv
+PROCESS_COUNT = 40
 ITERATION_COUNTS = 10 100 1000
+RS = 1 2 5
 M=1000
 N=1000
 SEED=5
@@ -26,7 +28,10 @@ bench: bake
 	mkdir -p data
 	for ITERS in $(ITERATION_COUNTS); do \
 		build/stencil_ref $(CSV_FILE) $(M) $(N) $(SEED) $${ITERS}; \
-		mpiexec -np 40 build/stencil_bench $(CSV_FILE) $(M) $(N) 4 10 $(SEED) $${ITERS}; \
+		for R in $(RS); do \
+			mpiexec -np $(PROCESS_COUNT) build/stencil_bench $(CSV_FILE) \
+			    $(M) $(N) $${R} $$(( $(PROCESS_COUNT) / $${R} )) $(SEED) $${ITERS}; \
+		done \
 	done
 
 hand-in:
