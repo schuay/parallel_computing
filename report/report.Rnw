@@ -147,6 +147,8 @@ Test and benchmark the implementations, for OpenMP compare performance to
 \subsubsection{Results}
 
 % TODO
+% TODO Implement using reduction clause
+% TODO Bonus: Can the algorithms be simplified to compute only the total sum?
 
 <<results=tex,echo=FALSE>>=
 \SweaveInput{functions.Rnw}
@@ -216,6 +218,11 @@ algorithm. Test cases include:
 \end{itemize}
 
 \subsubsection{Results}
+
+% TODO: Bonus: Can the algorithm be extended to allow element repetitions?
+%       Which properties can be guaranteed?
+% TODO: Bonus: Can the algorithm be used for implementing a parallel mergesort?
+%       What is missing?
 
 <<results=tex,echo=FALSE>>=
 readAndPlot("../1-merge/data/bench.csv")
