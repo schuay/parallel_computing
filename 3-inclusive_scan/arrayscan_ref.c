@@ -7,7 +7,7 @@ const char *getAlgorithmName(void)
     return algorithm_name;
 }
 
-TYPE *arrayscan(const TYPE A[], size_t n, MPI_Comm comm)
+TYPE *arrayscan(const TYPE A[], size_t n, __attribute__((unused)) MPI_Comm comm)
 {
     return arrayscan_seq(A, n);
 }
