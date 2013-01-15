@@ -11,8 +11,8 @@ SOURCE = . ../common
 
 CSV_FILE = data/bench.csv
 INPUT_SIZES = 10 100 1000000 100000000
-NUM_THREADS = 1 2 4 0 # 0 means use the default
-NUM_THREADS_REMOTE = 8 16 32 0
+NUM_THREADS = 1 2 4
+NUM_THREADS_REMOTE = 8 16 32 48
 SEED = 42
 
 bake:
