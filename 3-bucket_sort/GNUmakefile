@@ -38,6 +38,3 @@ remote-bench: hand-in
 
 clean:
 	rm -rf build
-	rm -rf data
-
-
