@@ -7,6 +7,7 @@
  * The datatype of array elements.
  */
 #define TYPE int
+#define TYPE_MPI MPI_INT
 
 const char *getAlgorithmName(void);
 
