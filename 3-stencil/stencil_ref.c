@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 
     FILE *const csvFile = csv_open(filename);
     if (csvFile != NULL) {
-        fprintf(csvFile, "%s,%d,%d,%f\n", "sequential",
+        fprintf(csvFile, "%s,%d,%d,%f\n", "sequential reference",
                 1, n * m * x, end - start);
         csv_close(csvFile);
     }
