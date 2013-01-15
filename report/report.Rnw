@@ -356,7 +356,19 @@ Unit tests include:
 
 \subsubsection{Results}
 
-% TODO
+As expected, the parallel stencil implementation scales very well: with recombination
+(in which all processes end up with the full matrix upon conclusion), we were able to
+achieve a speed-up of % TODO
+for $1000$ stencil iterations performed on a $1000 \times 1000$ matrix.
+
+The optimal matrix partitioning also fits our model, with the $200 \times 125$ submatrices
+outperforming the other partitions ($500 \times 50$ and $1000 \times 25$) by almost a factor
+of $2$.
+
+<<results=tex,echo=FALSE>>=
+readAndPlot("../3-stencil/data/bench.csv")
+@
+
 
 \clearpage
 \subsection{Parallel Integer Bucket Sort}
