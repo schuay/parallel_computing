@@ -75,8 +75,7 @@ speed-up is modest and less than p
 This report presents our solutions to six parallel computing programming projects:
 prefix sums and work-optimal merge with OpenMP, a comparison of task-parallel
 and data-parallel merge algorithms in Cilk, and parallel stencil, bucket sort
-and % TODO
-using OpenMPI.
+and inclusive scan algorithms using OpenMPI.
 
 The basic structure of each project is roughly the same. It consists of
 
@@ -453,11 +452,45 @@ by requiring $p \leq n$. Another possible solution would have been to create a n
 % TODO: Bonus radix sort
 
 \clearpage
-\subsection{...}
+\subsection{Inclusive Scan}
 
 \subsubsection{Specification}
 
-% TODO
+Given an array $A$ distributed blockwise over the $p$ MPI
+processes. Implement an algorithm (see 2nd lecture!) for
+computing all inclusive prefix-sums of $A$: The function
+\lstinline|arrayscan(int A[], int n, MPI_Comm comm)|
+shall compute for MPI rank $i$ in $A[j]$ the sum
+$(\forall i' < i: \sum_{k=0}^{k<ni'} A[k])+A[0]+...+A[k]$.
+
+Operation is integer sum ,,+''; but only associativity should be
+exploited for the parallelization. Note that the processes may
+contribute blocks of A of different sizes.
+
+Implementation hint: compute prefix sums of blocks locally, use a
+scan algorithm (as in lecture; e.g. 3rd algorithm) to compute all
+prefix sums of local sums, add prefix locally:
+
+\begin{enumerate}
+\item Locally compute \lstinline|Scan(A,n)|, let $B=a[n-1]$ for each process
+\item Do distributed \lstinline|ExScan'(B)| to compute for rank $i$ the sum
+      $B(0)+B(1)+...+B(i-1)$
+\item  Locally compute for rank $i$: $A[j] = A[j]+B(i-1)$ for $0 \leq j < n$
+\end{enumerate}
+
+Step 2 is the crucial step and requires MPI communication. This
+can be done by \lstinline|MPI_Exscan| - but the task of the project is to
+implement an own algorithm (hint: Hillis-Steele)
+
+\begin{itemize}
+\item Establish correctness by comparing to sequential scan
+\item What is the asymptotic running time of your algorithm as a
+      function of $n$ and $p$? Which assumptions do you need for the
+      estimate?
+\item Compute speed-up relative to sequential Scan for different
+      (large) $n \in 100000, 1000000, 10000000, ...$
+\item How is this function different from MPI's scan?
+\end{itemize}
 
 \subsubsection{Implementation}
 
