@@ -58,6 +58,18 @@ target_link_libraries(arrayscan_par_mpi_bench
     ${MPI_C_LIBRARIES}
 )
 
+add_executable(arrayscan_par_hillis-steele_bench
+    ${COMMON_DIR}/csv.c
+    bench.c
+    arrayscan.c
+    arrayscan_par.c
+    exscan_hillis-steele.c
+)
+
+target_link_libraries(arrayscan_par_hillis-steele_bench
+    ${MPI_C_LIBRARIES}
+)
+
 if(CHECK_FOUND)
     enable_testing()
 
@@ -80,6 +92,23 @@ if(CHECK_FOUND)
     add_test(arrayscan_par_mpi-test
         ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${CMAKE_CURRENT_BINARY_DIR}/arrayscan_par_mpi_test ${TEST_SEED}
     )
+
+    add_executable(arrayscan_par_hillis-steele_test
+        arrayscan.c
+        arrayscan_par.c
+        test.c
+        exscan_hillis-steele.c
+    )
+
+    target_link_libraries(arrayscan_par_hillis-steele_test
+        ${CHECK_LIBRARIES}
+        ${MPI_C_LIBRARIES}
+    )
+
+    add_test(arrayscan_par_hillis-steele-test
+        ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${CMAKE_CURRENT_BINARY_DIR}/arrayscan_par_hillis-steele_test ${TEST_SEED}
+    )
+
 endif()
 
 # vim:set ts=4 sw=4 et:
