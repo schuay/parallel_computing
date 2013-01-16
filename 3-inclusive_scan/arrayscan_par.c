@@ -131,11 +131,6 @@ TYPE *arrayscan(const TYPE A[], size_t n, MPI_Comm comm)
         goto out_a;
     }
 
-    /* MPI_Exscan() leaves this undefined, we need 0. */
-    if (rank == 0) {
-        rank_prefix = 0;
-    }
-
     for (size_t i = 0; i < len; i++) {
         a[i] += rank_prefix;
     }
