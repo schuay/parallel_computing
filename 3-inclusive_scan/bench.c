@@ -6,8 +6,6 @@
 #include "common.h"
 #include "csv.h"
 
-#define MASTER (0)
-
 /* #define DEBUG(...) fprintf(stderr, __VA_ARGS__) */
 #define DEBUG(...)
 
@@ -57,13 +55,13 @@ int main(int argc, char **argv)
     double end = MPI_Wtime();
 
     free(nrs);
-    if (prefix_sums != nrs) {
-    	free(prefix_sums);
-    }
-
     /* Only the master process (rank 0) outputs information. */
 
     if (rank == MASTER) {
+        if (prefix_sums != nrs) {
+            free(prefix_sums);
+        }
+
         printf("time: %f\n\n", end - start);
 
         /* Persist this run in our csv file. */

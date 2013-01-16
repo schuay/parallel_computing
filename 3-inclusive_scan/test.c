@@ -12,21 +12,18 @@ static int seed = 42;
     do { \
         size_t len = sizeof(nrs) / sizeof(nrs[0]); \
         \
-        TYPE *ref_in = malloc(sizeof(nrs)); \
-        memcpy(ref_in, nrs, sizeof(nrs)); \
-        TYPE *tst_in = malloc(sizeof(nrs)); \
-        memcpy(tst_in, nrs, sizeof(nrs)); \
+        TYPE *tst = arrayscan(nrs, len, MPI_COMM_WORLD); \
         \
-        TYPE *ref = arrayscan_seq(ref_in, len); \
-        TYPE *tst = arrayscan(tst_in, len, MPI_COMM_WORLD); \
-        \
-        fail_unless(memcmp(tst, ref, len) == 0, \
-             "Result not equal to reference implementation"); \
-        \
-        free(ref_in); \
-        if (ref != ref_in) { free(ref); } \
-        free(tst_in); \
-        if (tst != tst_in) { free(tst); } \
+        int rank; \
+        MPI_Comm_rank(MPI_COMM_WORLD, &rank); \
+        if (rank == MASTER) { \
+            TYPE *ref = arrayscan_seq(nrs, len); \
+            fail_unless(memcmp(tst, ref, len) == 0, \
+                 "Result not equal to reference implementation"); \
+            \
+            free(tst); \
+            free(ref); \
+        } \
     } while(0);
 
 START_TEST(test_odd) {

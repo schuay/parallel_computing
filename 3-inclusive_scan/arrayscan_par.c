@@ -34,39 +34,7 @@ static size_t length(size_t n, int rank, int processes)
     return (rank == processes - 1) ? n - off : size;
 }
 
-static int *genAlltoallvSendcounts(int n, int rank, int processes)
-{
-    int *ret = malloc(processes * sizeof(int));
-    if (ret == NULL) {
-        return NULL;
-    }
-
-    size_t len = length(n, rank, processes);
-
-    for (int i = 0; i < processes; i++) {
-        ret[i] = len;
-    }
-
-    return ret;
-}
-
-static int *genAlltoallvSenddispls(int processes)
-{
-    int *ret = malloc(processes * sizeof(int));
-    if (ret == NULL) {
-        return NULL;
-    }
-
-    size_t off = 0;
-
-    for (int i = 0; i < processes; i++) {
-        ret[i] = off;
-    }
-
-    return ret;
-}
-
-static int *genAlltoallvRecvcounts(int n, int processes)
+static int *genRecvcounts(int n, int processes)
 {
     int *ret = malloc(processes * sizeof(int));
     if (ret == NULL) {
@@ -80,7 +48,7 @@ static int *genAlltoallvRecvcounts(int n, int processes)
     return ret;
 }
 
-static int *genAlltoallvRecvdispls(int n, int processes)
+static int *genRecvdispls(int n, int processes)
 {
     int *ret = malloc(processes * sizeof(int));
     if (ret == NULL) {
@@ -94,42 +62,45 @@ static int *genAlltoallvRecvdispls(int n, int processes)
     return ret;
 }
 
-static int alltoall(TYPE *snd, TYPE *rcv, size_t n, int rank, int processes, MPI_Comm comm)
+static int gather(TYPE *snd, size_t len, MPI_Comm comm)
 {
-    int ret = -1;
+    return MPI_Gatherv(snd, len, TYPE_MPI, NULL, NULL, NULL, TYPE_MPI, MASTER, comm);
+}
 
-    int *sndcnt = genAlltoallvSendcounts(n, rank, processes);
-    if (sndcnt == NULL) {
+static TYPE *gather_master(TYPE *snd, size_t n, int rank, int processes, MPI_Comm comm)
+{
+    TYPE *ret = NULL;
+
+    int *rcvcnt = genRecvcounts(n, processes);
+    if (rcvcnt == NULL) {
         goto out;
     }
 
-    int *rcvcnt = genAlltoallvRecvcounts(n, processes);
-    if (rcvcnt == NULL) {
-        goto out_sndcnt;
-    }
-
-    int *snddispls = genAlltoallvSenddispls(processes);
-    if (snddispls == NULL) {
+    int *rcvdispls = genRecvdispls(n, processes);
+    if (rcvdispls == NULL) {
         goto out_rcvcnt;
     }
 
-    int *rcvdispls = genAlltoallvRecvdispls(n, processes);
-    if (snddispls == NULL) {
-        goto out_snddispls;
+    size_t len = length(n, rank, processes);
+
+    ret = malloc(n * sizeof(TYPE));
+    if (ret == NULL) {
+        goto out_rcvdispls;
     }
 
-    ret = MPI_Alltoallv(snd, sndcnt, snddispls, TYPE_MPI, rcv, rcvcnt, rcvdispls, TYPE_MPI, comm);
+    if (MPI_Gatherv(snd, len, TYPE_MPI,
+                ret, rcvcnt, rcvdispls, TYPE_MPI,
+                MASTER, comm) != MPI_SUCCESS) {
+        free(ret);
+        ret = NULL;
+        goto out_rcvdispls;
+    }
 
+out_rcvdispls:
     free(rcvdispls);
-
-out_snddispls:
-    free(snddispls);
 
 out_rcvcnt:
     free(rcvcnt);
-
-out_sndcnt:
-    free(sndcnt);
 
 out:
     return ret;
@@ -169,16 +140,10 @@ TYPE *arrayscan(const TYPE A[], size_t n, MPI_Comm comm)
         a[i] += rank_prefix;
     }
 
-    ret = malloc(n * sizeof(TYPE));
-    if (ret == NULL) {
-        goto out_a;
-    }
-
-    if (alltoall(a, ret, n, rank, processes, comm) != MPI_SUCCESS) {
-        fprintf(stderr, "MPI Error: MPI_Alltoallv failed.\n");
-        free(ret);
-        ret = NULL;
-        goto out_a;
+    if (rank == MASTER) {
+        ret = gather_master(a, n, rank, processes, comm);
+    } else {
+        gather(a, len, comm);
     }
 
 out_a:

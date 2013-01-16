@@ -9,6 +9,8 @@
 #define TYPE int
 #define TYPE_MPI MPI_INT
 
+#define MASTER (0)
+
 const char *getAlgorithmName(void);
 
 TYPE *arrayscan(const TYPE A[], size_t n, MPI_Comm comm);
