@@ -14,8 +14,8 @@ int exscan(TYPE xi, TYPE *bi, MPI_Comm comm)
 
     MPI_Status status;
 
-    TYPE orig = xi;
-    for (int k = 1; k < processes; k <<= 1) {
+    int k;
+    for (k = 1; k < processes; k <<= 1) {
         if (rank < k) {
             yi = xi;
             ret = MPI_Send(&xi, 1, TYPE_MPI, rank + k, k, comm);
@@ -40,8 +40,16 @@ int exscan(TYPE xi, TYPE *bi, MPI_Comm comm)
         yi = tmp;
     }
 
-    // TODO: this is not allowed, we may only assume associativity
-    *bi = xi - orig;
+    if (rank == 0) {
+        ret = MPI_Send(&xi, 1, TYPE_MPI, rank + 1, k, comm);
+        *bi = 0;
+    } else if (rank == processes - 1) {
+        ret = MPI_Recv(bi, 1, TYPE_MPI, rank - 1, k, comm, &status);
+    } else {
+        ret = MPI_Sendrecv(&xi, 1, TYPE_MPI, rank + 1, k,
+                bi, 1, TYPE_MPI, rank - 1, k,
+                comm, &status);
+    }
 
-    return 0;
+    return ret;
 }
