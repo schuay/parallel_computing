@@ -3,8 +3,10 @@
 
 #include <mpi.h>
 
+#include "arrayscan.h"
+
 extern const char *exscan_name;
 
-int exscan(int xi, int *yi, MPI_Datatype type, MPI_Comm comm);
+int exscan(TYPE xi, TYPE *bi, MPI_Comm comm);
 
 #endif /* __EXSCAN_H */

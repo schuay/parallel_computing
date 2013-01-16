@@ -2,7 +2,7 @@
 
 const char *exscan_name = "MPI Exscan";
 
-int exscan(int xi, int *yi, MPI_Datatype type, MPI_Comm comm)
+int exscan(TYPE xi, TYPE *bi, MPI_Comm comm)
 {
-    return MPI_Exscan(&xi, yi, 1, type, MPI_SUM, comm);
+    return MPI_Exscan(&xi, bi, 1, TYPE_MPI, MPI_SUM, comm);
 }
