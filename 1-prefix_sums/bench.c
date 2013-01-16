@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
         }
 
         omp_set_num_threads(threads);
-        printf("%s. omp_get_max_threads() == %d\n\n", algorithm_name, threads);
+        printf("%s. omp_get_max_threads() == %d\n", algorithm_name, threads);
 
         /* Bench the parallel implementation. */
 
