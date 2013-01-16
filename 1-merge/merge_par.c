@@ -37,7 +37,7 @@ TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf)
     const int threads = omp_get_max_threads();
     const int p = (threads <= n) ? threads : n;
 
-#pragma omp parallel for
+#pragma omp parallel for schedule(runtime)
     for (int i = 0; i < p; i++) {
         merge_part(a, n, b, m, c, i, p, 1, perf);
     }
@@ -61,7 +61,7 @@ static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
         const int threads = omp_get_max_threads();
         const int p = (threads <= b_length) ? threads : b_length;
 
-#pragma omp parallel for
+#pragma omp parallel for schedule(runtime)
         for (int i = 0; i < p; i++) {
             merge_part(b + b_start, b_length,
                     a + start, length,

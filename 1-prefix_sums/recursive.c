@@ -24,7 +24,7 @@ static int prefix_sums_(TYPE *x, size_t n, perf_t *perf, TYPE *y) {
 
     /* Accumulate pairs. */
 
-#pragma omp parallel for
+#pragma omp parallel for schedule(runtime)
     for (size_t i = 0; i < m; i++) {
         y[i] = x[2 * i] + x[2 * i + 1];
         PERF_INC(perf, omp_get_thread_num());
@@ -38,7 +38,7 @@ static int prefix_sums_(TYPE *x, size_t n, perf_t *perf, TYPE *y) {
 
     /* Combine. */
 
-#pragma omp parallel for
+#pragma omp parallel for schedule(runtime)
     for (size_t i = 1; i < m; i++) {
         x[2 * i] += y[i - 1];
         x[2 * i + 1] = y[i];
