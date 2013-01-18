@@ -11,7 +11,7 @@ SOURCE = . ../common
 
 CSV_FILE = bench.csv
 ALGORITHMS = recursive iterative hillis-steele reduction
-INPUT_SIZES = 10 100 1000000 100000000
+INPUT_SIZES = 10 100 1000000 1111111 2000000 5000000 6666666 100000000
 NUM_THREADS = 1 2 4 0 # 0 means use the default
 NUM_THREADS_REMOTE = 8 16 32 0
 
