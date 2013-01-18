@@ -73,7 +73,7 @@ if(CHECK_FOUND)
     )
 
     add_test(stencil-test
-        ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${CMAKE_CURRENT_BINARY_DIR}/stencil_test
+        ${MPIEXEC} -x PATH ${MPIEXEC_NUMPROC_FLAG} 4 ${CMAKE_CURRENT_BINARY_DIR}/stencil_test
     )
 endif()
 

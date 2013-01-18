@@ -10,10 +10,11 @@ REMOTEDIR = ~/project3-inclusive_scan
 SOURCE = . ../common
 
 CSV_FILE = data/bench.csv
-INPUT_SIZES = 10 100 1000000 100000000
+INPUT_SIZES = 10 100 1000000 100000000 1000000000
 NUM_THREADS = 1 2 4
-NUM_THREADS_REMOTE = 8 16 32 48
+NUM_THREADS_REMOTE = 8 16 32 64 128 256 512
 SEED = 42
+HOSTS=jupiter0,jupiter1,jupiter2,jupiter3,jupiter4,jupiter5,jupiter6,jupiter7,jupiter8,jupiter9,jupiter10,jupiter11,jupiter12,jupiter13,jupiter14,jupiter15,jupiter16,jupiter17,jupiter18,jupiter19,jupiter20,jupiter21,jupiter22,jupiter23,jupiter24,jupiter25,jupiter26,jupiter27,jupiter28,jupiter29,jupiter30,jupiter31,jupiter32,jupiter33,jupiter34,jupiter35
 
 bake:
 	mkdir -p build
@@ -27,8 +28,11 @@ bench: bake
 	for inSize in $(INPUT_SIZES); do \
 		mpiexec -np 1 build/arrayscan_ref_bench $(CSV_FILE) $${inSize} $(SEED); \
 		for nThreads in $(NUM_THREADS); do \
-			mpiexec -np $${nThreads} build/arrayscan_par_mpi_bench $(CSV_FILE) $${inSize} $(SEED); \
-			mpiexec -np $${nThreads} build/arrayscan_par_hillis-steele_bench $(CSV_FILE) $${inSize} $(SEED); \
+			mpiexec -host $(HOSTS) -np $${nThreads} -loadbalance \
+				build/arrayscan_par_mpi_bench $(CSV_FILE) \
+				$${inSize} $(SEED); \
+			mpiexec -host $(HOSTS) -np $${nThreads} -loadbalance \
+				-np $${nThreads} build/arrayscan_par_hillis-steele_bench $(CSV_FILE) $${inSize} $(SEED); \
 		done; \
 	done
 
