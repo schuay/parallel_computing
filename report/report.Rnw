@@ -146,6 +146,7 @@ Test and benchmark the implementations, for OpenMP compare performance to
 \subsubsection{Results}
 
 % TODO
+% TODO Verify complexity with performance counters
 % TODO Implement using reduction clause
 % TODO Bonus: Can the algorithms be simplified to compute only the total sum?
 
@@ -264,6 +265,8 @@ Comment on ease of implementation, and achieved performance.
 \section{MPI}
 % =============================================================================
 
+% TODO: Make sure we get the correct Tpar (the process taking the longest),
+% suggestion: MPI_Reduce(MPI_MAX), although MPI_Barrier seems to be better?
 \subsection{Parallel Stencil Computation}
 
 \subsubsection{Specification}
