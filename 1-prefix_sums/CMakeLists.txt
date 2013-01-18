@@ -59,6 +59,15 @@ add_executable(hillis-steele_bench
 )
 SET_TARGET_PROPERTIES(hillis-steele_bench PROPERTIES COMPILE_DEFINITIONS "NOPERF")
 
+add_executable(reduction_bench
+    common.c
+    ${COMMON_DIR}/perf.c
+    reduction.c
+    ${COMMON_DIR}/csv.c
+    bench.c
+)
+SET_TARGET_PROPERTIES(reduction_bench PROPERTIES COMPILE_DEFINITIONS "NOPERF")
+
 if(CHECK_FOUND)
     enable_testing()
 
