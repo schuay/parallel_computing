@@ -139,6 +139,19 @@ Test and benchmark the implementations, for OpenMP compare performance to
 
 % TODO
 
+A few of these algorithms may also be simplified to compute only the total
+sum instead of all prefix sums:
+
+\begin{itemize}
+\item The work performed by the iterative algorithm can be cut in half
+      by skipping the entire down phase, which is only responsible for
+      distributing results into the entire data range.
+\item It does not seem to be possible to simplify the Hillis-Steele
+      algorithm to compute only the final sum. % TODO: Is this correct?
+% TODO: Recursive
+\end{itemize}
+
+
 \subsubsection{Testing}
 
 % TODO
@@ -147,7 +160,6 @@ Test and benchmark the implementations, for OpenMP compare performance to
 
 % TODO
 % TODO Verify complexity with performance counters
-% TODO Implement using reduction clause
 % TODO Bonus: Can the algorithms be simplified to compute only the total sum?
 
 <<results=tex,echo=FALSE>>=
