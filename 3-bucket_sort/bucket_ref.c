@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 
     /* Only the master process (rank 0) outputs information. */
 
-    printf("elements: %d; upper bound: %d; time: %f\n\n",
+    printf("sequential. elements: %d; upper bound: %d; time: %f\n",
             size, upper_bound, end - start);
 
     /* Persist this run in our csv file. */

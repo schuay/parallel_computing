@@ -65,8 +65,8 @@ int main(int argc, char **argv)
     /* Only the master process (rank 0) outputs information. */
 
     if (rank == MASTER) {
-        printf("elements: %d; upper bound: %d; time: %f\n\n",
-                size, upper_bound, end - start);
+        printf("processes: %d, elements: %d; upper bound: %d; time: %f\n",
+                processes, size, upper_bound, end - start);
 
         /* Persist this run in our csv file. */
 
