@@ -7,8 +7,6 @@
 #include "matrix.h"
 #include "stencil.h"
 
-#define MASTER (0)
-
 extern const char *algorithm_name;
 
 int main(int argc, char **argv)

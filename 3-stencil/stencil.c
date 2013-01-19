@@ -41,7 +41,9 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     if (r * c != processes) {
-        fprintf(stderr, "r * c != processes, aborting\n");
+        if (rank == MASTER) {
+            fprintf(stderr, "r * c != processes, aborting\n");
+        }
         return;
     }
 
@@ -49,7 +51,9 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
     matrix_dims(matrix, &m, &n);
 
     if (m % r  != 0 || n % c != 0) {
-        fprintf(stderr, "m / r, n / c must be evenly divisible, aborting\n");
+        if (rank == MASTER) {
+            fprintf(stderr, "m / r, n / c must be evenly divisible, aborting\n");
+        }
         return;
     }
 
