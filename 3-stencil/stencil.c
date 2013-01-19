@@ -31,7 +31,7 @@ static int stencil_iteration(MPI_Comm comm, submatrix_t *submatrix);
  * m/r + n/c is minimal.
  */
 
-void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
+int stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
 {
     /* Complexity: O(1), assuming MPI_Comm_size, MPI_Comm_rank, MPI_Cart_create,
      * MPI_Cart_coords are all O(1). */
@@ -44,7 +44,7 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
         if (rank == MASTER) {
             fprintf(stderr, "r * c != processes, aborting\n");
         }
-        return;
+        return -1;
     }
 
     int m, n;
@@ -54,7 +54,7 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
         if (rank == MASTER) {
             fprintf(stderr, "m / r, n / c must be evenly divisible, aborting\n");
         }
-        return;
+        return -1;
     }
 
     /* Construct our MPI cartography. */
@@ -65,7 +65,7 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
     int periods[] = { 0, 0 };
     int ret = MPI_Cart_create(MPI_COMM_WORLD, NDIMS, dims, periods, 1, &comm);
     if (ret != MPI_SUCCESS) {
-        return;
+        return -1;
     }
 
     MPI_Comm_size(comm, &processes);
@@ -134,6 +134,8 @@ void stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
     submatrix_free(submatrix);
 
     MPI_Comm_free(&comm);
+
+    return 0;
 }
 
 /* Complexity: O(m/r * n/c). */
