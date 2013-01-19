@@ -270,7 +270,9 @@ Comment on ease of implementation, and achieved performance.
 
 \subsubsection{Results}
 
-% TODO
+<<results=tex,echo=FALSE>>=
+readAndPlot("../2-merge/data/bench.csv")
+@
 
 % =============================================================================
 \clearpage
@@ -466,7 +468,10 @@ by requiring $p \leq n$. Another possible solution would have been to create a n
 
 \subsubsection{Results}
 
-% TODO: Results
+<<results=tex,echo=FALSE>>=
+readAndPlot("../3-bucket_sort/data/bench.csv")
+@
+
 % TODO: Bonus radix sort
 
 \clearpage
