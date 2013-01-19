@@ -1,0 +1,400 @@
+sequential reference,1,10,0.000122
+parallel merge,1,10,0.000103
+parallel merge,2,10,0.000098
+parallel merge,4,10,0.000099
+parallel merge,0,10,0.000113
+sequential reference,1,100,0.000094
+parallel merge,1,100,0.000106
+parallel merge,2,100,0.000106
+parallel merge,4,100,0.000134
+parallel merge,0,100,0.000105
+sequential reference,1,1000000,0.018430
+parallel merge,1,1000000,0.163446
+parallel merge,2,1000000,0.171001
+parallel merge,4,1000000,0.167475
+parallel merge,0,1000000,0.173906
+sequential reference,1,10,0.000309
+recursive parallel merge,8,10,0.001494
+binary search based parallel merge,8,10,0.001787
+recursive parallel merge,16,10,0.002326
+binary search based parallel merge,16,10,0.002402
+recursive parallel merge,32,10,0.003968
+binary search based parallel merge,32,10,0.005366
+recursive parallel merge,33,10,0.004305
+binary search based parallel merge,33,10,0.006153
+recursive parallel merge,48,10,0.008131
+binary search based parallel merge,48,10,0.009156
+sequential reference,1,100,0.000269
+recursive parallel merge,8,100,0.001435
+binary search based parallel merge,8,100,0.001403
+recursive parallel merge,16,100,0.002701
+binary search based parallel merge,16,100,0.002896
+recursive parallel merge,32,100,0.004385
+binary search based parallel merge,32,100,0.004410
+recursive parallel merge,33,100,0.004228
+binary search based parallel merge,33,100,0.005422
+recursive parallel merge,48,100,0.008191
+binary search based parallel merge,48,100,0.008492
+sequential reference,1,1000000,0.016415
+recursive parallel merge,8,1000000,0.005159
+binary search based parallel merge,8,1000000,0.004946
+recursive parallel merge,16,1000000,0.006163
+binary search based parallel merge,16,1000000,0.006513
+recursive parallel merge,32,1000000,0.007747
+binary search based parallel merge,32,1000000,0.008360
+recursive parallel merge,33,1000000,0.008284
+binary search based parallel merge,33,1000000,0.009718
+recursive parallel merge,48,1000000,0.011863
+binary search based parallel merge,48,1000000,0.042916
+sequential reference,1,1111111,0.018145
+recursive parallel merge,8,1111111,0.004749
+binary search based parallel merge,8,1111111,0.005088
+recursive parallel merge,16,1111111,0.005172
+binary search based parallel merge,16,1111111,0.006604
+recursive parallel merge,32,1111111,0.007813
+binary search based parallel merge,32,1111111,0.008797
+recursive parallel merge,33,1111111,0.008893
+binary search based parallel merge,33,1111111,0.008710
+recursive parallel merge,48,1111111,0.012544
+binary search based parallel merge,48,1111111,0.012536
+sequential reference,1,100000000,1.645674
+recursive parallel merge,8,100000000,0.318340
+binary search based parallel merge,8,100000000,0.219842
+recursive parallel merge,16,100000000,0.157760
+binary search based parallel merge,16,100000000,0.128397
+recursive parallel merge,32,100000000,0.107112
+binary search based parallel merge,32,100000000,0.119013
+recursive parallel merge,33,100000000,0.108026
+binary search based parallel merge,33,100000000,0.118269
+recursive parallel merge,48,100000000,0.095438
+binary search based parallel merge,48,100000000,0.110844
+sequential reference,1,10,0.000296
+recursive parallel merge,8,10,0.001231
+binary search based parallel merge,8,10,0.001434
+recursive parallel merge,16,10,0.002449
+binary search based parallel merge,16,10,0.002338
+recursive parallel merge,32,10,0.004311
+binary search based parallel merge,32,10,0.005267
+recursive parallel merge,33,10,0.004744
+binary search based parallel merge,33,10,0.004754
+recursive parallel merge,48,10,0.008545
+binary search based parallel merge,48,10,0.009126
+sequential reference,1,100,0.000254
+recursive parallel merge,8,100,0.001268
+binary search based parallel merge,8,100,0.001158
+recursive parallel merge,16,100,0.002514
+binary search based parallel merge,16,100,0.002287
+recursive parallel merge,32,100,0.004585
+binary search based parallel merge,32,100,0.004586
+recursive parallel merge,33,100,0.004496
+binary search based parallel merge,33,100,0.005242
+recursive parallel merge,48,100,0.008138
+binary search based parallel merge,48,100,0.008869
+sequential reference,1,1000000,0.016041
+recursive parallel merge,8,1000000,0.005027
+binary search based parallel merge,8,1000000,0.004921
+recursive parallel merge,16,1000000,0.004894
+binary search based parallel merge,16,1000000,0.005308
+recursive parallel merge,32,1000000,0.007739
+binary search based parallel merge,32,1000000,0.012891
+recursive parallel merge,33,1000000,0.008494
+binary search based parallel merge,33,1000000,0.008360
+recursive parallel merge,48,1000000,0.012068
+binary search based parallel merge,48,1000000,0.012492
+sequential reference,1,1111111,0.017807
+recursive parallel merge,8,1111111,0.004465
+binary search based parallel merge,8,1111111,0.004601
+recursive parallel merge,16,1111111,0.006268
+binary search based parallel merge,16,1111111,0.006068
+recursive parallel merge,32,1111111,0.009472
+binary search based parallel merge,32,1111111,0.007760
+recursive parallel merge,33,1111111,0.008667
+binary search based parallel merge,33,1111111,0.007835
+recursive parallel merge,48,1111111,0.013069
+binary search based parallel merge,48,1111111,0.012170
+sequential reference,1,100000000,1.646729
+recursive parallel merge,8,100000000,0.321930
+binary search based parallel merge,8,100000000,0.218787
+recursive parallel merge,16,100000000,0.126238
+binary search based parallel merge,16,100000000,0.130938
+recursive parallel merge,32,100000000,0.118696
+binary search based parallel merge,32,100000000,0.110610
+recursive parallel merge,33,100000000,0.107810
+binary search based parallel merge,33,100000000,0.114404
+recursive parallel merge,48,100000000,0.102113
+binary search based parallel merge,48,100000000,0.117657
+sequential reference,1,10,0.000301
+recursive parallel merge,8,10,0.001385
+binary search based parallel merge,8,10,0.001351
+recursive parallel merge,16,10,0.002545
+binary search based parallel merge,16,10,0.002460
+recursive parallel merge,32,10,0.004362
+binary search based parallel merge,32,10,0.004207
+recursive parallel merge,33,10,0.004405
+binary search based parallel merge,33,10,0.006199
+recursive parallel merge,48,10,0.008531
+binary search based parallel merge,48,10,0.008694
+sequential reference,1,100,0.000262
+recursive parallel merge,8,100,0.001268
+binary search based parallel merge,8,100,0.001322
+recursive parallel merge,16,100,0.002448
+binary search based parallel merge,16,100,0.002671
+recursive parallel merge,32,100,0.004575
+binary search based parallel merge,32,100,0.005417
+recursive parallel merge,33,100,0.004630
+binary search based parallel merge,33,100,0.005077
+recursive parallel merge,48,100,0.008519
+binary search based parallel merge,48,100,0.008826
+sequential reference,1,1000000,0.016081
+recursive parallel merge,8,1000000,0.004645
+binary search based parallel merge,8,1000000,0.004244
+recursive parallel merge,16,1000000,0.004617
+binary search based parallel merge,16,1000000,0.006274
+recursive parallel merge,32,1000000,0.008850
+binary search based parallel merge,32,1000000,0.007236
+recursive parallel merge,33,1000000,0.009901
+binary search based parallel merge,33,1000000,0.007957
+recursive parallel merge,48,1000000,0.010817
+binary search based parallel merge,48,1000000,0.013460
+sequential reference,1,1111111,0.017821
+recursive parallel merge,8,1111111,0.004717
+binary search based parallel merge,8,1111111,0.004819
+recursive parallel merge,16,1111111,0.005857
+binary search based parallel merge,16,1111111,0.006069
+recursive parallel merge,32,1111111,0.007947
+binary search based parallel merge,32,1111111,0.008512
+recursive parallel merge,33,1111111,0.008718
+binary search based parallel merge,33,1111111,0.009321
+recursive parallel merge,48,1111111,0.011056
+binary search based parallel merge,48,1111111,0.026526
+sequential reference,1,100000000,1.610567
+recursive parallel merge,8,100000000,0.219099
+binary search based parallel merge,8,100000000,0.218902
+recursive parallel merge,16,100000000,0.138608
+binary search based parallel merge,16,100000000,0.124323
+recursive parallel merge,32,100000000,0.101090
+binary search based parallel merge,32,100000000,0.115474
+recursive parallel merge,33,100000000,0.096041
+binary search based parallel merge,33,100000000,0.104609
+recursive parallel merge,48,100000000,0.089063
+binary search based parallel merge,48,100000000,0.109102
+sequential reference,1,10,0.000291
+recursive parallel merge,8,10,0.001419
+binary search based parallel merge,8,10,0.001313
+recursive parallel merge,16,10,0.002619
+binary search based parallel merge,16,10,0.002701
+recursive parallel merge,32,10,0.004189
+binary search based parallel merge,32,10,0.005457
+recursive parallel merge,33,10,0.004497
+binary search based parallel merge,33,10,0.004709
+recursive parallel merge,48,10,0.008730
+binary search based parallel merge,48,10,0.010046
+sequential reference,1,100,0.000228
+recursive parallel merge,8,100,0.001205
+binary search based parallel merge,8,100,0.001590
+recursive parallel merge,16,100,0.002367
+binary search based parallel merge,16,100,0.002688
+recursive parallel merge,32,100,0.004357
+binary search based parallel merge,32,100,0.005905
+recursive parallel merge,33,100,0.004946
+binary search based parallel merge,33,100,0.004368
+recursive parallel merge,48,100,0.008245
+binary search based parallel merge,48,100,0.008166
+sequential reference,1,1000000,0.016107
+recursive parallel merge,8,1000000,0.004435
+binary search based parallel merge,8,1000000,0.004671
+recursive parallel merge,16,1000000,0.005558
+binary search based parallel merge,16,1000000,0.005229
+recursive parallel merge,32,1000000,0.007479
+binary search based parallel merge,32,1000000,0.007713
+recursive parallel merge,33,1000000,0.009240
+binary search based parallel merge,33,1000000,0.007629
+recursive parallel merge,48,1000000,0.032103
+binary search based parallel merge,48,1000000,0.012343
+sequential reference,1,1111111,0.017767
+recursive parallel merge,8,1111111,0.005297
+binary search based parallel merge,8,1111111,0.004732
+recursive parallel merge,16,1111111,0.006516
+binary search based parallel merge,16,1111111,0.005224
+recursive parallel merge,32,1111111,0.007769
+binary search based parallel merge,32,1111111,0.007891
+recursive parallel merge,33,1111111,0.009905
+binary search based parallel merge,33,1111111,0.008301
+recursive parallel merge,48,1111111,0.011756
+binary search based parallel merge,48,1111111,0.021214
+sequential reference,1,100000000,1.645798
+recursive parallel merge,8,100000000,0.319996
+binary search based parallel merge,8,100000000,0.218084
+recursive parallel merge,16,100000000,0.135732
+binary search based parallel merge,16,100000000,0.131241
+recursive parallel merge,32,100000000,0.115428
+binary search based parallel merge,32,100000000,0.114324
+recursive parallel merge,33,100000000,0.109865
+binary search based parallel merge,33,100000000,0.107122
+recursive parallel merge,48,100000000,0.100356
+binary search based parallel merge,48,100000000,0.098916
+sequential reference,1,10,0.000303
+recursive parallel merge,8,10,0.001313
+binary search based parallel merge,8,10,0.001686
+recursive parallel merge,16,10,0.002226
+binary search based parallel merge,16,10,0.002468
+recursive parallel merge,32,10,0.004353
+binary search based parallel merge,32,10,0.004546
+recursive parallel merge,33,10,0.004075
+binary search based parallel merge,33,10,0.004787
+recursive parallel merge,48,10,0.008260
+binary search based parallel merge,48,10,0.010166
+sequential reference,1,100,0.000269
+recursive parallel merge,8,100,0.001213
+binary search based parallel merge,8,100,0.001524
+recursive parallel merge,16,100,0.002053
+binary search based parallel merge,16,100,0.002828
+recursive parallel merge,32,100,0.004414
+binary search based parallel merge,32,100,0.004590
+recursive parallel merge,33,100,0.004416
+binary search based parallel merge,33,100,0.006765
+recursive parallel merge,48,100,0.008697
+binary search based parallel merge,48,100,0.008531
+sequential reference,1,1000000,0.016096
+recursive parallel merge,8,1000000,0.005052
+binary search based parallel merge,8,1000000,0.004515
+recursive parallel merge,16,1000000,0.005972
+binary search based parallel merge,16,1000000,0.006000
+recursive parallel merge,32,1000000,0.007373
+binary search based parallel merge,32,1000000,0.007347
+recursive parallel merge,33,1000000,0.009116
+binary search based parallel merge,33,1000000,0.006857
+recursive parallel merge,48,1000000,0.012223
+binary search based parallel merge,48,1000000,0.015975
+sequential reference,1,1111111,0.017863
+recursive parallel merge,8,1111111,0.005382
+binary search based parallel merge,8,1111111,0.004698
+recursive parallel merge,16,1111111,0.005371
+binary search based parallel merge,16,1111111,0.005782
+recursive parallel merge,32,1111111,0.007608
+binary search based parallel merge,32,1111111,0.011957
+recursive parallel merge,33,1111111,0.013807
+binary search based parallel merge,33,1111111,0.009805
+recursive parallel merge,48,1111111,0.016583
+binary search based parallel merge,48,1111111,0.011510
+sequential reference,1,100000000,1.647309
+recursive parallel merge,8,100000000,0.219297
+binary search based parallel merge,8,100000000,0.219457
+recursive parallel merge,16,100000000,0.172058
+binary search based parallel merge,16,100000000,0.133069
+recursive parallel merge,32,100000000,0.103178
+binary search based parallel merge,32,100000000,0.115349
+recursive parallel merge,33,100000000,0.095630
+binary search based parallel merge,33,100000000,0.110312
+recursive parallel merge,48,100000000,0.106372
+binary search based parallel merge,48,100000000,0.110298
+sequential reference,1,10,0.000317
+recursive parallel merge,8,10,0.001663
+binary search based parallel merge,8,10,0.001669
+recursive parallel merge,16,10,0.002706
+binary search based parallel merge,16,10,0.002497
+recursive parallel merge,32,10,0.004224
+binary search based parallel merge,32,10,0.004956
+recursive parallel merge,33,10,0.004903
+binary search based parallel merge,33,10,0.005009
+recursive parallel merge,48,10,0.009226
+binary search based parallel merge,48,10,0.024784
+sequential reference,1,100,0.000262
+recursive parallel merge,8,100,0.001160
+binary search based parallel merge,8,100,0.001369
+recursive parallel merge,16,100,0.002504
+binary search based parallel merge,16,100,0.002827
+recursive parallel merge,32,100,0.004377
+binary search based parallel merge,32,100,0.005749
+recursive parallel merge,33,100,0.004332
+binary search based parallel merge,33,100,0.004838
+recursive parallel merge,48,100,0.008566
+binary search based parallel merge,48,100,0.008888
+sequential reference,1,1000000,0.016428
+recursive parallel merge,8,1000000,0.005593
+binary search based parallel merge,8,1000000,0.005270
+recursive parallel merge,16,1000000,0.005857
+binary search based parallel merge,16,1000000,0.006682
+recursive parallel merge,32,1000000,0.007976
+binary search based parallel merge,32,1000000,0.007960
+recursive parallel merge,33,1000000,0.008069
+binary search based parallel merge,33,1000000,0.008617
+recursive parallel merge,48,1000000,0.011927
+binary search based parallel merge,48,1000000,0.013131
+sequential reference,1,1111111,0.018046
+recursive parallel merge,8,1111111,0.005969
+binary search based parallel merge,8,1111111,0.004858
+recursive parallel merge,16,1111111,0.007029
+binary search based parallel merge,16,1111111,0.007454
+recursive parallel merge,32,1111111,0.010543
+binary search based parallel merge,32,1111111,0.008104
+recursive parallel merge,33,1111111,0.019512
+binary search based parallel merge,33,1111111,0.008743
+recursive parallel merge,48,1111111,0.012412
+binary search based parallel merge,48,1111111,0.013302
+sequential reference,1,100000000,1.667509
+recursive parallel merge,8,100000000,0.220820
+binary search based parallel merge,8,100000000,0.221157
+recursive parallel merge,16,100000000,0.166886
+binary search based parallel merge,16,100000000,0.124962
+recursive parallel merge,32,100000000,0.112345
+binary search based parallel merge,32,100000000,0.128111
+recursive parallel merge,33,100000000,0.126959
+binary search based parallel merge,33,100000000,0.298482
+recursive parallel merge,48,100000000,0.160515
+binary search based parallel merge,48,100000000,0.121158
+sequential reference,1,10,0.000263
+recursive parallel merge,8,10,0.000986
+binary search based parallel merge,8,10,0.000893
+recursive parallel merge,16,10,0.001545
+binary search based parallel merge,16,10,0.001916
+recursive parallel merge,32,10,0.003190
+binary search based parallel merge,32,10,0.003399
+recursive parallel merge,33,10,0.003105
+binary search based parallel merge,33,10,0.007571
+recursive parallel merge,48,10,0.006303
+binary search based parallel merge,48,10,0.006943
+sequential reference,1,100,0.000183
+recursive parallel merge,8,100,0.000837
+binary search based parallel merge,8,100,0.001216
+recursive parallel merge,16,100,0.003345
+binary search based parallel merge,16,100,0.008677
+recursive parallel merge,32,100,0.004929
+binary search based parallel merge,32,100,0.022312
+recursive parallel merge,33,100,0.003320
+binary search based parallel merge,33,100,0.004518
+recursive parallel merge,48,100,0.006302
+binary search based parallel merge,48,100,0.019503
+sequential reference,1,1000000,0.017702
+recursive parallel merge,8,1000000,0.025717
+binary search based parallel merge,8,1000000,0.036537
+recursive parallel merge,16,1000000,0.004768
+binary search based parallel merge,16,1000000,0.007362
+recursive parallel merge,32,1000000,0.007033
+binary search based parallel merge,32,1000000,0.007329
+recursive parallel merge,33,1000000,0.006563
+binary search based parallel merge,33,1000000,0.012291
+recursive parallel merge,48,1000000,0.009593
+binary search based parallel merge,48,1000000,0.031879
+sequential reference,1,1111111,0.026851
+recursive parallel merge,8,1111111,0.013980
+binary search based parallel merge,8,1111111,0.036945
+recursive parallel merge,16,1111111,0.010199
+binary search based parallel merge,16,1111111,0.006968
+recursive parallel merge,32,1111111,0.010084
+binary search based parallel merge,32,1111111,0.008797
+recursive parallel merge,33,1111111,0.016711
+binary search based parallel merge,33,1111111,0.008910
+recursive parallel merge,48,1111111,0.011028
+binary search based parallel merge,48,1111111,0.028484
+sequential reference,1,100000000,1.686308
+recursive parallel merge,8,100000000,0.375382
+binary search based parallel merge,8,100000000,0.255579
+recursive parallel merge,16,100000000,0.130214
+binary search based parallel merge,16,100000000,0.138704
+recursive parallel merge,32,100000000,0.167590
+binary search based parallel merge,32,100000000,0.135952
+recursive parallel merge,33,100000000,0.127429
+binary search based parallel merge,33,100000000,0.143320
+recursive parallel merge,48,100000000,0.117871
+binary search based parallel merge,48,100000000,0.119328

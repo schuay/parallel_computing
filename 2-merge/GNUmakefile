@@ -19,9 +19,9 @@ REMOTEDIR = ~/project2-merge
 SOURCE = . ${COMMON}
 
 CSV_FILE = bench.csv
-INPUT_SIZES = 10 100 1000000 100000000
+INPUT_SIZES = 10 100 1000000 1111111 100000000
 NUM_THREADS = 1 2 4 0 # 0 means use the default
-NUM_THREADS_REMOTE = 8 16 32 0
+NUM_THREADS_REMOTE = 8 16 32 33 0
 
 bake: test_build bench_build
 
