@@ -31,7 +31,7 @@ static int stencil_iteration(MPI_Comm comm, submatrix_t *submatrix);
  * m/r + n/c is minimal.
  */
 
-int stencil(matrix_t *matrix, int iters, int r, int c, perf_t *perf)
+int stencil(matrix_t *matrix, int iters, int r, int c, __attribute__((unused)) perf_t *perf)
 {
     /* Complexity: O(1), assuming MPI_Comm_size, MPI_Comm_rank, MPI_Cart_create,
      * MPI_Cart_coords are all O(1). */
