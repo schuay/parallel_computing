@@ -266,7 +266,20 @@ Comment on ease of implementation, and achieved performance.
 
 \subsubsection{Testing}
 
-% TODO
+Our merge unit tests compare the sequential results against either parallel
+algorithm. Test cases include:
+
+\begin{itemize}
+\item $m, n = 1$, $a_0 < b_0$
+\item $m, n = 1$, $a_0 > b_0$
+\item $\forall i, j: a_i < b_j$
+\item $\forall i, j: a_i > b_j$
+\item fully interleaved ranges $a$ and $b$
+\item blockwise interleaved ranges $a$ and $b$
+\item large interleaved ranges $a$ and $b$ with $n = 500000$
+\item large pseudo-random ranges with $n = 500000$ (repeatable by
+      using a predetermined seed)
+\end{itemize}
 
 \subsubsection{Results}
 
