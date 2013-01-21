@@ -10,6 +10,11 @@ int exscan(TYPE xi, TYPE *bi, MPI_Comm comm)
     MPI_Comm_size(comm, &processes);
     MPI_Comm_rank(comm, &rank);
 
+    if (processes == 1) {
+        *bi = 0;
+        return 0;
+    }
+
     TYPE tmp, yi;
 
     MPI_Status status;
@@ -18,7 +23,9 @@ int exscan(TYPE xi, TYPE *bi, MPI_Comm comm)
     for (k = 1; k < processes; k <<= 1) {
         if (rank < k) {
             yi = xi;
-            ret = MPI_Send(&xi, 1, TYPE_MPI, rank + k, k, comm);
+            if (rank + k < processes) {
+                ret = MPI_Send(&xi, 1, TYPE_MPI, rank + k, k, comm);
+            }
         } else {
             if (rank >= processes - k) {
                 ret = MPI_Recv(&yi, 1, TYPE_MPI, rank - k, k, comm, &status);
