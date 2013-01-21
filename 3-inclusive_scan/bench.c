@@ -39,7 +39,7 @@ int main(int argc, char **argv)
             getAlgorithmName(), processes, rank, size);
 
     if (rank == MASTER) {
-        printf("%s. nproc == %d\n", getAlgorithmName(), processes);
+        printf("%s. nproc == %d, input size == %d\n", getAlgorithmName(), processes, size);
     }
 
     TYPE *nrs = random_array(size, seed);
@@ -55,6 +55,10 @@ int main(int argc, char **argv)
     TYPE *prefix_sums = arrayscan(nrs, size, MPI_COMM_WORLD);
     double end = MPI_Wtime();
 
+    double localElapsed = end - start;
+    double totalElapsed;
+    MPI_Reduce(&localElapsed, &totalElapsed, 1, MPI_DOUBLE, MPI_MAX, MASTER, MPI_COMM_WORLD);
+
     free(nrs);
     /* Only the master process (rank 0) outputs information. */
 
@@ -63,7 +67,7 @@ int main(int argc, char **argv)
             free(prefix_sums);
         }
 
-        printf("time: %f\n\n", end - start);
+        printf("time: %f\n\n", totalElapsed);
 
         /* Persist this run in our csv file. */
 
@@ -74,7 +78,7 @@ int main(int argc, char **argv)
         }
 
         fprintf(csvFile, "%s,%d,%d,%f\n", getAlgorithmName(),
-                processes, size, end - start);
+                processes, size, totalElapsed);
 
         csv_close(csvFile);
     }

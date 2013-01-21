@@ -55,11 +55,15 @@ int main(int argc, char **argv)
     }
     double end = MPI_Wtime();
 
+    double localElapsed = end - start;
+    double totalElapsed;
+    MPI_Reduce(&localElapsed, &totalElapsed, 1, MPI_DOUBLE, MPI_MAX, MASTER, MPI_COMM_WORLD);
+
     /* Only the master process (rank 0) outputs information. */
 
     if (rank == MASTER) {
         printf("%dx%d, rxc: %dx%d, %d iterations, %d processes, time: %f\n",
-                m, n, r, c, iterations, processes, end - start);
+                m, n, r, c, iterations, processes, totalElapsed);
 
         /* Persist this run in our csv file. */
 
@@ -70,7 +74,7 @@ int main(int argc, char **argv)
         }
 
         fprintf(csvFile, "%s-%dx%d,%d,%d,%f\n", algorithm_name, m / r, n / c,
-                processes, n * m * iterations, end - start);
+                processes, n * m * iterations, totalElapsed);
 
         csv_close(csvFile);
     }

@@ -60,6 +60,10 @@ int main(int argc, char **argv)
     TYPE *c = bucket_sort(a, size, upper_bound, NULL);
     double end = MPI_Wtime();
 
+    double localElapsed = end - start;
+    double totalElapsed;
+    MPI_Reduce(&localElapsed, &totalElapsed, 1, MPI_DOUBLE, MPI_MAX, MASTER, MPI_COMM_WORLD);
+
     free(a);
     free(c);
 
@@ -67,7 +71,7 @@ int main(int argc, char **argv)
 
     if (rank == MASTER) {
         printf("processes: %d, elements: %d; upper bound: %d; time: %f\n",
-                processes, size, upper_bound, end - start);
+                processes, size, upper_bound, totalElapsed);
 
         /* Persist this run in our csv file. */
 
@@ -76,7 +80,7 @@ int main(int argc, char **argv)
             return -1;
         }
 
-        fprintf(csvFile, "%s,%d,%d,%f\n", algorithm_name, processes, size, end - start);
+        fprintf(csvFile, "%s,%d,%d,%f\n", algorithm_name, processes, size, totalElapsed);
 
         csv_close(csvFile);
     }
