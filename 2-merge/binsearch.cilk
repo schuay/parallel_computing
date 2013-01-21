@@ -51,8 +51,6 @@ static void binary_search_datapara(size_t i, void *args)
     bargs->rankB[i] = binary_search(needleB, a, n);
 }
 
-/* TODO: not sure if I'm using this right? Is this the "data parallel construct" the
- * assignment text is referring to? */
 cilk void datapara(size_t i, size_t j, size_t unit, void (*f)(size_t, void*), void *optargs)
 {
     if (j - i <= unit) {
