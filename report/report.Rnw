@@ -262,6 +262,17 @@ Comment on ease of implementation, and achieved performance.
 
 \subsubsection{Implementation}
 
+In the task parallel implementation $a$ is split in half and then $b$ is split into two
+parts, where the first one only contains elements smaller than those in the larger half
+of $a$ and the second part the rest. To find the correct spot where $b$ has to be split,
+a binary search is used.
+
+This process is then repeated for parts of $a$ and $b$ containing the smaller elements
+and the parts containing the larger ones. Since there are no dependencies between them,
+this step is done in parallel, by recursively spawning \lstinline|merge_recursive()|.
+
+Once $m + n$ is $\leq unit$ the recursion stops and the remaining problem is solved
+sequentially.
 % TODO
 
 \subsubsection{Testing}
