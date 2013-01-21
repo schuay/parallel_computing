@@ -47,6 +47,7 @@ int main(int argc, char **argv)
 
     /* Everything is set up, start working and time how long it takes. */
 
+    MPI_Barrier(MPI_COMM_WORLD);
     double start = MPI_Wtime();
     if (stencil(matrix, iterations, r, c, NULL) != 0) {
         /* Don't fail our benchmarks. */

@@ -55,6 +55,7 @@ int main(int argc, char **argv)
 
     /* Everything is set up, start sorting and time how long it takes. */
 
+    MPI_Barrier(MPI_COMM_WORLD);
     double start = MPI_Wtime();
     TYPE *c = bucket_sort(a, size, upper_bound, NULL);
     double end = MPI_Wtime();

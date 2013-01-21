@@ -50,6 +50,7 @@ int main(int argc, char **argv)
 
     /* Everything is set up, start working and time how long it takes. */
 
+    MPI_Barrier(MPI_COMM_WORLD);
     double start = MPI_Wtime();
     TYPE *prefix_sums = arrayscan(nrs, size, MPI_COMM_WORLD);
     double end = MPI_Wtime();
