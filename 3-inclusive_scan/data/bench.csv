@@ -1,0 +1,1020 @@
+sequential reference,1,10,0.000002
+parallel algorithm, MPI Exscan,8,10,0.039730
+parallel algorithm, hillis-steele,8,10,0.041652
+parallel algorithm, MPI Exscan,16,10,0.071300
+parallel algorithm, hillis-steele,16,10,0.041368
+parallel algorithm, MPI Exscan,32,10,0.147708
+parallel algorithm, hillis-steele,32,10,0.049346
+parallel algorithm, MPI Exscan,64,10,0.263561
+parallel algorithm, hillis-steele,64,10,0.065489
+parallel algorithm, MPI Exscan,128,10,0.245109
+parallel algorithm, hillis-steele,128,10,0.096233
+parallel algorithm, MPI Exscan,256,10,0.213338
+parallel algorithm, hillis-steele,256,10,0.139343
+parallel algorithm, MPI Exscan,511,10,0.171636
+parallel algorithm, hillis-steele,511,10,0.228747
+parallel algorithm, MPI Exscan,512,10,0.359158
+parallel algorithm, hillis-steele,512,10,0.220517
+sequential reference,1,100,0.000004
+parallel algorithm, MPI Exscan,8,100,0.038100
+parallel algorithm, hillis-steele,8,100,0.041122
+parallel algorithm, MPI Exscan,16,100,0.084438
+parallel algorithm, hillis-steele,16,100,0.078821
+parallel algorithm, MPI Exscan,32,100,0.157560
+parallel algorithm, hillis-steele,32,100,0.139329
+parallel algorithm, MPI Exscan,64,100,0.314861
+parallel algorithm, hillis-steele,64,100,0.286695
+parallel algorithm, MPI Exscan,128,100,0.253336
+parallel algorithm, hillis-steele,128,100,0.083870
+parallel algorithm, MPI Exscan,256,100,0.208844
+parallel algorithm, hillis-steele,256,100,0.139269
+parallel algorithm, MPI Exscan,511,100,0.193237
+parallel algorithm, hillis-steele,511,100,0.183616
+parallel algorithm, MPI Exscan,512,100,0.344172
+parallel algorithm, hillis-steele,512,100,0.230994
+sequential reference,1,1000000,0.011305
+parallel algorithm, MPI Exscan,8,1000000,0.048780
+parallel algorithm, hillis-steele,8,1000000,0.040482
+parallel algorithm, MPI Exscan,16,1000000,0.086232
+parallel algorithm, hillis-steele,16,1000000,0.076329
+parallel algorithm, MPI Exscan,32,1000000,0.154181
+parallel algorithm, hillis-steele,32,1000000,0.148614
+parallel algorithm, MPI Exscan,64,1000000,0.307599
+parallel algorithm, hillis-steele,64,1000000,0.291873
+parallel algorithm, MPI Exscan,128,1000000,0.573437
+parallel algorithm, hillis-steele,128,1000000,0.598773
+parallel algorithm, MPI Exscan,256,1000000,1.167951
+parallel algorithm, hillis-steele,256,1000000,1.208748
+parallel algorithm, MPI Exscan,511,1000000,2.462476
+parallel algorithm, hillis-steele,511,1000000,2.487010
+parallel algorithm, MPI Exscan,512,1000000,2.402729
+parallel algorithm, hillis-steele,512,1000000,2.134264
+sequential reference,1,100000000,1.032393
+parallel algorithm, MPI Exscan,8,100000000,0.472452
+parallel algorithm, hillis-steele,8,100000000,0.491595
+parallel algorithm, MPI Exscan,16,100000000,0.401938
+parallel algorithm, hillis-steele,16,100000000,0.423237
+parallel algorithm, MPI Exscan,32,100000000,0.433451
+parallel algorithm, hillis-steele,32,100000000,0.444852
+parallel algorithm, MPI Exscan,64,100000000,0.573886
+parallel algorithm, hillis-steele,64,100000000,0.585727
+parallel algorithm, MPI Exscan,128,100000000,0.876563
+parallel algorithm, hillis-steele,128,100000000,0.903951
+parallel algorithm, MPI Exscan,256,100000000,1.475384
+parallel algorithm, hillis-steele,256,100000000,1.515337
+parallel algorithm, MPI Exscan,511,100000000,2.669808
+parallel algorithm, hillis-steele,511,100000000,2.468849
+parallel algorithm, MPI Exscan,512,100000000,2.328495
+parallel algorithm, hillis-steele,512,100000000,2.340849
+sequential reference,1,111111111,1.090405
+parallel algorithm, MPI Exscan,8,111111111,0.541130
+parallel algorithm, hillis-steele,8,111111111,0.543993
+parallel algorithm, MPI Exscan,16,111111111,0.446360
+parallel algorithm, hillis-steele,16,111111111,0.458606
+parallel algorithm, MPI Exscan,32,111111111,0.455589
+parallel algorithm, hillis-steele,32,111111111,0.469499
+parallel algorithm, MPI Exscan,64,111111111,0.616536
+parallel algorithm, hillis-steele,64,111111111,0.616935
+parallel algorithm, MPI Exscan,128,111111111,0.910913
+parallel algorithm, hillis-steele,128,111111111,0.841164
+parallel algorithm, MPI Exscan,256,111111111,1.531157
+parallel algorithm, hillis-steele,256,111111111,1.566931
+parallel algorithm, MPI Exscan,511,111111111,2.684500
+parallel algorithm, hillis-steele,511,111111111,2.772778
+parallel algorithm, MPI Exscan,512,111111111,2.679335
+parallel algorithm, hillis-steele,512,111111111,2.696003
+sequential reference,1,1000000000,10.540738
+parallel algorithm, MPI Exscan,8,1000000000,5.772736
+parallel algorithm, hillis-steele,8,1000000000,5.798087
+parallel algorithm, MPI Exscan,16,1000000000,3.744944
+parallel algorithm, hillis-steele,16,1000000000,4.531795
+parallel algorithm, MPI Exscan,32,1000000000,3.333381
+parallel algorithm, hillis-steele,32,1000000000,4.026780
+parallel algorithm, MPI Exscan,64,1000000000,3.845597
+parallel algorithm, hillis-steele,64,1000000000,3.240961
+parallel algorithm, MPI Exscan,128,1000000000,3.936603
+parallel algorithm, hillis-steele,128,1000000000,3.430762
+parallel algorithm, MPI Exscan,256,1000000000,8.804521
+parallel algorithm, hillis-steele,256,1000000000,9.639243
+parallel algorithm, MPI Exscan,511,1000000000,28.075578
+parallel algorithm, hillis-steele,511,1000000000,30.214409
+parallel algorithm, MPI Exscan,512,1000000000,33.766171
+parallel algorithm, hillis-steele,512,1000000000,29.033251
+sequential reference,1,10,0.000002
+parallel algorithm, MPI Exscan,8,10,0.041077
+parallel algorithm, hillis-steele,8,10,0.041715
+parallel algorithm, MPI Exscan,16,10,0.071021
+parallel algorithm, hillis-steele,16,10,0.043990
+parallel algorithm, MPI Exscan,32,10,0.147699
+parallel algorithm, hillis-steele,32,10,0.055350
+parallel algorithm, MPI Exscan,64,10,0.269328
+parallel algorithm, hillis-steele,64,10,0.062037
+parallel algorithm, MPI Exscan,128,10,0.249523
+parallel algorithm, hillis-steele,128,10,0.095759
+parallel algorithm, MPI Exscan,256,10,0.229673
+parallel algorithm, hillis-steele,256,10,0.129928
+parallel algorithm, MPI Exscan,511,10,0.197192
+parallel algorithm, hillis-steele,511,10,0.188311
+parallel algorithm, MPI Exscan,512,10,0.323648
+parallel algorithm, hillis-steele,512,10,0.225360
+sequential reference,1,100,0.000003
+parallel algorithm, MPI Exscan,8,100,0.043835
+parallel algorithm, hillis-steele,8,100,0.041396
+parallel algorithm, MPI Exscan,16,100,0.083829
+parallel algorithm, hillis-steele,16,100,0.074383
+parallel algorithm, MPI Exscan,32,100,0.156377
+parallel algorithm, hillis-steele,32,100,0.143904
+parallel algorithm, MPI Exscan,64,100,0.315578
+parallel algorithm, hillis-steele,64,100,0.280960
+parallel algorithm, MPI Exscan,128,100,0.246841
+parallel algorithm, hillis-steele,128,100,0.094031
+parallel algorithm, MPI Exscan,256,100,0.185131
+parallel algorithm, hillis-steele,256,100,0.132726
+parallel algorithm, MPI Exscan,511,100,0.183883
+parallel algorithm, hillis-steele,511,100,0.173007
+parallel algorithm, MPI Exscan,512,100,0.336811
+parallel algorithm, hillis-steele,512,100,0.217388
+sequential reference,1,1000000,0.011189
+parallel algorithm, MPI Exscan,8,1000000,0.047632
+parallel algorithm, hillis-steele,8,1000000,0.041374
+parallel algorithm, MPI Exscan,16,1000000,0.079579
+parallel algorithm, hillis-steele,16,1000000,0.073826
+parallel algorithm, MPI Exscan,32,1000000,0.155583
+parallel algorithm, hillis-steele,32,1000000,0.142576
+parallel algorithm, MPI Exscan,64,1000000,0.322274
+parallel algorithm, hillis-steele,64,1000000,0.293644
+parallel algorithm, MPI Exscan,128,1000000,0.574127
+parallel algorithm, hillis-steele,128,1000000,0.610110
+parallel algorithm, MPI Exscan,256,1000000,1.196125
+parallel algorithm, hillis-steele,256,1000000,1.232852
+parallel algorithm, MPI Exscan,511,1000000,2.315931
+parallel algorithm, hillis-steele,511,1000000,2.434606
+parallel algorithm, MPI Exscan,512,1000000,2.416113
+parallel algorithm, hillis-steele,512,1000000,2.433267
+sequential reference,1,100000000,0.989711
+parallel algorithm, MPI Exscan,8,100000000,0.477371
+parallel algorithm, hillis-steele,8,100000000,0.492847
+parallel algorithm, MPI Exscan,16,100000000,0.413428
+parallel algorithm, hillis-steele,16,100000000,0.423109
+parallel algorithm, MPI Exscan,32,100000000,0.434888
+parallel algorithm, hillis-steele,32,100000000,0.446928
+parallel algorithm, MPI Exscan,64,100000000,0.574267
+parallel algorithm, hillis-steele,64,100000000,0.581593
+parallel algorithm, MPI Exscan,128,100000000,0.866877
+parallel algorithm, hillis-steele,128,100000000,0.899468
+parallel algorithm, MPI Exscan,256,100000000,1.483435
+parallel algorithm, hillis-steele,256,100000000,1.499223
+parallel algorithm, MPI Exscan,511,100000000,2.308208
+parallel algorithm, hillis-steele,511,100000000,2.314491
+parallel algorithm, MPI Exscan,512,100000000,2.600212
+parallel algorithm, hillis-steele,512,100000000,2.647284
+sequential reference,1,111111111,1.093429
+parallel algorithm, MPI Exscan,8,111111111,0.535987
+parallel algorithm, hillis-steele,8,111111111,0.539294
+parallel algorithm, MPI Exscan,16,111111111,0.433347
+parallel algorithm, hillis-steele,16,111111111,0.447331
+parallel algorithm, MPI Exscan,32,111111111,0.464334
+parallel algorithm, hillis-steele,32,111111111,0.480449
+parallel algorithm, MPI Exscan,64,111111111,0.608766
+parallel algorithm, hillis-steele,64,111111111,0.614998
+parallel algorithm, MPI Exscan,128,111111111,0.906036
+parallel algorithm, hillis-steele,128,111111111,0.908498
+parallel algorithm, MPI Exscan,256,111111111,1.517880
+parallel algorithm, hillis-steele,256,111111111,1.336871
+parallel algorithm, MPI Exscan,511,111111111,2.314291
+parallel algorithm, hillis-steele,511,111111111,2.679918
+parallel algorithm, MPI Exscan,512,111111111,2.664265
+parallel algorithm, hillis-steele,512,111111111,2.420979
+sequential reference,1,1000000000,10.312109
+parallel algorithm, MPI Exscan,8,1000000000,5.232470
+parallel algorithm, hillis-steele,8,1000000000,5.086253
+parallel algorithm, MPI Exscan,16,1000000000,4.022901
+parallel algorithm, hillis-steele,16,1000000000,4.024874
+parallel algorithm, MPI Exscan,32,1000000000,3.589329
+parallel algorithm, hillis-steele,32,1000000000,3.722935
+parallel algorithm, MPI Exscan,64,1000000000,3.453992
+parallel algorithm, hillis-steele,64,1000000000,3.344226
+parallel algorithm, MPI Exscan,128,1000000000,3.464286
+parallel algorithm, hillis-steele,128,1000000000,3.435577
+parallel algorithm, MPI Exscan,256,1000000000,7.673864
+parallel algorithm, hillis-steele,256,1000000000,7.694563
+parallel algorithm, MPI Exscan,511,1000000000,31.438161
+parallel algorithm, hillis-steele,511,1000000000,31.246122
+parallel algorithm, MPI Exscan,512,1000000000,31.189074
+parallel algorithm, hillis-steele,512,1000000000,31.752732
+sequential reference,1,10,0.000002
+parallel algorithm, MPI Exscan,8,10,0.040353
+parallel algorithm, hillis-steele,8,10,0.041314
+parallel algorithm, MPI Exscan,16,10,0.069791
+parallel algorithm, hillis-steele,16,10,0.043693
+parallel algorithm, MPI Exscan,32,10,0.140571
+parallel algorithm, hillis-steele,32,10,0.052110
+parallel algorithm, MPI Exscan,64,10,0.281774
+parallel algorithm, hillis-steele,64,10,0.064887
+parallel algorithm, MPI Exscan,128,10,0.258640
+parallel algorithm, hillis-steele,128,10,0.088904
+parallel algorithm, MPI Exscan,256,10,0.199034
+parallel algorithm, hillis-steele,256,10,0.150702
+parallel algorithm, MPI Exscan,511,10,0.218247
+parallel algorithm, hillis-steele,511,10,0.198114
+parallel algorithm, MPI Exscan,512,10,0.348277
+parallel algorithm, hillis-steele,512,10,0.216617
+sequential reference,1,100,0.000004
+parallel algorithm, MPI Exscan,8,100,0.043327
+parallel algorithm, hillis-steele,8,100,0.038063
+parallel algorithm, MPI Exscan,16,100,0.083815
+parallel algorithm, hillis-steele,16,100,0.077619
+parallel algorithm, MPI Exscan,32,100,0.151997
+parallel algorithm, hillis-steele,32,100,0.144214
+parallel algorithm, MPI Exscan,64,100,0.323615
+parallel algorithm, hillis-steele,64,100,0.292070
+parallel algorithm, MPI Exscan,128,100,0.253143
+parallel algorithm, hillis-steele,128,100,0.092220
+parallel algorithm, MPI Exscan,256,100,0.193504
+parallel algorithm, hillis-steele,256,100,0.139900
+parallel algorithm, MPI Exscan,511,100,0.221776
+parallel algorithm, hillis-steele,511,100,0.195612
+parallel algorithm, MPI Exscan,512,100,0.342039
+parallel algorithm, hillis-steele,512,100,0.218703
+sequential reference,1,1000000,0.011237
+parallel algorithm, MPI Exscan,8,1000000,0.048969
+parallel algorithm, hillis-steele,8,1000000,0.039659
+parallel algorithm, MPI Exscan,16,1000000,0.080484
+parallel algorithm, hillis-steele,16,1000000,0.073592
+parallel algorithm, MPI Exscan,32,1000000,0.150477
+parallel algorithm, hillis-steele,32,1000000,0.144173
+parallel algorithm, MPI Exscan,64,1000000,0.317785
+parallel algorithm, hillis-steele,64,1000000,0.294288
+parallel algorithm, MPI Exscan,128,1000000,0.575189
+parallel algorithm, hillis-steele,128,1000000,0.605356
+parallel algorithm, MPI Exscan,256,1000000,1.175214
+parallel algorithm, hillis-steele,256,1000000,1.203784
+parallel algorithm, MPI Exscan,511,1000000,2.247156
+parallel algorithm, hillis-steele,511,1000000,2.301202
+parallel algorithm, MPI Exscan,512,1000000,2.420978
+parallel algorithm, hillis-steele,512,1000000,2.279660
+sequential reference,1,100000000,0.988520
+parallel algorithm, MPI Exscan,8,100000000,0.480885
+parallel algorithm, hillis-steele,8,100000000,0.488499
+parallel algorithm, MPI Exscan,16,100000000,0.405787
+parallel algorithm, hillis-steele,16,100000000,0.425705
+parallel algorithm, MPI Exscan,32,100000000,0.430098
+parallel algorithm, hillis-steele,32,100000000,0.436501
+parallel algorithm, MPI Exscan,64,100000000,0.580584
+parallel algorithm, hillis-steele,64,100000000,0.584503
+parallel algorithm, MPI Exscan,128,100000000,0.860682
+parallel algorithm, hillis-steele,128,100000000,0.873496
+parallel algorithm, MPI Exscan,256,100000000,1.477555
+parallel algorithm, hillis-steele,256,100000000,1.509568
+parallel algorithm, MPI Exscan,511,100000000,2.305088
+parallel algorithm, hillis-steele,511,100000000,2.308654
+parallel algorithm, MPI Exscan,512,100000000,2.596400
+parallel algorithm, hillis-steele,512,100000000,2.323198
+sequential reference,1,111111111,1.087704
+parallel algorithm, MPI Exscan,8,111111111,0.536908
+parallel algorithm, hillis-steele,8,111111111,0.538578
+parallel algorithm, MPI Exscan,16,111111111,0.445212
+parallel algorithm, hillis-steele,16,111111111,0.459598
+parallel algorithm, MPI Exscan,32,111111111,0.463497
+parallel algorithm, hillis-steele,32,111111111,0.486840
+parallel algorithm, MPI Exscan,64,111111111,0.602369
+parallel algorithm, hillis-steele,64,111111111,0.605232
+parallel algorithm, MPI Exscan,128,111111111,0.895926
+parallel algorithm, hillis-steele,128,111111111,0.820181
+parallel algorithm, MPI Exscan,256,111111111,1.496794
+parallel algorithm, hillis-steele,256,111111111,1.545939
+parallel algorithm, MPI Exscan,511,111111111,2.395548
+parallel algorithm, hillis-steele,511,111111111,2.649636
+parallel algorithm, MPI Exscan,512,111111111,2.644568
+parallel algorithm, hillis-steele,512,111111111,2.487222
+sequential reference,1,1000000000,10.076946
+parallel algorithm, MPI Exscan,8,1000000000,5.221883
+parallel algorithm, hillis-steele,8,1000000000,4.980969
+parallel algorithm, MPI Exscan,16,1000000000,3.749612
+parallel algorithm, hillis-steele,16,1000000000,3.808229
+parallel algorithm, MPI Exscan,32,1000000000,3.326289
+parallel algorithm, hillis-steele,32,1000000000,3.498428
+parallel algorithm, MPI Exscan,64,1000000000,3.242093
+parallel algorithm, hillis-steele,64,1000000000,3.106151
+parallel algorithm, MPI Exscan,128,1000000000,3.386065
+parallel algorithm, hillis-steele,128,1000000000,3.464212
+parallel algorithm, MPI Exscan,256,1000000000,7.101764
+parallel algorithm, hillis-steele,256,1000000000,7.065447
+parallel algorithm, MPI Exscan,511,1000000000,27.272606
+parallel algorithm, hillis-steele,511,1000000000,23.509385
+parallel algorithm, MPI Exscan,512,1000000000,30.725877
+parallel algorithm, hillis-steele,512,1000000000,26.473890
+sequential reference,1,10,0.000002
+parallel algorithm, MPI Exscan,8,10,0.043560
+parallel algorithm, hillis-steele,8,10,0.042214
+parallel algorithm, MPI Exscan,16,10,0.073158
+parallel algorithm, hillis-steele,16,10,0.044102
+parallel algorithm, MPI Exscan,32,10,0.144033
+parallel algorithm, hillis-steele,32,10,0.052119
+parallel algorithm, MPI Exscan,64,10,0.277293
+parallel algorithm, hillis-steele,64,10,0.065531
+parallel algorithm, MPI Exscan,128,10,0.237935
+parallel algorithm, hillis-steele,128,10,0.093130
+parallel algorithm, MPI Exscan,256,10,0.202514
+parallel algorithm, hillis-steele,256,10,0.139279
+parallel algorithm, MPI Exscan,511,10,0.227358
+parallel algorithm, hillis-steele,511,10,0.177919
+parallel algorithm, MPI Exscan,512,10,0.329185
+parallel algorithm, hillis-steele,512,10,0.232041
+sequential reference,1,100,0.000004
+parallel algorithm, MPI Exscan,8,100,0.047096
+parallel algorithm, hillis-steele,8,100,0.038045
+parallel algorithm, MPI Exscan,16,100,0.084749
+parallel algorithm, hillis-steele,16,100,0.077282
+parallel algorithm, MPI Exscan,32,100,0.153502
+parallel algorithm, hillis-steele,32,100,0.144946
+parallel algorithm, MPI Exscan,64,100,0.322002
+parallel algorithm, hillis-steele,64,100,0.288988
+parallel algorithm, MPI Exscan,128,100,0.246363
+parallel algorithm, hillis-steele,128,100,0.083716
+parallel algorithm, MPI Exscan,256,100,0.188272
+parallel algorithm, hillis-steele,256,100,0.148012
+parallel algorithm, MPI Exscan,511,100,0.193667
+parallel algorithm, hillis-steele,511,100,0.195508
+parallel algorithm, MPI Exscan,512,100,0.378844
+parallel algorithm, hillis-steele,512,100,0.223502
+sequential reference,1,1000000,0.011211
+parallel algorithm, MPI Exscan,8,1000000,0.044389
+parallel algorithm, hillis-steele,8,1000000,0.042191
+parallel algorithm, MPI Exscan,16,1000000,0.085720
+parallel algorithm, hillis-steele,16,1000000,0.075879
+parallel algorithm, MPI Exscan,32,1000000,0.153897
+parallel algorithm, hillis-steele,32,1000000,0.150657
+parallel algorithm, MPI Exscan,64,1000000,0.319262
+parallel algorithm, hillis-steele,64,1000000,0.296243
+parallel algorithm, MPI Exscan,128,1000000,0.586485
+parallel algorithm, hillis-steele,128,1000000,0.607110
+parallel algorithm, MPI Exscan,256,1000000,1.177548
+parallel algorithm, hillis-steele,256,1000000,1.217564
+parallel algorithm, MPI Exscan,511,1000000,2.456282
+parallel algorithm, hillis-steele,511,1000000,2.471809
+parallel algorithm, MPI Exscan,512,1000000,2.401526
+parallel algorithm, hillis-steele,512,1000000,2.443063
+sequential reference,1,100000000,0.994538
+parallel algorithm, MPI Exscan,8,100000000,0.489696
+parallel algorithm, hillis-steele,8,100000000,0.488688
+parallel algorithm, MPI Exscan,16,100000000,0.408776
+parallel algorithm, hillis-steele,16,100000000,0.419108
+parallel algorithm, MPI Exscan,32,100000000,0.433226
+parallel algorithm, hillis-steele,32,100000000,0.444335
+parallel algorithm, MPI Exscan,64,100000000,0.581310
+parallel algorithm, hillis-steele,64,100000000,0.572486
+parallel algorithm, MPI Exscan,128,100000000,0.883705
+parallel algorithm, hillis-steele,128,100000000,0.891586
+parallel algorithm, MPI Exscan,256,100000000,1.480583
+parallel algorithm, hillis-steele,256,100000000,1.498222
+parallel algorithm, MPI Exscan,511,100000000,1.966729
+parallel algorithm, hillis-steele,511,100000000,2.325874
+parallel algorithm, MPI Exscan,512,100000000,2.257347
+parallel algorithm, hillis-steele,512,100000000,2.311491
+sequential reference,1,111111111,1.089338
+parallel algorithm, MPI Exscan,8,111111111,0.539846
+parallel algorithm, hillis-steele,8,111111111,0.537223
+parallel algorithm, MPI Exscan,16,111111111,0.455991
+parallel algorithm, hillis-steele,16,111111111,0.461036
+parallel algorithm, MPI Exscan,32,111111111,0.465793
+parallel algorithm, hillis-steele,32,111111111,0.480487
+parallel algorithm, MPI Exscan,64,111111111,0.593444
+parallel algorithm, hillis-steele,64,111111111,0.607795
+parallel algorithm, MPI Exscan,128,111111111,0.886557
+parallel algorithm, hillis-steele,128,111111111,0.912072
+parallel algorithm, MPI Exscan,256,111111111,1.534706
+parallel algorithm, hillis-steele,256,111111111,1.529873
+parallel algorithm, MPI Exscan,511,111111111,2.356305
+parallel algorithm, hillis-steele,511,111111111,2.487204
+parallel algorithm, MPI Exscan,512,111111111,2.353997
+parallel algorithm, hillis-steele,512,111111111,2.472929
+sequential reference,1,1000000000,10.092013
+parallel algorithm, MPI Exscan,8,1000000000,5.041641
+parallel algorithm, hillis-steele,8,1000000000,5.027737
+parallel algorithm, MPI Exscan,16,1000000000,3.750699
+parallel algorithm, hillis-steele,16,1000000000,3.807026
+parallel algorithm, MPI Exscan,32,1000000000,3.732655
+parallel algorithm, hillis-steele,32,1000000000,3.748522
+parallel algorithm, MPI Exscan,64,1000000000,3.427550
+parallel algorithm, hillis-steele,64,1000000000,3.442532
+parallel algorithm, MPI Exscan,128,1000000000,3.518247
+parallel algorithm, hillis-steele,128,1000000000,3.625422
+parallel algorithm, MPI Exscan,256,1000000000,7.664710
+parallel algorithm, hillis-steele,256,1000000000,6.981260
+parallel algorithm, MPI Exscan,511,1000000000,28.922342
+parallel algorithm, hillis-steele,511,1000000000,31.339994
+parallel algorithm, MPI Exscan,512,1000000000,31.592798
+parallel algorithm, hillis-steele,512,1000000000,25.972558
+sequential reference,1,10,0.000002
+parallel algorithm, MPI Exscan,8,10,0.050016
+parallel algorithm, hillis-steele,8,10,0.041312
+parallel algorithm, MPI Exscan,16,10,0.071069
+parallel algorithm, hillis-steele,16,10,0.044034
+parallel algorithm, MPI Exscan,32,10,0.143886
+parallel algorithm, hillis-steele,32,10,0.054375
+parallel algorithm, MPI Exscan,64,10,0.276620
+parallel algorithm, hillis-steele,64,10,0.071187
+parallel algorithm, MPI Exscan,128,10,0.265694
+parallel algorithm, hillis-steele,128,10,0.089921
+parallel algorithm, MPI Exscan,256,10,0.206693
+parallel algorithm, hillis-steele,256,10,0.134942
+parallel algorithm, MPI Exscan,511,10,0.176118
+parallel algorithm, hillis-steele,511,10,0.161498
+parallel algorithm, MPI Exscan,512,10,0.347379
+parallel algorithm, hillis-steele,512,10,0.245517
+sequential reference,1,100,0.000004
+parallel algorithm, MPI Exscan,8,100,0.042531
+parallel algorithm, hillis-steele,8,100,0.038136
+parallel algorithm, MPI Exscan,16,100,0.083091
+parallel algorithm, hillis-steele,16,100,0.075466
+parallel algorithm, MPI Exscan,32,100,0.155708
+parallel algorithm, hillis-steele,32,100,0.142820
+parallel algorithm, MPI Exscan,64,100,0.311657
+parallel algorithm, hillis-steele,64,100,0.284025
+parallel algorithm, MPI Exscan,128,100,0.255087
+parallel algorithm, hillis-steele,128,100,0.085974
+parallel algorithm, MPI Exscan,256,100,0.201904
+parallel algorithm, hillis-steele,256,100,0.131356
+parallel algorithm, MPI Exscan,511,100,0.157271
+parallel algorithm, hillis-steele,511,100,0.164582
+parallel algorithm, MPI Exscan,512,100,0.329757
+parallel algorithm, hillis-steele,512,100,0.212868
+sequential reference,1,1000000,0.011176
+parallel algorithm, MPI Exscan,8,1000000,0.045940
+parallel algorithm, hillis-steele,8,1000000,0.042898
+parallel algorithm, MPI Exscan,16,1000000,0.080713
+parallel algorithm, hillis-steele,16,1000000,0.077141
+parallel algorithm, MPI Exscan,32,1000000,0.163928
+parallel algorithm, hillis-steele,32,1000000,0.150732
+parallel algorithm, MPI Exscan,64,1000000,0.303634
+parallel algorithm, hillis-steele,64,1000000,0.291374
+parallel algorithm, MPI Exscan,128,1000000,0.573584
+parallel algorithm, hillis-steele,128,1000000,0.601683
+parallel algorithm, MPI Exscan,256,1000000,1.169915
+parallel algorithm, hillis-steele,256,1000000,1.211195
+parallel algorithm, MPI Exscan,511,1000000,2.193683
+parallel algorithm, hillis-steele,511,1000000,2.475115
+parallel algorithm, MPI Exscan,512,1000000,2.405644
+parallel algorithm, hillis-steele,512,1000000,2.417292
+sequential reference,1,100000000,0.979184
+parallel algorithm, MPI Exscan,8,100000000,0.473016
+parallel algorithm, hillis-steele,8,100000000,0.484984
+parallel algorithm, MPI Exscan,16,100000000,0.417736
+parallel algorithm, hillis-steele,16,100000000,0.416891
+parallel algorithm, MPI Exscan,32,100000000,0.432218
+parallel algorithm, hillis-steele,32,100000000,0.443590
+parallel algorithm, MPI Exscan,64,100000000,0.583785
+parallel algorithm, hillis-steele,64,100000000,0.604671
+parallel algorithm, MPI Exscan,128,100000000,0.880944
+parallel algorithm, hillis-steele,128,100000000,0.887552
+parallel algorithm, MPI Exscan,256,100000000,1.471905
+parallel algorithm, hillis-steele,256,100000000,1.508018
+parallel algorithm, MPI Exscan,511,100000000,2.307039
+parallel algorithm, hillis-steele,511,100000000,2.678092
+parallel algorithm, MPI Exscan,512,100000000,2.649895
+parallel algorithm, hillis-steele,512,100000000,2.335620
+sequential reference,1,111111111,1.097174
+parallel algorithm, MPI Exscan,8,111111111,0.541282
+parallel algorithm, hillis-steele,8,111111111,0.543606
+parallel algorithm, MPI Exscan,16,111111111,0.455279
+parallel algorithm, hillis-steele,16,111111111,0.462591
+parallel algorithm, MPI Exscan,32,111111111,0.464659
+parallel algorithm, hillis-steele,32,111111111,0.479240
+parallel algorithm, MPI Exscan,64,111111111,0.610271
+parallel algorithm, hillis-steele,64,111111111,0.600042
+parallel algorithm, MPI Exscan,128,111111111,0.897033
+parallel algorithm, hillis-steele,128,111111111,0.923292
+parallel algorithm, MPI Exscan,256,111111111,1.496124
+parallel algorithm, hillis-steele,256,111111111,1.553279
+parallel algorithm, MPI Exscan,511,111111111,2.660433
+parallel algorithm, hillis-steele,511,111111111,2.376286
+parallel algorithm, MPI Exscan,512,111111111,2.678040
+parallel algorithm, hillis-steele,512,111111111,2.674109
+sequential reference,1,1000000000,10.256850
+parallel algorithm, MPI Exscan,8,1000000000,5.057837
+parallel algorithm, hillis-steele,8,1000000000,5.051372
+parallel algorithm, MPI Exscan,16,1000000000,4.022944
+parallel algorithm, hillis-steele,16,1000000000,4.061025
+parallel algorithm, MPI Exscan,32,1000000000,3.320935
+parallel algorithm, hillis-steele,32,1000000000,3.417508
+parallel algorithm, MPI Exscan,64,1000000000,3.155182
+parallel algorithm, hillis-steele,64,1000000000,3.361637
+parallel algorithm, MPI Exscan,128,1000000000,3.411448
+parallel algorithm, hillis-steele,128,1000000000,3.340682
+parallel algorithm, MPI Exscan,256,1000000000,7.003538
+parallel algorithm, hillis-steele,256,1000000000,7.249421
+parallel algorithm, MPI Exscan,511,1000000000,32.295092
+parallel algorithm, hillis-steele,511,1000000000,28.084082
+parallel algorithm, MPI Exscan,512,1000000000,22.545804
+parallel algorithm, hillis-steele,512,1000000000,30.664503
+sequential reference,1,10,0.000002
+parallel algorithm, MPI Exscan,8,10,0.043138
+parallel algorithm, hillis-steele,8,10,0.038855
+parallel algorithm, MPI Exscan,16,10,0.068704
+parallel algorithm, hillis-steele,16,10,0.044586
+parallel algorithm, MPI Exscan,32,10,0.145224
+parallel algorithm, hillis-steele,32,10,0.049419
+parallel algorithm, MPI Exscan,64,10,0.265800
+parallel algorithm, hillis-steele,64,10,0.067505
+parallel algorithm, MPI Exscan,128,10,0.238334
+parallel algorithm, hillis-steele,128,10,0.101918
+parallel algorithm, MPI Exscan,256,10,0.215803
+parallel algorithm, hillis-steele,256,10,0.128592
+parallel algorithm, MPI Exscan,511,10,0.195714
+parallel algorithm, hillis-steele,511,10,0.181188
+parallel algorithm, MPI Exscan,512,10,0.336413
+parallel algorithm, hillis-steele,512,10,0.219251
+sequential reference,1,100,0.000004
+parallel algorithm, MPI Exscan,8,100,0.039700
+parallel algorithm, hillis-steele,8,100,0.041343
+parallel algorithm, MPI Exscan,16,100,0.083246
+parallel algorithm, hillis-steele,16,100,0.076867
+parallel algorithm, MPI Exscan,32,100,0.159428
+parallel algorithm, hillis-steele,32,100,0.142183
+parallel algorithm, MPI Exscan,64,100,0.320509
+parallel algorithm, hillis-steele,64,100,0.279889
+parallel algorithm, MPI Exscan,128,100,0.246841
+parallel algorithm, hillis-steele,128,100,0.081075
+parallel algorithm, MPI Exscan,256,100,0.200169
+parallel algorithm, hillis-steele,256,100,0.139877
+parallel algorithm, MPI Exscan,511,100,0.169807
+parallel algorithm, hillis-steele,511,100,0.176550
+parallel algorithm, MPI Exscan,512,100,0.367486
+parallel algorithm, hillis-steele,512,100,0.221332
+sequential reference,1,1000000,0.011239
+parallel algorithm, MPI Exscan,8,1000000,0.049648
+parallel algorithm, hillis-steele,8,1000000,0.041132
+parallel algorithm, MPI Exscan,16,1000000,0.085498
+parallel algorithm, hillis-steele,16,1000000,0.076602
+parallel algorithm, MPI Exscan,32,1000000,0.152830
+parallel algorithm, hillis-steele,32,1000000,0.147769
+parallel algorithm, MPI Exscan,64,1000000,0.306524
+parallel algorithm, hillis-steele,64,1000000,0.292778
+parallel algorithm, MPI Exscan,128,1000000,0.586252
+parallel algorithm, hillis-steele,128,1000000,0.601829
+parallel algorithm, MPI Exscan,256,1000000,1.169360
+parallel algorithm, hillis-steele,256,1000000,1.218839
+parallel algorithm, MPI Exscan,511,1000000,2.421498
+parallel algorithm, hillis-steele,511,1000000,2.113205
+parallel algorithm, MPI Exscan,512,1000000,2.420982
+parallel algorithm, hillis-steele,512,1000000,2.111840
+sequential reference,1,100000000,0.982706
+parallel algorithm, MPI Exscan,8,100000000,0.491422
+parallel algorithm, hillis-steele,8,100000000,0.487170
+parallel algorithm, MPI Exscan,16,100000000,0.401474
+parallel algorithm, hillis-steele,16,100000000,0.414988
+parallel algorithm, MPI Exscan,32,100000000,0.429334
+parallel algorithm, hillis-steele,32,100000000,0.448294
+parallel algorithm, MPI Exscan,64,100000000,0.576695
+parallel algorithm, hillis-steele,64,100000000,0.596592
+parallel algorithm, MPI Exscan,128,100000000,0.878817
+parallel algorithm, hillis-steele,128,100000000,0.890153
+parallel algorithm, MPI Exscan,256,100000000,1.470623
+parallel algorithm, hillis-steele,256,100000000,1.497641
+parallel algorithm, MPI Exscan,511,100000000,2.554484
+parallel algorithm, hillis-steele,511,100000000,2.317672
+parallel algorithm, MPI Exscan,512,100000000,2.344859
+parallel algorithm, hillis-steele,512,100000000,2.370691
+sequential reference,1,111111111,1.085587
+parallel algorithm, MPI Exscan,8,111111111,0.537204
+parallel algorithm, hillis-steele,8,111111111,0.542327
+parallel algorithm, MPI Exscan,16,111111111,0.444557
+parallel algorithm, hillis-steele,16,111111111,0.457753
+parallel algorithm, MPI Exscan,32,111111111,0.467404
+parallel algorithm, hillis-steele,32,111111111,0.478375
+parallel algorithm, MPI Exscan,64,111111111,0.593851
+parallel algorithm, hillis-steele,64,111111111,0.599192
+parallel algorithm, MPI Exscan,128,111111111,0.900259
+parallel algorithm, hillis-steele,128,111111111,0.906018
+parallel algorithm, MPI Exscan,256,111111111,1.506637
+parallel algorithm, hillis-steele,256,111111111,1.544873
+parallel algorithm, MPI Exscan,511,111111111,2.357719
+parallel algorithm, hillis-steele,511,111111111,2.356696
+parallel algorithm, MPI Exscan,512,111111111,2.689481
+parallel algorithm, hillis-steele,512,111111111,2.602407
+sequential reference,1,1000000000,9.976644
+parallel algorithm, MPI Exscan,8,1000000000,5.220028
+parallel algorithm, hillis-steele,8,1000000000,5.234744
+parallel algorithm, MPI Exscan,16,1000000000,4.180046
+parallel algorithm, hillis-steele,16,1000000000,4.093121
+parallel algorithm, MPI Exscan,32,1000000000,3.326311
+parallel algorithm, hillis-steele,32,1000000000,3.419330
+parallel algorithm, MPI Exscan,64,1000000000,3.296918
+parallel algorithm, hillis-steele,64,1000000000,3.127449
+parallel algorithm, MPI Exscan,128,1000000000,3.524260
+parallel algorithm, hillis-steele,128,1000000000,3.495185
+parallel algorithm, MPI Exscan,256,1000000000,9.363970
+parallel algorithm, hillis-steele,256,1000000000,6.751294
+parallel algorithm, MPI Exscan,511,1000000000,29.179777
+parallel algorithm, hillis-steele,511,1000000000,30.390308
+parallel algorithm, MPI Exscan,512,1000000000,32.642892
+parallel algorithm, hillis-steele,512,1000000000,31.494159
+sequential reference,1,10,0.000001
+parallel algorithm, MPI Exscan,8,10,0.043056
+parallel algorithm, hillis-steele,8,10,0.041213
+parallel algorithm, MPI Exscan,16,10,0.074612
+parallel algorithm, hillis-steele,16,10,0.039283
+parallel algorithm, MPI Exscan,32,10,0.134823
+parallel algorithm, hillis-steele,32,10,0.058265
+parallel algorithm, MPI Exscan,64,10,0.261610
+parallel algorithm, hillis-steele,64,10,0.064746
+parallel algorithm, MPI Exscan,128,10,0.252248
+parallel algorithm, hillis-steele,128,10,0.093905
+parallel algorithm, MPI Exscan,256,10,0.198203
+parallel algorithm, hillis-steele,256,10,0.130494
+parallel algorithm, MPI Exscan,511,10,0.181297
+parallel algorithm, hillis-steele,511,10,0.170670
+parallel algorithm, MPI Exscan,512,10,0.350811
+parallel algorithm, hillis-steele,512,10,0.217431
+sequential reference,1,100,0.000004
+parallel algorithm, MPI Exscan,8,100,0.043655
+parallel algorithm, hillis-steele,8,100,0.038004
+parallel algorithm, MPI Exscan,16,100,0.079481
+parallel algorithm, hillis-steele,16,100,0.075082
+parallel algorithm, MPI Exscan,32,100,0.151709
+parallel algorithm, hillis-steele,32,100,0.143078
+parallel algorithm, MPI Exscan,64,100,0.321082
+parallel algorithm, hillis-steele,64,100,0.278158
+parallel algorithm, MPI Exscan,128,100,0.229028
+parallel algorithm, hillis-steele,128,100,0.086750
+parallel algorithm, MPI Exscan,256,100,0.221277
+parallel algorithm, hillis-steele,256,100,0.141863
+parallel algorithm, MPI Exscan,511,100,0.179187
+parallel algorithm, hillis-steele,511,100,0.189189
+parallel algorithm, MPI Exscan,512,100,0.355316
+parallel algorithm, hillis-steele,512,100,0.209141
+sequential reference,1,1000000,0.011116
+parallel algorithm, MPI Exscan,8,1000000,0.046004
+parallel algorithm, hillis-steele,8,1000000,0.038572
+parallel algorithm, MPI Exscan,16,1000000,0.087472
+parallel algorithm, hillis-steele,16,1000000,0.078314
+parallel algorithm, MPI Exscan,32,1000000,0.157195
+parallel algorithm, hillis-steele,32,1000000,0.143086
+parallel algorithm, MPI Exscan,64,1000000,0.306314
+parallel algorithm, hillis-steele,64,1000000,0.291037
+parallel algorithm, MPI Exscan,128,1000000,0.586368
+parallel algorithm, hillis-steele,128,1000000,0.595361
+parallel algorithm, MPI Exscan,256,1000000,1.183944
+parallel algorithm, hillis-steele,256,1000000,1.219814
+parallel algorithm, MPI Exscan,511,1000000,2.409744
+parallel algorithm, hillis-steele,511,1000000,2.118511
+parallel algorithm, MPI Exscan,512,1000000,2.400440
+parallel algorithm, hillis-steele,512,1000000,2.436695
+sequential reference,1,100000000,0.982499
+parallel algorithm, MPI Exscan,8,100000000,0.462173
+parallel algorithm, hillis-steele,8,100000000,0.478327
+parallel algorithm, MPI Exscan,16,100000000,0.406219
+parallel algorithm, hillis-steele,16,100000000,0.423472
+parallel algorithm, MPI Exscan,32,100000000,0.432402
+parallel algorithm, hillis-steele,32,100000000,0.447322
+parallel algorithm, MPI Exscan,64,100000000,0.581737
+parallel algorithm, hillis-steele,64,100000000,0.576942
+parallel algorithm, MPI Exscan,128,100000000,0.865075
+parallel algorithm, hillis-steele,128,100000000,0.910687
+parallel algorithm, MPI Exscan,256,100000000,1.493973
+parallel algorithm, hillis-steele,256,100000000,1.510626
+parallel algorithm, MPI Exscan,511,100000000,2.311970
+parallel algorithm, hillis-steele,511,100000000,2.650404
+parallel algorithm, MPI Exscan,512,100000000,2.282979
+parallel algorithm, hillis-steele,512,100000000,2.284638
+sequential reference,1,111111111,1.096692
+parallel algorithm, MPI Exscan,8,111111111,0.525563
+parallel algorithm, hillis-steele,8,111111111,0.526444
+parallel algorithm, MPI Exscan,16,111111111,0.440393
+parallel algorithm, hillis-steele,16,111111111,0.455457
+parallel algorithm, MPI Exscan,32,111111111,0.466627
+parallel algorithm, hillis-steele,32,111111111,0.471902
+parallel algorithm, MPI Exscan,64,111111111,0.610805
+parallel algorithm, hillis-steele,64,111111111,0.617691
+parallel algorithm, MPI Exscan,128,111111111,0.805763
+parallel algorithm, hillis-steele,128,111111111,0.920414
+parallel algorithm, MPI Exscan,256,111111111,1.511438
+parallel algorithm, hillis-steele,256,111111111,1.561628
+parallel algorithm, MPI Exscan,511,111111111,2.639851
+parallel algorithm, hillis-steele,511,111111111,2.359021
+parallel algorithm, MPI Exscan,512,111111111,2.634485
+parallel algorithm, hillis-steele,512,111111111,2.352837
+sequential reference,1,1000000000,9.951548
+parallel algorithm, MPI Exscan,8,1000000000,5.225382
+parallel algorithm, hillis-steele,8,1000000000,5.226596
+parallel algorithm, MPI Exscan,16,1000000000,3.755626
+parallel algorithm, hillis-steele,16,1000000000,3.778777
+parallel algorithm, MPI Exscan,32,1000000000,3.292394
+parallel algorithm, hillis-steele,32,1000000000,3.327849
+parallel algorithm, MPI Exscan,64,1000000000,3.274529
+parallel algorithm, hillis-steele,64,1000000000,3.273760
+parallel algorithm, MPI Exscan,128,1000000000,3.450178
+parallel algorithm, hillis-steele,128,1000000000,3.548318
+parallel algorithm, MPI Exscan,256,1000000000,6.932904
+parallel algorithm, hillis-steele,256,1000000000,6.285979
+parallel algorithm, MPI Exscan,511,1000000000,31.607789
+parallel algorithm, hillis-steele,511,1000000000,26.010070
+parallel algorithm, MPI Exscan,512,1000000000,29.050686
+parallel algorithm, hillis-steele,512,1000000000,30.563014
+sequential reference,1,10,0.000002
+parallel algorithm, MPI Exscan,8,10,0.043032
+parallel algorithm, hillis-steele,8,10,0.038192
+parallel algorithm, MPI Exscan,16,10,0.068466
+parallel algorithm, hillis-steele,16,10,0.044291
+parallel algorithm, MPI Exscan,32,10,0.143946
+parallel algorithm, hillis-steele,32,10,0.052438
+parallel algorithm, MPI Exscan,64,10,0.266385
+parallel algorithm, hillis-steele,64,10,0.062532
+parallel algorithm, MPI Exscan,128,10,0.247230
+parallel algorithm, hillis-steele,128,10,0.098432
+parallel algorithm, MPI Exscan,256,10,0.202248
+parallel algorithm, hillis-steele,256,10,0.142792
+parallel algorithm, MPI Exscan,511,10,0.252971
+parallel algorithm, hillis-steele,511,10,0.175408
+parallel algorithm, MPI Exscan,512,10,0.345935
+parallel algorithm, hillis-steele,512,10,0.219744
+sequential reference,1,100,0.000003
+parallel algorithm, MPI Exscan,8,100,0.039481
+parallel algorithm, hillis-steele,8,100,0.041001
+parallel algorithm, MPI Exscan,16,100,0.080628
+parallel algorithm, hillis-steele,16,100,0.076015
+parallel algorithm, MPI Exscan,32,100,0.168666
+parallel algorithm, hillis-steele,32,100,0.146701
+parallel algorithm, MPI Exscan,64,100,0.305241
+parallel algorithm, hillis-steele,64,100,0.279013
+parallel algorithm, MPI Exscan,128,100,0.240645
+parallel algorithm, hillis-steele,128,100,0.082825
+parallel algorithm, MPI Exscan,256,100,0.200148
+parallel algorithm, hillis-steele,256,100,0.129961
+parallel algorithm, MPI Exscan,511,100,0.191319
+parallel algorithm, hillis-steele,511,100,0.187109
+parallel algorithm, MPI Exscan,512,100,0.346606
+parallel algorithm, hillis-steele,512,100,0.214432
+sequential reference,1,1000000,0.010900
+parallel algorithm, MPI Exscan,8,1000000,0.044806
+parallel algorithm, hillis-steele,8,1000000,0.043562
+parallel algorithm, MPI Exscan,16,1000000,0.077918
+parallel algorithm, hillis-steele,16,1000000,0.075055
+parallel algorithm, MPI Exscan,32,1000000,0.152124
+parallel algorithm, hillis-steele,32,1000000,0.146435
+parallel algorithm, MPI Exscan,64,1000000,0.305522
+parallel algorithm, hillis-steele,64,1000000,0.295605
+parallel algorithm, MPI Exscan,128,1000000,0.590735
+parallel algorithm, hillis-steele,128,1000000,0.602800
+parallel algorithm, MPI Exscan,256,1000000,1.195398
+parallel algorithm, hillis-steele,256,1000000,1.197117
+parallel algorithm, MPI Exscan,511,1000000,2.196645
+parallel algorithm, hillis-steele,511,1000000,2.207282
+parallel algorithm, MPI Exscan,512,1000000,2.385921
+parallel algorithm, hillis-steele,512,1000000,2.441825
+sequential reference,1,100000000,0.980944
+parallel algorithm, MPI Exscan,8,100000000,0.463421
+parallel algorithm, hillis-steele,8,100000000,0.493896
+parallel algorithm, MPI Exscan,16,100000000,0.418290
+parallel algorithm, hillis-steele,16,100000000,0.421955
+parallel algorithm, MPI Exscan,32,100000000,0.439953
+parallel algorithm, hillis-steele,32,100000000,0.443170
+parallel algorithm, MPI Exscan,64,100000000,0.575673
+parallel algorithm, hillis-steele,64,100000000,0.601166
+parallel algorithm, MPI Exscan,128,100000000,0.876533
+parallel algorithm, hillis-steele,128,100000000,0.884917
+parallel algorithm, MPI Exscan,256,100000000,1.481723
+parallel algorithm, hillis-steele,256,100000000,1.516387
+parallel algorithm, MPI Exscan,511,100000000,2.694225
+parallel algorithm, hillis-steele,511,100000000,2.388667
+parallel algorithm, MPI Exscan,512,100000000,2.603192
+parallel algorithm, hillis-steele,512,100000000,2.501617
+sequential reference,1,111111111,1.091393
+parallel algorithm, MPI Exscan,8,111111111,0.539344
+parallel algorithm, hillis-steele,8,111111111,0.532787
+parallel algorithm, MPI Exscan,16,111111111,0.434841
+parallel algorithm, hillis-steele,16,111111111,0.453535
+parallel algorithm, MPI Exscan,32,111111111,0.466593
+parallel algorithm, hillis-steele,32,111111111,0.479375
+parallel algorithm, MPI Exscan,64,111111111,0.609499
+parallel algorithm, hillis-steele,64,111111111,0.616120
+parallel algorithm, MPI Exscan,128,111111111,0.818091
+parallel algorithm, hillis-steele,128,111111111,0.923153
+parallel algorithm, MPI Exscan,256,111111111,1.511571
+parallel algorithm, hillis-steele,256,111111111,1.366275
+parallel algorithm, MPI Exscan,511,111111111,2.641496
+parallel algorithm, hillis-steele,511,111111111,2.364216
+parallel algorithm, MPI Exscan,512,111111111,2.642721
+parallel algorithm, hillis-steele,512,111111111,2.543982
+sequential reference,1,1000000000,10.268098
+parallel algorithm, MPI Exscan,8,1000000000,5.214621
+parallel algorithm, hillis-steele,8,1000000000,5.221258
+parallel algorithm, MPI Exscan,16,1000000000,3.756464
+parallel algorithm, hillis-steele,16,1000000000,3.844816
+parallel algorithm, MPI Exscan,32,1000000000,3.661286
+parallel algorithm, hillis-steele,32,1000000000,3.584577
+parallel algorithm, MPI Exscan,64,1000000000,3.665615
+parallel algorithm, hillis-steele,64,1000000000,3.220425
+parallel algorithm, MPI Exscan,128,1000000000,3.508245
+parallel algorithm, hillis-steele,128,1000000000,3.429503
+parallel algorithm, MPI Exscan,256,1000000000,8.936657
+parallel algorithm, hillis-steele,256,1000000000,9.394917
+parallel algorithm, MPI Exscan,511,1000000000,31.788821
+parallel algorithm, hillis-steele,511,1000000000,31.081935
+parallel algorithm, MPI Exscan,512,1000000000,29.154202
+parallel algorithm, hillis-steele,512,1000000000,29.095298
+sequential reference,1,10,0.000001
+parallel algorithm, MPI Exscan,8,10,0.042608
+parallel algorithm, hillis-steele,8,10,0.038432
+parallel algorithm, MPI Exscan,16,10,0.080829
+parallel algorithm, hillis-steele,16,10,0.043953
+parallel algorithm, MPI Exscan,32,10,0.142931
+parallel algorithm, hillis-steele,32,10,0.056836
+parallel algorithm, MPI Exscan,64,10,0.271947
+parallel algorithm, hillis-steele,64,10,0.065797
+parallel algorithm, MPI Exscan,128,10,0.246716
+parallel algorithm, hillis-steele,128,10,0.091762
+parallel algorithm, MPI Exscan,256,10,0.192582
+parallel algorithm, hillis-steele,256,10,0.144678
+parallel algorithm, MPI Exscan,511,10,0.167328
+parallel algorithm, hillis-steele,511,10,0.171660
+parallel algorithm, MPI Exscan,512,10,0.347167
+parallel algorithm, hillis-steele,512,10,0.236497
+sequential reference,1,100,0.000003
+parallel algorithm, MPI Exscan,8,100,0.039941
+parallel algorithm, hillis-steele,8,100,0.044927
+parallel algorithm, MPI Exscan,16,100,0.080184
+parallel algorithm, hillis-steele,16,100,0.076596
+parallel algorithm, MPI Exscan,32,100,0.152810
+parallel algorithm, hillis-steele,32,100,0.143507
+parallel algorithm, MPI Exscan,64,100,0.320620
+parallel algorithm, hillis-steele,64,100,0.276518
+parallel algorithm, MPI Exscan,128,100,0.248994
+parallel algorithm, hillis-steele,128,100,0.086444
+parallel algorithm, MPI Exscan,256,100,0.199465
+parallel algorithm, hillis-steele,256,100,0.128804
+parallel algorithm, MPI Exscan,511,100,0.185926
+parallel algorithm, hillis-steele,511,100,0.167369
+parallel algorithm, MPI Exscan,512,100,0.349712
+parallel algorithm, hillis-steele,512,100,0.217973
+sequential reference,1,1000000,0.011021
+parallel algorithm, MPI Exscan,8,1000000,0.045413
+parallel algorithm, hillis-steele,8,1000000,0.042030
+parallel algorithm, MPI Exscan,16,1000000,0.083374
+parallel algorithm, hillis-steele,16,1000000,0.076858
+parallel algorithm, MPI Exscan,32,1000000,0.159262
+parallel algorithm, hillis-steele,32,1000000,0.147833
+parallel algorithm, MPI Exscan,64,1000000,0.316250
+parallel algorithm, hillis-steele,64,1000000,0.291183
+parallel algorithm, MPI Exscan,128,1000000,0.583150
+parallel algorithm, hillis-steele,128,1000000,0.608588
+parallel algorithm, MPI Exscan,256,1000000,1.182863
+parallel algorithm, hillis-steele,256,1000000,1.203185
+parallel algorithm, MPI Exscan,511,1000000,2.299621
+parallel algorithm, hillis-steele,511,1000000,2.358988
+parallel algorithm, MPI Exscan,512,1000000,2.444218
+parallel algorithm, hillis-steele,512,1000000,2.439084
+sequential reference,1,100000000,0.989577
+parallel algorithm, MPI Exscan,8,100000000,0.490121
+parallel algorithm, hillis-steele,8,100000000,0.493720
+parallel algorithm, MPI Exscan,16,100000000,0.402095
+parallel algorithm, hillis-steele,16,100000000,0.419595
+parallel algorithm, MPI Exscan,32,100000000,0.439769
+parallel algorithm, hillis-steele,32,100000000,0.440777
+parallel algorithm, MPI Exscan,64,100000000,0.575057
+parallel algorithm, hillis-steele,64,100000000,0.579876
+parallel algorithm, MPI Exscan,128,100000000,0.848917
+parallel algorithm, hillis-steele,128,100000000,0.899014
+parallel algorithm, MPI Exscan,256,100000000,1.482759
+parallel algorithm, hillis-steele,256,100000000,1.492967
+parallel algorithm, MPI Exscan,511,100000000,2.559374
+parallel algorithm, hillis-steele,511,100000000,2.433492
+parallel algorithm, MPI Exscan,512,100000000,2.663338
+parallel algorithm, hillis-steele,512,100000000,2.619822
+sequential reference,1,111111111,1.090237
+parallel algorithm, MPI Exscan,8,111111111,0.542716
+parallel algorithm, hillis-steele,8,111111111,0.538966
+parallel algorithm, MPI Exscan,16,111111111,0.441924
+parallel algorithm, hillis-steele,16,111111111,0.462912
+parallel algorithm, MPI Exscan,32,111111111,0.458952
+parallel algorithm, hillis-steele,32,111111111,0.467068
+parallel algorithm, MPI Exscan,64,111111111,0.608788
+parallel algorithm, hillis-steele,64,111111111,0.616186
+parallel algorithm, MPI Exscan,128,111111111,0.896649
+parallel algorithm, hillis-steele,128,111111111,0.919756
+parallel algorithm, MPI Exscan,256,111111111,1.502686
+parallel algorithm, hillis-steele,256,111111111,1.539273
+parallel algorithm, MPI Exscan,511,111111111,2.731927
+parallel algorithm, hillis-steele,511,111111111,2.381890
+parallel algorithm, MPI Exscan,512,111111111,2.672301
+parallel algorithm, hillis-steele,512,111111111,2.375783
+sequential reference,1,1000000000,10.240625
+parallel algorithm, MPI Exscan,8,1000000000,4.856550
+parallel algorithm, hillis-steele,8,1000000000,5.122982
+parallel algorithm, MPI Exscan,16,1000000000,3.743540
+parallel algorithm, hillis-steele,16,1000000000,3.763771
+parallel algorithm, MPI Exscan,32,1000000000,3.319389
+parallel algorithm, hillis-steele,32,1000000000,3.453767
+parallel algorithm, MPI Exscan,64,1000000000,3.272242
+parallel algorithm, hillis-steele,64,1000000000,3.254690
+parallel algorithm, MPI Exscan,128,1000000000,3.498378
+parallel algorithm, hillis-steele,128,1000000000,3.384519
+parallel algorithm, MPI Exscan,256,1000000000,6.081801
+parallel algorithm, hillis-steele,256,1000000000,8.195092
+parallel algorithm, MPI Exscan,511,1000000000,32.624475
+parallel algorithm, hillis-steele,511,1000000000,26.888705
+parallel algorithm, MPI Exscan,512,1000000000,24.698129
+parallel algorithm, hillis-steele,512,1000000000,31.971906
+sequential reference,1,10,0.000002
+parallel algorithm, MPI Exscan,8,10,0.050062
+parallel algorithm, hillis-steele,8,10,0.039349
+parallel algorithm, MPI Exscan,16,10,0.069937
+parallel algorithm, hillis-steele,16,10,0.044528
+parallel algorithm, MPI Exscan,32,10,0.148909
+parallel algorithm, hillis-steele,32,10,0.049380
+parallel algorithm, MPI Exscan,64,10,0.256331
+parallel algorithm, hillis-steele,64,10,0.059793
+parallel algorithm, MPI Exscan,128,10,0.243533
+parallel algorithm, hillis-steele,128,10,0.096658
+parallel algorithm, MPI Exscan,256,10,0.251655
+parallel algorithm, hillis-steele,256,10,0.141768
+parallel algorithm, MPI Exscan,511,10,0.197541
+parallel algorithm, hillis-steele,511,10,0.202058
+parallel algorithm, MPI Exscan,512,10,0.346623
+parallel algorithm, hillis-steele,512,10,0.222875
+sequential reference,1,100,0.000004
+parallel algorithm, MPI Exscan,8,100,0.047150
+parallel algorithm, hillis-steele,8,100,0.037635
+parallel algorithm, MPI Exscan,16,100,0.081310
+parallel algorithm, hillis-steele,16,100,0.076496
+parallel algorithm, MPI Exscan,32,100,0.152416
+parallel algorithm, hillis-steele,32,100,0.144160
+parallel algorithm, MPI Exscan,64,100,0.309280
+parallel algorithm, hillis-steele,64,100,0.283223
+parallel algorithm, MPI Exscan,128,100,0.247503
+parallel algorithm, hillis-steele,128,100,0.086750
+parallel algorithm, MPI Exscan,256,100,0.179290
+parallel algorithm, hillis-steele,256,100,0.139068
+parallel algorithm, MPI Exscan,511,100,0.196586
+parallel algorithm, hillis-steele,511,100,0.186826
+parallel algorithm, MPI Exscan,512,100,0.355414
+parallel algorithm, hillis-steele,512,100,0.233284
+sequential reference,1,1000000,0.010878
+parallel algorithm, MPI Exscan,8,1000000,0.045466
+parallel algorithm, hillis-steele,8,1000000,0.038506
+parallel algorithm, MPI Exscan,16,1000000,0.087450
+parallel algorithm, hillis-steele,16,1000000,0.077858
+parallel algorithm, MPI Exscan,32,1000000,0.156226
+parallel algorithm, hillis-steele,32,1000000,0.146821
+parallel algorithm, MPI Exscan,64,1000000,0.307691
+parallel algorithm, hillis-steele,64,1000000,0.294260
+parallel algorithm, MPI Exscan,128,1000000,0.574517
+parallel algorithm, hillis-steele,128,1000000,0.598598
+parallel algorithm, MPI Exscan,256,1000000,1.162144
+parallel algorithm, hillis-steele,256,1000000,1.206920
+parallel algorithm, MPI Exscan,511,1000000,2.459282
+parallel algorithm, hillis-steele,511,1000000,2.268893
+parallel algorithm, MPI Exscan,512,1000000,2.420589
+parallel algorithm, hillis-steele,512,1000000,2.451812
+sequential reference,1,100000000,0.975230
+parallel algorithm, MPI Exscan,8,100000000,0.477760
+parallel algorithm, hillis-steele,8,100000000,0.491608
+parallel algorithm, MPI Exscan,16,100000000,0.403273
+parallel algorithm, hillis-steele,16,100000000,0.421396
+parallel algorithm, MPI Exscan,32,100000000,0.431406
+parallel algorithm, hillis-steele,32,100000000,0.436699
+parallel algorithm, MPI Exscan,64,100000000,0.572600
+parallel algorithm, hillis-steele,64,100000000,0.581692
+parallel algorithm, MPI Exscan,128,100000000,0.865905
+parallel algorithm, hillis-steele,128,100000000,0.884702
+parallel algorithm, MPI Exscan,256,100000000,1.490540
+parallel algorithm, hillis-steele,256,100000000,1.509944
+parallel algorithm, MPI Exscan,511,100000000,2.318575
+parallel algorithm, hillis-steele,511,100000000,2.306223
+parallel algorithm, MPI Exscan,512,100000000,2.321112
+parallel algorithm, hillis-steele,512,100000000,2.344726
+sequential reference,1,111111111,1.090539
+parallel algorithm, MPI Exscan,8,111111111,0.535357
+parallel algorithm, hillis-steele,8,111111111,0.529321
+parallel algorithm, MPI Exscan,16,111111111,0.448295
+parallel algorithm, hillis-steele,16,111111111,0.457956
+parallel algorithm, MPI Exscan,32,111111111,0.465580
+parallel algorithm, hillis-steele,32,111111111,0.481284
+parallel algorithm, MPI Exscan,64,111111111,0.603144
+parallel algorithm, hillis-steele,64,111111111,0.603962
+parallel algorithm, MPI Exscan,128,111111111,0.901115
+parallel algorithm, hillis-steele,128,111111111,0.915350
+parallel algorithm, MPI Exscan,256,111111111,1.499641
+parallel algorithm, hillis-steele,256,111111111,1.519266
+parallel algorithm, MPI Exscan,511,111111111,2.719747
+parallel algorithm, hillis-steele,511,111111111,2.709974
+parallel algorithm, MPI Exscan,512,111111111,2.628690
+parallel algorithm, hillis-steele,512,111111111,2.420203
+sequential reference,1,1000000000,9.996710
+parallel algorithm, MPI Exscan,8,1000000000,5.220279
+parallel algorithm, hillis-steele,8,1000000000,5.221247
+parallel algorithm, MPI Exscan,16,1000000000,3.739938
+parallel algorithm, hillis-steele,16,1000000000,3.796421
+parallel algorithm, MPI Exscan,32,1000000000,3.749746
+parallel algorithm, hillis-steele,32,1000000000,3.449819
+parallel algorithm, MPI Exscan,64,1000000000,3.339277
+parallel algorithm, hillis-steele,64,1000000000,3.207606
+parallel algorithm, MPI Exscan,128,1000000000,3.593502
+parallel algorithm, hillis-steele,128,1000000000,3.440063
+parallel algorithm, MPI Exscan,256,1000000000,6.826643
+parallel algorithm, hillis-steele,256,1000000000,8.703788
+parallel algorithm, MPI Exscan,511,1000000000,31.184532
+parallel algorithm, hillis-steele,511,1000000000,34.216781
+parallel algorithm, MPI Exscan,512,1000000000,34.718762
+parallel algorithm, hillis-steele,512,1000000000,30.071767
