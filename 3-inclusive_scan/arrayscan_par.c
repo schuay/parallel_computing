@@ -12,7 +12,7 @@ char name[NAME_LEN];
 
 const char *getAlgorithmName(void)
 {
-    snprintf(name, NAME_LEN, "%s, %s", algorithm_name, exscan_name);
+    snprintf(name, NAME_LEN, "%s; %s", algorithm_name, exscan_name);
     name[NAME_LEN - 1] = '\0';
 
     return name;
