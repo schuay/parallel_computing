@@ -549,6 +549,8 @@ implement an own algorithm (hint: Hillis-Steele)
 
 \subsubsection{Results}
 
-% TODO
+<<results=tex,echo=FALSE>>=
+readAndPlot("../3-inclusive_scan/data/bench.csv")
+@
 
 \end{document}
