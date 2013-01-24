@@ -3,6 +3,8 @@
 
 #include <mpi.h>
 
+#include <stdlib.h>
+
 /**
  * The datatype of array elements.
  */
