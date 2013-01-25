@@ -492,6 +492,11 @@ by requiring $p \leq n$. Another possible solution would have been to create a n
 
 \subsubsection{Results}
 
+This bucket sort implementation only begins showing speed-up at rather high data amounts.
+We investiged this phenomenon, and came to the conclusion that nearly all time was spent
+in the calls to \lstinline|MPI_Alltoall| and \lstinline|MPI_Alltoallv| calls, which we
+cannot influence.
+
 <<results=tex,echo=FALSE>>=
 readAndPlot("../3-bucket_sort/data/bench.csv")
 @
