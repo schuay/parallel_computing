@@ -272,8 +272,29 @@ and the parts containing the larger ones. Since there are no dependencies betwee
 this step is done in parallel, by recursively spawning \lstinline|merge_recursive()|.
 
 Once $m + n$ is $\leq unit$ the recursion stops and the remaining problem is solved
-sequentially. We use $\frac{m + n}{p}$ as our $unit$.
-% TODO
+sequentially. We use $\frac{m + n}{p}$ as our $unit$.\\
+
+The data parallel algorithm first uses the data parallel construct to split $a$ in $p$
+parts and perform a binary search for each block of $a$ to determine it's rank in $b$.
+These searches are performed in parallel.
+
+Once each rank has been determined, the ranks are used to determine for each segment
+in $a$ it's according segment in $b$. If both segments together are $\leq \frac{m + n}{p}$,
+they are merged using a sequential merge algorithm. This again happens in parallel for
+each segment in $a$.
+
+If the parts to merge remain $> \frac{m + n}{p}$, the data-parallel algorithm is performed
+again on them. Since the segment of $a$ already has a size of $n/p$, the segment of $b$ is
+split this time.\\
+
+Implementation-wise the recursive algorithm is slightly simpler than the data parallel
+one. This is mostly due to the fact, that the parallelization is far more explicit in
+the data parallel algorithm. Additionally, the use of the data parallel construct adds
+complexity in the form of function pointers and large argument structs.
+
+On the other hand, the recursive algorithm may require tuning the $unit$ value to achieve
+optimal performance, whereas the data is already partitioned according to the number of
+processors in the data parallel one.
 
 \subsubsection{Testing}
 
