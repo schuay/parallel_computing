@@ -25,8 +25,7 @@ static size_t binary_search(TYPE needle, const TYPE *haystack, size_t n)
 }
 
 struct bsearch_args_t {
-    size_t *rankA;
-    size_t *rankB;
+    size_t *rank;
     const TYPE *a;
     size_t n;
     const TYPE *b;
@@ -34,7 +33,7 @@ struct bsearch_args_t {
     size_t p;
 };
 
-static void binary_search_datapara(size_t i, void *args)
+static cilk void binary_search_datapara(size_t i, void *args)
 {
     struct bsearch_args_t *bargs = (struct bsearch_args_t *) args;
 
@@ -44,19 +43,17 @@ static void binary_search_datapara(size_t i, void *args)
     size_t m = bargs->m;
     size_t p = bargs->p;
 
-    TYPE needleA = a[i * n / p];
-    TYPE needleB = b[i * m / p];
+    TYPE needle = a[i * n / p];
 
-    bargs->rankA[i] = binary_search(needleA, b, m);
-    bargs->rankB[i] = binary_search(needleB, a, n);
+    bargs->rank[i] = binary_search(needle, b, m);
 }
 
-cilk void datapara(size_t i, size_t j, size_t unit, void (*f)(size_t, void*), void *optargs)
+static cilk void datapara(size_t i, size_t j, size_t unit, cilk void (*f)(size_t, void*), void *optargs)
 {
     if (j - i <= unit) {
         size_t k;
         for (k = i; k < j; k++) {
-            f(k, optargs);
+            spawn f(k, optargs);
         }
     } else {
         size_t m = (i + j) / 2;
@@ -67,53 +64,69 @@ cilk void datapara(size_t i, size_t j, size_t unit, void (*f)(size_t, void*), vo
 }
 
 struct merge_args_t {
-    const size_t *rankA;
-    const size_t *rankB;
+    const size_t *rank;
     const TYPE *a;
     size_t n;
     const TYPE *b;
     size_t m;
     size_t p;
     TYPE *c;
+    int nsplit;
 };
 
-static void merge_datapara(size_t i, void *args)
+static cilk void merge_sub(const TYPE *a, size_t n, const TYPE *b, size_t m, TYPE *c,
+        size_t p, int nsplit);
+
+static cilk void merge_datapara(size_t i, void *args)
 {
     struct merge_args_t *margs = (struct merge_args_t *) args;
 
-    const size_t *rankA = margs->rankA;
-    const size_t *rankB = margs->rankB;
+    const size_t *rank = margs->rank;
     const TYPE *a = margs->a;
     size_t n = margs->n;
     const TYPE *b = margs->b;
     size_t m = margs->m;
     size_t p = margs->p;
     TYPE *c = margs->c;
+    int nsplit = margs->nsplit;
 
-    size_t a_start = (i == 0) ? 0 : rankB[i];
-    size_t a_length = (i == p - 1) ? n - a_start : rankB[i + 1] - a_start;
+    size_t a_start = i * n / p;
+    size_t a_start_next = (i + 1) * n / p;
+    size_t a_length = (i == p - 1) ? n - a_start : a_start_next - a_start;
 
-    size_t b_start = (i == 0) ? 0 : rankA[i];
-    size_t b_length = (i == p - 1) ? m - b_start : rankA[i + 1] - b_start;
+    size_t b_start = (i == 0) ? 0 : rank[i];
+    size_t b_length = (i == p - 1) ? m - b_start : rank[i + 1] - b_start;
+
+    if ((a_length + b_length) > ((m + n) / p) && nsplit <= 1) {
+        spawn merge_sub(b + b_start, b_length, a + a_start, a_length,
+            c + a_start + b_start, p, nsplit + 1);
+        return;
+    }
 
     merge_seq(a + a_start, a_length, b + b_start, b_length, c + a_start + b_start);
+}
+
+static cilk void merge_sub(const TYPE *a, size_t n, const TYPE *b, size_t m, TYPE *c,
+        size_t p, int nsplit)
+{
+    size_t *rank = calloc(p, sizeof(size_t));
+
+    struct bsearch_args_t bsearch_args = { rank, a, n, b, m, p };
+    struct merge_args_t merge_args = { rank, a, n, b, m, p, c, nsplit };
+
+    spawn datapara(0, p, 1, binary_search_datapara, &bsearch_args);
+    sync;
+
+    spawn datapara(0, p, 1, merge_datapara, &merge_args);
+    sync;
 }
 
 cilk void merge_impl(const TYPE *a, size_t n, const TYPE *b, size_t m, TYPE *c,
         perf_t *perf, int *nproc)
 {
     size_t p = Cilk_active_size;
-    size_t *rankA = calloc(p, sizeof(size_t));
-    size_t *rankB = calloc(p, sizeof(size_t));
-
-    struct bsearch_args_t bsearch_args = { rankA, rankB, a, n, b, m, p };
-    struct merge_args_t merge_args = { rankA, rankB, a, n, b, m, p, c };
-
     *nproc = p;
 
-    spawn datapara(0, p, 1, binary_search_datapara, &bsearch_args);
-    sync;
-
-    spawn datapara(0, p, 1, merge_datapara, &merge_args);
+    spawn merge_sub(a, n, b, m, c, p, 1);
     sync;
 }
