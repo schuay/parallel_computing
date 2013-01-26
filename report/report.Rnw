@@ -154,7 +154,16 @@ sum instead of all prefix sums:
 
 \subsubsection{Testing}
 
-% TODO
+Our unit tests compare the sequential results against our parallel
+algorithms. Test cases include:
+
+\begin{itemize}
+\item an input array with an odd number of elements
+\item an input array with an even number of elements
+\item an input array containing only one element
+\item an input array containing containing $1024$ random elements ($seed = 1024$)
+\item an input array containing containing $16384$ random elements ($seed = 16384$)
+\end{itemize}
 
 \subsubsection{Results}
 
@@ -570,7 +579,16 @@ implement an own algorithm (hint: Hillis-Steele)
 
 \subsubsection{Testing}
 
-% TODO
+Our unit tests compare the sequential results against our parallel
+algorithms. Test cases include:
+
+\begin{itemize}
+\item an input array with an odd number of elements
+\item an input array with an even number of elements
+\item an input array containing only one element
+\item an input array containing containing $1024$ random elements ($seed = 1024$)
+\item an input array containing containing $16384$ random elements ($seed = 16384$)
+\end{itemize}
 
 \subsubsection{Results}
 
