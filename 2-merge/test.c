@@ -77,6 +77,14 @@ START_TEST(test_block_interleaved)
 }
 END_TEST
 
+START_TEST(test_block_end_interleaved)
+{
+    TYPE a[] = {0, 1, 2, 3, 4, 5, 6, 8, 10};
+    TYPE b[] = {7, 9, 11, 12, 13, 14, 15, 16, 17};
+    MERGE_TEST(a, b);
+}
+END_TEST
+
 START_TEST(test_interleaved_large)
 {
     TYPE *a = calloc(LARGE_N, sizeof(TYPE));
@@ -141,6 +149,7 @@ static Suite *create_suite(void)
     tcase_add_test(tc_core, test_b_lt_a);
     tcase_add_test(tc_core, test_interleaved);
     tcase_add_test(tc_core, test_block_interleaved);
+    tcase_add_test(tc_core, test_block_end_interleaved);
     tcase_add_test(tc_core, test_interleaved_large);
     tcase_add_test(tc_core, test_random_large);
 
