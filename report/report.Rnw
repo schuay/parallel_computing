@@ -399,8 +399,8 @@ In order to execute our benchmark on all available nodes, we had to add
 
 As expected, the parallel stencil implementation scales very well: with recombination
 (in which all processes end up with the full matrix upon conclusion), we were able to
-achieve a speed-up of % TODO
-for $1000$ stencil iterations performed on a $1000 \times 1000$ matrix.
+achieve super-linear speedup of $112.48$ for $1000$ stencil iterations performed on
+a $1000 \times 1000$ matrix with $80$ processes.
 
 The optimal matrix partitioning also fits our model, with the $200 \times 125$ submatrices
 outperforming the other partitions ($500 \times 50$ and $1000 \times 25$) by almost a factor
