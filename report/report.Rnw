@@ -590,6 +590,21 @@ implement an own algorithm (hint: Hillis-Steele)
 
 \subsubsection{Implementation}
 
+The parallel scan first splits the input array into $p$ segments, where the
+segment for each process starts at $offset = rank * n / p$ and contains
+$length = n / p$ elements (unless $rank = p - 1$, in which case $size = n - offset$).
+
+Next each process computes the inclusive prefix-sum array for its segment. The last
+element of this array ($b$) is then contributed to the distributed Exscan. We can
+either use MPI's Exscan or our own implementation, which is detailed below.
+
+The Exscan yields the (exclusive) prefix for each process' rank, which is then added
+to each element of the locally computed prefix-sum array.
+
+Lastly, all of the locally computed prefix-sums are sent to the ''Master`` process
+($rank = 0$) using \lstinline|MPI_Gatherv()|. At first we used \lstinline|MPI_Alltoallv()|
+and distributed the result to all processes, but this involved a larger communication
+overhead.
 % TODO
 
 \subsubsection{Testing}
