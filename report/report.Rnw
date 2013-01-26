@@ -303,8 +303,6 @@ readAndPlot("../2-merge/data/bench.csv")
 \section{MPI}
 % =============================================================================
 
-% TODO: Make sure we get the correct Tpar (the process taking the longest),
-% suggestion: MPI_Reduce(MPI_MAX), although MPI_Barrier seems to be better?
 \subsection{Parallel Stencil Computation}
 
 \subsubsection{Specification}
