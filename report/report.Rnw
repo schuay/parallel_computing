@@ -272,7 +272,7 @@ and the parts containing the larger ones. Since there are no dependencies betwee
 this step is done in parallel, by recursively spawning \lstinline|merge_recursive()|.
 
 Once $m + n$ is $\leq unit$ the recursion stops and the remaining problem is solved
-sequentially.
+sequentially. We use $\frac{m + n}{p}$ as our $unit$.
 % TODO
 
 \subsubsection{Testing}
@@ -287,6 +287,7 @@ algorithm. Test cases include:
 \item $\forall i, j: a_i > b_j$
 \item fully interleaved ranges $a$ and $b$
 \item blockwise interleaved ranges $a$ and $b$
+\item interleaving at the end of $a$ and the beginning of $b$
 \item large interleaved ranges $a$ and $b$ with $n = 500000$
 \item large pseudo-random ranges with $n = 500000$ (repeatable by
       using a predetermined seed)
