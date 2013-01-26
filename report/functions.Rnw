@@ -32,7 +32,7 @@ plotByNumThreads <- function(par, seq, prefix) {
 	y <- seq[,4]
 	sapply(pars, FUN=addPar)
 
-	texPlot(x,y, pch, txt, "input size", "time(s)", sprintf("%s: Time as function of input size (%d thread(s))", prefix, nThreads), "xy")
+	texPlot(x,y, pch, txt, "input size", "time(s)", sprintf("%s: Time as function of input size (%d thread(s))", prefix, nThreads), "x")
 }
 
 plotByInputSize <- function(par, prefix) {
