@@ -118,6 +118,7 @@ TYPE *arrayscan(const TYPE A[], size_t n, MPI_Comm comm)
 
     TYPE *ret = NULL;
 
+    // time complexity: n / p
     TYPE *a = arrayscan_seq(A + off, len);
     if (a == NULL) {
         return ret;
@@ -126,15 +127,18 @@ TYPE *arrayscan(const TYPE A[], size_t n, MPI_Comm comm)
     TYPE b = (len == 0) ? 0 : a[len - 1];
     TYPE rank_prefix;
 
+    // time complexity: depends
     if (exscan(b, &rank_prefix, comm) != MPI_SUCCESS) {
         fprintf(stderr, "MPI Error: MPI_Exscan failed.\n");
         goto out_a;
     }
 
+    // time complexity: n / p
     for (size_t i = 0; i < len; i++) {
         a[i] += rank_prefix;
     }
 
+    // time complexity: n / p + log p
     if (rank == MASTER) {
         ret = gather_master(a, n, rank, processes, comm);
     } else {

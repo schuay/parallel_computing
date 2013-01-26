@@ -20,6 +20,7 @@ int exscan(TYPE xi, TYPE *bi, MPI_Comm comm)
     MPI_Status status;
 
     int k;
+    // time complexity: log p
     for (k = 1; k < processes; k <<= 1) {
         if (rank < k) {
             yi = xi;
@@ -47,6 +48,7 @@ int exscan(TYPE xi, TYPE *bi, MPI_Comm comm)
         yi = tmp;
     }
 
+    // time complexity: c
     if (rank == 0) {
         ret = MPI_Send(&xi, 1, TYPE_MPI, rank + 1, k, comm);
         *bi = 0;
