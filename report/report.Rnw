@@ -325,6 +325,21 @@ algorithm. Test cases include:
 
 \subsubsection{Results}
 
+The sequential reference and both parallel algorithms were benchmarked with $10$, $100$,
+$1000000$, $1111111$ and $100000000$ as input size, with $n = \lfloor size / 2\rfloor$ and
+$m = size - n$.
+
+The parallel algorithms were benchmarked with $8$, $16$, $32$, $33$ and $48$ threads for each
+input size.\\
+
+Both the data parallel and the recursive algorithm perform almost equally well (or bad) with the
+latter being slightly faster than the former. At an input size of $100000000$ this relation is
+reversed.
+
+It is also interesting to note, that the improvement over the sequential algorithm is minimal
+before the $100000000$ benchmark. Additionally, at lower input sizes the threading overhead
+is so large, that increasing the number of parallel threads actually slows down execution.
+
 <<results=tex,echo=FALSE>>=
 readAndPlot("../2-merge/data/bench.csv")
 @
