@@ -620,7 +620,16 @@ After this, each process holds the inclusive prefix-sum for the first element of
 local segment. Since we need the exclusive one and are not allowed to substract our
 initial contribution (we may only assume associativity, but not the existence of an
 inverse), each process sends its sum to the process with $rank + 1$ and returns the
-received value (or $0$ for the process with $rank = 0$) to the Arrayscan implementation.
+received value (or $0$ for the process with $rank = 0$) to the Arrayscan
+implementation.\\
+
+This Hillis-Steele Exscan has an asymptotic running time of $O(\log p)$ assuming that
+$p$ is a power of $2$. In addition to that, the local array sums take $O(\frac{2 * n}{p})$
+and the final Gather takes $O(\frac{n}{p} + \log p)$. So the asymptotic running time of the
+entire Arrayscan algorithm is $O(\frac{3 * n}{p} + 2 * \log p)$. Assuming, that we don't
+have to collect the the data it can be cut down to $O(\frac{2 * n}{p} + \log p)$.
+
+\subsubsection{Correctness}
 % TODO
 
 \subsubsection{Testing}
