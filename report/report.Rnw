@@ -604,7 +604,23 @@ to each element of the locally computed prefix-sum array.
 Lastly, all of the locally computed prefix-sums are sent to the ''Master`` process
 ($rank = 0$) using \lstinline|MPI_Gatherv()|. At first we used \lstinline|MPI_Alltoallv()|
 and distributed the result to all processes, but this involved a larger communication
-overhead.
+overhead.\\
+
+Our Exscan implementation uses the Hillis-Steele algorithm from the lecture. However,
+each process executes one iteration of the inner loops. In each iteration of the outer
+loop a process with $rank$ will send its current contribution $xi$ to the process with
+$rank + k$ if it exists. It will also receive from the process with $rank - k$ and add
+the received value to its last contribution.
+
+The outer loop starts with $k = 1$ and $xi$ as the last element of the local prefix
+calculation (see above). It runs until $k \geq p$, where $k$ is doubled after each
+iteration.
+
+After this, each process holds the inclusive prefix-sum for the first element of its
+local segment. Since we need the exclusive one and are not allowed to substract our
+initial contribution (we may only assume associativity, but not the existence of an
+inverse), each process sends its sum to the process with $rank + 1$ and returns the
+received value (or $0$ for the process with $rank = 0$) to the Arrayscan implementation.
 % TODO
 
 \subsubsection{Testing}
