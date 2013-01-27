@@ -189,7 +189,14 @@ algorithms. Test cases include:
 
 <<results=tex,echo=FALSE>>=
 \SweaveInput{functions.Rnw}
-readAndPlot("../1-prefix_sums/data/bench.csv")
+
+doStuff <- function() {
+	plotWork("../1-prefix_sums/data/work.csv")
+
+	readAndPlot("../1-prefix_sums/data/bench.csv")
+}
+
+doStuff()
 @
 
 \clearpage
