@@ -3,13 +3,13 @@ library(xtable, lib.loc="R-libs/")
 REF <- "sequential reference"
 fidx <- 0
 
-texPlot <- function(x, y, pch, text, xlab, ylab, main, log) {
+texPlot <- function(x, y, pch, text, xlab, ylab, main, log, ylim=NULL) {
 	file=paste("graph", fidx, ".eps", sep="")  
 	fidx <<- fidx + 1
 
 	postscript(file=file, paper="special", width=8, height=8, horizontal=FALSE)  
 
-	matplot(x,y, pch=pch, type='b', xlab=xlab, ylab=ylab, main=main, log=log)
+	matplot(x,y, pch=pch, type='b', xlab=xlab, ylab=ylab, ylim=ylim, main=main, log=log)
 	legend("topleft", text, col=pch, pch=pch)
 
 	dev.off()  
@@ -34,7 +34,7 @@ plotWork <- function(file) {
 	y <- NULL
 	sapply(pars, FUN=addPar)
 
-	texPlot(x,y, pch, txt, "input size", "work", "Work as function of input size", "")
+	texPlot(x,y, pch, txt, "input size", "work", "Work as function of input size", "", ylim=c(0,500000000))
 }
 
 plotByNumThreads <- function(par, seq, prefix) {
