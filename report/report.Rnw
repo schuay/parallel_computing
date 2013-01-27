@@ -191,10 +191,15 @@ The parallel algorithms were benchmarked with $8$, $16$, $32$ and $48$ threads f
 each input size.
 
 To measure the amount of work each implementation has to do, we used our performance
-counters and above input sizes. We measured with $2$ threads.
+counters and above input sizes. We measured with $2$ threads.\\
 
-% TODO
-% TODO Verify complexity with performance counters
+For smaller input sizes, the parallelization overhead prevents any speedup. The
+Hillis-Steele algorithm performed consistently worse than the others and never showed
+a speedup over the sequential reference algorithm.\\
+
+The work graph below shows, that the Hillis-Steele algorithm, does a lot more work than
+the others. Also, while the work done rises linearly for the iterative, recursive and
+reduction algorithms, it describes a slight curve for Hillis-Steele.
 
 <<results=tex,echo=FALSE>>=
 \SweaveInput{functions.Rnw}
