@@ -43,7 +43,7 @@ int main(int argc, const char **argv) {
     int nproc;
 
     Cilk_time start = Cilk_get_wall_time();
-    TYPE *c = merge(a, n, b, m, NULL, threads, &nproc);
+    TYPE *c = merge(a, n, b, m, threads, &nproc);
     Cilk_time elapsed = Cilk_get_wall_time() - start;
     double par_time = Cilk_wall_time_to_sec(elapsed);
 

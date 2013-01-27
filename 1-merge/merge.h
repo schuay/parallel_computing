@@ -1,4 +1,4 @@
-#include "perf.h"
+#include <stdlib.h>
 
 /**
  * The datatype of array elements.
@@ -15,7 +15,7 @@ extern const char *algorithm_name;
  * the resulting array of length n + m is returned and must
  * be freed by the caller.
  */
-TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf);
+TYPE *merge(const TYPE *a, int n, const TYPE *b, int m);
 
 /**
  * Performs the actual sequential merge within the given memory areas.

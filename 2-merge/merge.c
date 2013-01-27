@@ -3,7 +3,7 @@
 #include <cilk.h>
 
 extern void EXPORT(merge_impl) (CilkContext *context, const TYPE *a, size_t n,
-        const TYPE *b, size_t m, TYPE *c, perf_t *perf, int *nproc);
+        const TYPE *b, size_t m, TYPE *c, int *nproc);
 
 void merge_seq(const TYPE *a, size_t n, const TYPE *b, size_t m, TYPE *c)
 {
@@ -31,7 +31,7 @@ TYPE *merge_ref(const TYPE *a, size_t n, const TYPE *b, size_t m)
     return c;
 }
 
-TYPE *merge(const TYPE *a, size_t n, const TYPE *b, size_t m, perf_t *perf, const char *nproc,
+TYPE *merge(const TYPE *a, size_t n, const TYPE *b, size_t m, const char *nproc,
         int *nproc_ret) {
     const char *argv[] = {algorithm_name, "--nproc", nproc, 0};
     int argc = 3;
@@ -41,7 +41,7 @@ TYPE *merge(const TYPE *a, size_t n, const TYPE *b, size_t m, perf_t *perf, cons
     }
 
     CilkContext *context = Cilk_init(&argc, (char **) argv);
-    EXPORT(merge_impl) (context, a, n, b, m, c, perf, nproc_ret);
+    EXPORT(merge_impl) (context, a, n, b, m, c, nproc_ret);
     Cilk_terminate(context);
 
     return c;

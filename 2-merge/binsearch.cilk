@@ -122,7 +122,7 @@ static cilk void merge_sub(const TYPE *a, size_t n, const TYPE *b, size_t m, TYP
 }
 
 cilk void merge_impl(const TYPE *a, size_t n, const TYPE *b, size_t m, TYPE *c,
-        perf_t *perf, int *nproc)
+        int *nproc)
 {
     size_t p = Cilk_active_size;
     *nproc = p;

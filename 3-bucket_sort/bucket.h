@@ -1,4 +1,4 @@
-#include "perf.h"
+#include <stdlib.h>
 
 // #define DEBUG(...) printf(__VA_ARGS__)
 #define DEBUG(...)
@@ -14,7 +14,7 @@
  *
  * It is assumed that the process count is >= n.
  */
-TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, perf_t *perf);
+TYPE *bucket_sort(TYPE *xs, int n, int upper_bound);
 
 /**
  * Returns a random array with the given size and upper bound,

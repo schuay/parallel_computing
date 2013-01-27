@@ -24,7 +24,6 @@ include_directories(
 )
 
 add_executable(merge_bench
-    ${COMMON_DIR}/perf.c
     ${COMMON_DIR}/csv.c
     merge.c
     merge_par.c
@@ -33,7 +32,6 @@ add_executable(merge_bench
 SET_TARGET_PROPERTIES(merge_bench PROPERTIES COMPILE_DEFINITIONS "NOPERF")
 
 add_executable(merge_seq_bench
-    ${COMMON_DIR}/perf.c
     ${COMMON_DIR}/csv.c
     merge.c
     merge_ref.c

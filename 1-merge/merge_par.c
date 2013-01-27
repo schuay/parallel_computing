@@ -14,7 +14,7 @@ const char *algorithm_name = "parallel merge";
  * a points to the subsequence of length n. c points to the result array.
  */
 static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
-        int iteration, int partitions, int nsplit, perf_t *perf);
+        int iteration, int partitions, int nsplit);
 
 /**
  * Searches the haystack of size n for needle and returns
@@ -22,7 +22,7 @@ static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
  */
 static int binary_search(TYPE needle, const TYPE *haystack, int n);
 
-TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf)
+TYPE *merge(const TYPE *a, int n, const TYPE *b, int m)
 {
     TYPE *c = calloc(n + m, sizeof(TYPE));
     if (c == NULL) {
@@ -39,14 +39,14 @@ TYPE *merge(const TYPE *a, int n, const TYPE *b, int m, perf_t *perf)
 
 #pragma omp parallel for schedule(guided)
     for (int i = 0; i < p; i++) {
-        merge_part(a, n, b, m, c, i, p, 1, perf);
+        merge_part(a, n, b, m, c, i, p, 1);
     }
 
     return c;
 }
 
 static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
-        int iteration, int partitions, int nsplit, perf_t *perf)
+        int iteration, int partitions, int nsplit)
 {
     const int size = n / partitions;
     const int start = iteration * size;
@@ -66,7 +66,7 @@ static void merge_part(const TYPE *a, int n, const TYPE *b, int m, TYPE *c,
             merge_part(b + b_start, b_length,
                     a + start, length,
                     c + start + b_start,
-                    i, p, nsplit + 1, perf);
+                    i, p, nsplit + 1);
         }
 
         return;

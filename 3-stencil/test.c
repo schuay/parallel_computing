@@ -49,7 +49,7 @@ void stencil_test(int iters, int r, int c)
         goto out;
     }
 
-    stencil(matrix, iters, r, c, NULL);
+    stencil(matrix, iters, r, c);
 
     fail_unless(matrix_equals(matrix, result));
 

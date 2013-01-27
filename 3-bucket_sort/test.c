@@ -10,7 +10,7 @@
 
 #define BUCKET_TEST(a, n, upper_bound) \
     do { \
-        TYPE *tst = bucket_sort(a, n, upper_bound, NULL); \
+        TYPE *tst = bucket_sort(a, n, upper_bound); \
         qsort(a, n, sizeof(TYPE), less_than); \
  \
         fail_unless(memcmp(a, tst, sizeof(TYPE) * n) == 0, \

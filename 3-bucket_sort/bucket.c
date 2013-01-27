@@ -14,7 +14,7 @@ static int less_than(const void *a, const void *b);
  * O(n/p log (n/p) + p).
  */
 
-TYPE *bucket_sort(TYPE *xs, int n, int upper_bound, __attribute__((unused)) perf_t *perf)
+TYPE *bucket_sort(TYPE *xs, int n, int upper_bound)
 {
     /* Complexity: O(1). */
 

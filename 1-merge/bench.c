@@ -46,7 +46,7 @@ int main(int argc, const char **argv) {
     printf("%s. omp_get_max_threads() == %d\n", algorithm_name, threads);
 
     double start = omp_get_wtime();
-    TYPE *c = merge(a, n, b, m, NULL);
+    TYPE *c = merge(a, n, b, m);
     double par_time = omp_get_wtime() - start;
 
     printf("elements: %d; time: %f\n\n",

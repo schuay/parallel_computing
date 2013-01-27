@@ -27,7 +27,7 @@ static size_t binary_search(TYPE needle, const TYPE *haystack, size_t n)
 }
 
 static cilk void merge_recursive(const TYPE *a, size_t n, const TYPE *b, size_t m, TYPE *c,
-        size_t unit, perf_t *perf)
+        size_t unit)
 {
     size_t r, s;
 
@@ -47,7 +47,7 @@ static cilk void merge_recursive(const TYPE *a, size_t n, const TYPE *b, size_t 
     }
 
     if (n < m) {
-        spawn merge_recursive(b, m, a, n, c, unit, perf);
+        spawn merge_recursive(b, m, a, n, c, unit);
         sync;
         return;
     }
@@ -62,18 +62,18 @@ static cilk void merge_recursive(const TYPE *a, size_t n, const TYPE *b, size_t 
         return;
     }
 
-    spawn merge_recursive(a, r, b, s, c, unit, perf);
-    spawn merge_recursive(a + r, n - r, b + s, m - s, c + r + s, unit, perf);
+    spawn merge_recursive(a, r, b, s, c, unit);
+    spawn merge_recursive(a + r, n - r, b + s, m - s, c + r + s, unit);
 
     sync;
 }
 
 cilk void merge_impl(const TYPE *a, size_t n, const TYPE *b, size_t m, TYPE *c,
-        perf_t *perf, int *nproc)
+        int *nproc)
 {
     size_t p = Cilk_active_size;
     *nproc = p;
 
-    spawn merge_recursive(a, n, b, m, c, (m + n) / p, perf);
+    spawn merge_recursive(a, n, b, m, c, (m + n) / p);
     sync;
 }

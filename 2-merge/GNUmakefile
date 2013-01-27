@@ -34,11 +34,11 @@ test_build:
 bench_build:
 	mkdir -p build
 	cd build
-	${CC} ${CFLAGS} recursive.cilk merge.c bench.c ${COMMON}/perf.c ${COMMON}/csv.c \
+	${CC} ${CFLAGS} recursive.cilk merge.c bench.c ${COMMON}/csv.c \
 	    -o build/recursive_bench
-	${CC} ${CFLAGS} binsearch.cilk merge.c bench.c ${COMMON}/perf.c ${COMMON}/csv.c \
+	${CC} ${CFLAGS} binsearch.cilk merge.c bench.c ${COMMON}/csv.c \
 	    -o build/binsearch_bench
-	${CC} ${CFLAGS} reference.cilk merge.c bench.c ${COMMON}/perf.c ${COMMON}/csv.c \
+	${CC} ${CFLAGS} reference.cilk merge.c bench.c ${COMMON}/csv.c \
 	    -o build/reference_bench
 
 test: test_build

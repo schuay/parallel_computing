@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 
     MPI_Barrier(MPI_COMM_WORLD);
     double start = MPI_Wtime();
-    TYPE *c = bucket_sort(a, size, upper_bound, NULL);
+    TYPE *c = bucket_sort(a, size, upper_bound);
     double end = MPI_Wtime();
 
     double localElapsed = end - start;

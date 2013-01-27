@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 
     MPI_Barrier(MPI_COMM_WORLD);
     double start = MPI_Wtime();
-    if (stencil(matrix, iterations, r, c, NULL) != 0) {
+    if (stencil(matrix, iterations, r, c) != 0) {
         /* Don't fail our benchmarks. */
         goto out;
     }

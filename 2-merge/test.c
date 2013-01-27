@@ -14,7 +14,7 @@
         qsort(b, n, sizeof(a[0]), less_than); \
  \
         TYPE *ref = merge_ref(a, n, b, m); \
-        TYPE *tst = merge(a, n, b, m, NULL, "0", &nproc); \
+        TYPE *tst = merge(a, n, b, m, "0", &nproc); \
  \
         fail_unless(memcmp(ref, tst, sizeof(TYPE) * (n + m)) == 0, \
                 "Result not equal to reference implementation"); \
