@@ -159,7 +159,7 @@ sum instead of all prefix sums:
       by skipping the entire down phase, which is only responsible for
       distributing results into the entire data range.
 \item It does not seem to be possible to simplify the Hillis-Steele
-      algorithm to compute only the final sum. % TODO: Is this correct?
+      algorithm to compute only the final sum.
 \item It should be possible to skip most of the combine phase of the recursive
       algorithm, because at the deepest recursion level we already have a
       sum of most of the original elements. At most, we have to add one
@@ -185,7 +185,6 @@ algorithms. Test cases include:
 
 % TODO
 % TODO Verify complexity with performance counters
-% TODO Bonus: Can the algorithms be simplified to compute only the total sum?
 
 <<results=tex,echo=FALSE>>=
 \SweaveInput{functions.Rnw}
