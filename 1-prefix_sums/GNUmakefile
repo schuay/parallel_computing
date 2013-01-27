@@ -35,6 +35,7 @@ bench: bake
 
 work: bake
 	mkdir -p data
+	rm -f data/$(WORK_FILE)
 	for alg in $(ALGORITHMS); do \
 		build/$${alg}_work data/$(WORK_FILE) $(INPUT_SIZES); \
 	done
