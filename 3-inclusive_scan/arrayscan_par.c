@@ -135,7 +135,7 @@ TYPE *arrayscan(const TYPE A[], size_t n, MPI_Comm comm)
 
     // time complexity: n / p
     for (size_t i = 0; i < len; i++) {
-        a[i] += rank_prefix;
+        a[i] = rank_prefix + a[i];
     }
 
     // time complexity: n / p + log p
