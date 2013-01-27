@@ -272,6 +272,15 @@ algorithm. Test cases include:
 
 \subsubsection{Results}
 
+Benchmarks were performed with data sets of $n \in {10, 100, 1000000, 1111111, 2222222, 1000000000}$
+and $p \in {1, 8, 16, 31, 32, 48}$.
+
+The parallel merge algorithm required fairly high data volumes to supercede
+the sequential algorithm's performance. At $1000000$ elements, we first achieved
+a speedup of $2.01$ with $p = 8$. This improved noticeably with larger datasets:
+At $n = 100000000$, the best results were obtained with $16$ threads. We assume that
+the optimal thread count with still larger datasets will increase even further.
+
 % TODO: Bonus: Can the algorithm be extended to allow element repetitions?
 %       Which properties can be guaranteed?
 % TODO: Bonus: Can the algorithm be used for implementing a parallel mergesort?
