@@ -160,7 +160,11 @@ sum instead of all prefix sums:
       distributing results into the entire data range.
 \item It does not seem to be possible to simplify the Hillis-Steele
       algorithm to compute only the final sum. % TODO: Is this correct?
-% TODO: Recursive
+\item It should be possible to skip most of the combine phase of the recursive
+      algorithm, because at the deepest recursion level we already have a
+      sum of most of the original elements. At most, we have to add one
+      additional element per recursion step, because it may have been lost
+      during the accumulation phase.
 \end{itemize}
 
 
