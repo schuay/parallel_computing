@@ -661,6 +661,20 @@ algorithms. Test cases include:
 
 \subsubsection{Results}
 
+The sequential reference and the parallel algorithm were benchmarked with $10$, $100$,
+$1000000$, $100000000$, $1i11111111$ and $1000000000$ as input size. Additionally, we
+benchmarked the parallel algorithm, but using the MPI's Exscan instead of our own.
+
+The parallel algorithms were benchmarked with $8$, $16$, $32$, $64$, $128$, $256$, $511$
+and $512$ processes for each input size. We benchmarked for both OpenMPI and NECmpi.\\
+
+For a large amount of processes ($> 128$) we actually noticed a slowdown compared to the
+sequential algorithm. This may be caused by communication overhead. The processes spend
+most of the time in the final Gather step.\\
+
+In general, NECmpi was faster than OpenMPI. The performances of MPI's Exscan and the
+Hillis-Steele Exscan were almost identical.
+
 <<results=tex,echo=FALSE>>=
 readAndPlot("../3-inclusive_scan/data/bench.csv")
 @
