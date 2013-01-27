@@ -676,7 +676,7 @@ In general, NECmpi was faster than OpenMPI. The performances of MPI's Exscan and
 Hillis-Steele Exscan were almost identical.
 
 <<results=tex,echo=FALSE>>=
-readAndPlot("../3-inclusive_scan/data/bench.csv")
+tableAndPlot("../3-inclusive_scan/data/bench.csv")
 @
 
 \end{document}
