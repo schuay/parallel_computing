@@ -1,3 +1,5 @@
+library(xtable, lib.loc="R-libs/")
+
 REF <- "sequential reference"
 fidx <- 0
 
@@ -64,6 +66,29 @@ makePlots <- function(times, prefix) {
 	unused <- sapply(byInputSize, FUN=plotByInputSize, prefix)
 }
 
+speedupTable <- function(times, prefix) {
+	size <- times[1,3]
+	times <- times[,c(1,2,4)]
+	ref <- times[times[,1] == REF,3]
+	tab <- cbind(times, ref / times[,3])
+	names(tab) <- make.names(c("Algorithm", "Threads", "Time", "Speedup"))
+	cap <- sprintf("%s: Runtimes and Speedup for input size %d", prefix, size)
+	print(xtable(tab, caption=cap))
+}
+
+makeSpeedupTables <- function(times, prefix) {
+	byInputSize <- split(times, times[,3])
+	unused <- sapply(byInputSize, FUN=speedupTable, prefix)
+}
+
+makeAvgSpeedupTables <- function(file) {
+	results <- read.table(file, sep=",")
+
+	time_mean <- aggregate(results[,4], by=list(results[,1],results[,2],results[,3]), FUN=mean)
+
+	unused <- makeSpeedupTables(time_mean, "Avg")
+}
+
 readAndPlot <- function(file) {
 	results <- read.table(file, sep=",")
 
@@ -72,4 +97,10 @@ readAndPlot <- function(file) {
 
 	unused <- makePlots(time_mean, "Avg")
 	unused <- makePlots(time_best, "Min")
+}
+
+tableAndPlot <- function(file) {
+	makeAvgSpeedupTables(file)
+
+	readAndPlot(file)
 }
