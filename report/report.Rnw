@@ -441,7 +441,7 @@ Unit tests include:
 \subsubsection{Results}
 
 In order to execute our benchmark on all available nodes, we had to add
-\lstinline|export PATH=/opt/openmpi/bin:$PATH| to all local \lstinline|~/.bashrc| files.
+\lstinline|export PATH=/opt/openmpi/bin:\$PATH| to all local \lstinline|~/.bashrc| files.
 
 As expected, the parallel stencil implementation scales very well: with recombination
 (in which all processes end up with the full matrix upon conclusion), we were able to
