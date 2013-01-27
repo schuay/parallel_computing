@@ -31,7 +31,7 @@ static int safe_strtol(const char *s) {
 
 int main(int argc, char **argv) {
 
-    if (argc < 4) {
+    if (argc < 3) {
         fprintf(stderr, "Usage: work <csv file> <input size> [<input size> ...]\n");
         return -1;
     }
