@@ -253,6 +253,18 @@ $a$ and $b$ reversed\footnote{Note that this kind of nested parallelism requires
 On conclusion of the partition function, its assigned ranges are merged with
 the references sequential merge implementation.
 
+If this algorithm were to handle element repetitions, it would either need to
+partition the data set in such a way that an element value is not contained in
+more than one partition; or each partition would need to determine repetition
+counts of its first element in previous partitions. A parallel merge altered in
+this way could guarantee stableness, meaning that the order in which elements
+with the same value occur is preserved in the resulting merged array.
+
+In order to extend this algorithm into a fully fledged merge-sort, we'd need to
+implement the entire ,,down'' phase (in which the data set is recursively split),
+and the basic structure of the ,,up'' phase, in which sorted sub-sequences are
+merged until we again arrive at the entire dataset in sorted order.
+
 \subsubsection{Testing}
 
 Our merge unit tests compare the sequential results against our parallel
@@ -280,11 +292,6 @@ the sequential algorithm's performance. At $1000000$ elements, we first achieved
 a speedup of $2.01$ with $p = 8$. This improved noticeably with larger datasets:
 At $n = 100000000$, the best results were obtained with $16$ threads. We assume that
 the optimal thread count with still larger datasets will increase even further.
-
-% TODO: Bonus: Can the algorithm be extended to allow element repetitions?
-%       Which properties can be guaranteed?
-% TODO: Bonus: Can the algorithm be used for implementing a parallel mergesort?
-%       What is missing?
 
 <<results=tex,echo=FALSE>>=
 tableAndPlot("../1-merge/data/bench.csv")
