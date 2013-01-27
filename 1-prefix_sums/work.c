@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
     }
 
     int nThreads = omp_get_max_threads();
-    int work;
+    size_t work;
 
     for (int i = 2; i < argc; i++) {
         int size = safe_strtol(argv[i]);
@@ -72,10 +72,10 @@ int main(int argc, char **argv) {
         work = perf_summary(perf);
         perf_free(perf);
 
-        printf("elements: %d; work: %d\n\n",
+        printf("elements: %d; work: %zu\n\n",
                 size, work);
 
-        fprintf(csvFile, "%s,%d,%d,%d\n", algorithm_name, nThreads, size, work);
+        fprintf(csvFile, "%s,%d,%d,%zu\n", algorithm_name, nThreads, size, work);
 
         free(nrs);
     }
