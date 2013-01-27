@@ -74,7 +74,9 @@ plotByInputSize <- function(par, prefix) {
 	y <- NULL
 	sapply(pars, FUN=addPar)
 
-	texPlot(x,y, pch, txt, "number of threads", "time(s)", sprintf("%s: Time as function of the number of threads (input size = %d)", prefix, nInput), "")
+	if (nrow(x) > 1) {
+		texPlot(x,y, pch, txt, "number of threads", "time(s)", sprintf("%s: Time as function of the number of threads (input size = %d)", prefix, nInput), "")
+	}
 }
 
 makePlots <- function(times, prefix) {
@@ -92,9 +94,11 @@ speedupTable <- function(times, prefix) {
 	ref <- times[times[,1] == REF,3]
 	tab <- cbind(times, round(ref / times[,3], digits=2))
 	tab <- tab[tab[,4] > 0,]
-	names(tab) <- make.names(c("Algorithm", "Threads", "Time", "Speedup"))
-	cap <- sprintf("%s: Runtimes and Speedup for input size %d", prefix, size)
-	print(xtable(tab, caption=cap))
+	if (nrow(tab) > 1) {
+		names(tab) <- make.names(c("Algorithm", "Threads", "Time", "Speedup"))
+		cap <- sprintf("%s: Runtimes and Speedup for input size %d", prefix, size)
+		print(xtable(tab, caption=cap))
+	}
 }
 
 makeSpeedupTables <- function(times, prefix) {
