@@ -106,12 +106,14 @@ makeSpeedupTables <- function(times, prefix) {
 	unused <- sapply(byInputSize, FUN=speedupTable, prefix)
 }
 
-makeMinSpeedupTables <- function(file) {
+makeAllSpeedupTables <- function(file) {
 	results <- read.table(file, sep=",")
 
-	time_mean <- aggregate(results[,4], by=list(results[,1],results[,2],results[,3]), FUN=min)
+	time_mean <- aggregate(results[,4], by=list(results[,1],results[,2],results[,3]), FUN=mean)
+	time_min <- aggregate(results[,4], by=list(results[,1],results[,2],results[,3]), FUN=min)
 
-	unused <- makeSpeedupTables(time_mean, "Min")
+	unused <- makeSpeedupTables(time_mean, "Avg")
+	unused <- makeSpeedupTables(time_min, "Min")
 }
 
 readAndPlot <- function(file) {
@@ -125,7 +127,7 @@ readAndPlot <- function(file) {
 }
 
 tableAndPlot <- function(file) {
-	makeMinSpeedupTables(file)
+	makeAllSpeedupTables(file)
 
 	readAndPlot(file)
 }
