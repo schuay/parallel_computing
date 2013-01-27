@@ -68,6 +68,38 @@ add_executable(reduction_bench
 )
 SET_TARGET_PROPERTIES(reduction_bench PROPERTIES COMPILE_DEFINITIONS "NOPERF")
 
+add_executable(recursive_work
+    common.c
+    ${COMMON_DIR}/perf.c
+    recursive.c
+    ${COMMON_DIR}/csv.c
+    work.c
+)
+
+add_executable(iterative_work
+    common.c
+    ${COMMON_DIR}/perf.c
+    iterative.c
+    ${COMMON_DIR}/csv.c
+    work.c
+)
+
+add_executable(hillis-steele_work
+    common.c
+    ${COMMON_DIR}/perf.c
+    hillis-steele.c
+    ${COMMON_DIR}/csv.c
+    work.c
+)
+
+add_executable(reduction_work
+    common.c
+    ${COMMON_DIR}/perf.c
+    reduction.c
+    ${COMMON_DIR}/csv.c
+    work.c
+)
+
 if(CHECK_FOUND)
     enable_testing()
 

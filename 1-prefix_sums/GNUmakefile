@@ -10,6 +10,8 @@ REMOTEDIR = ~/project1-prefix_sums
 SOURCE = . ../common
 
 CSV_FILE = bench.csv
+WORK_FILE = work.csv
+
 ALGORITHMS = recursive iterative hillis-steele reduction
 INPUT_SIZES = 10 100 1000000 1111111 2000000 5000000 6666666 100000000
 NUM_THREADS = 1 2 4 0 # 0 means use the default
@@ -30,6 +32,13 @@ bench: bake
 			build/$${alg}_bench data/$(CSV_FILE) $${inSize} $(NUM_THREADS); \
 		done; \
 	done
+
+work: bake
+	mkdir -p data
+	for alg in $(ALGORITHMS); do \
+		build/$${alg}_work data/$(WORK_FILE) $(INPUT_SIZES); \
+	done
+
 
 hand-in:
 	$(RSYNC) $(RFLAGS) $(SOURCE) $(HOST):$(REMOTEDIR)
