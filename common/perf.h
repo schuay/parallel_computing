@@ -10,7 +10,7 @@
 #endif /* NOPERF */
 
 typedef struct {
-    int *counters;
+    size_t *counters;
     size_t len;
 } perf_t;
 
@@ -22,6 +22,6 @@ void perf_inc(perf_t *perf, size_t n);
 
 /** Print a summary of the performance counters.
  * Return the sum of all counters. */
-int perf_summary(perf_t *perf);
+size_t perf_summary(perf_t *perf);
 
 #endif /* __PERF_H */

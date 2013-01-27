@@ -10,7 +10,7 @@ perf_t *perf_create(size_t n) {
     }
 
     p->len = n;
-    p->counters = calloc(n, sizeof(int));
+    p->counters = calloc(n, sizeof(size_t));
     if (p->counters == NULL) {
         free(p);
         return NULL;
@@ -30,14 +30,14 @@ void perf_inc(perf_t *perf, size_t n) {
     }
 }
 
-int perf_summary(perf_t *perf) {
-    int sum = 0;
+size_t perf_summary(perf_t *perf) {
+    size_t sum = 0;
     size_t i;
     for (i = 0; i < perf->len; i++) {
         sum += perf->counters[i];
-        printf("Thread %02d: %d counters\n", (int)i, perf->counters[i]);
+        printf("Thread %02d: %zu counters\n", (int)i, perf->counters[i]);
     }
-    printf("Total: %d counters\n", sum);
+    printf("Total: %zu counters\n", sum);
     return sum;
 }
 
