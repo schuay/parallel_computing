@@ -202,7 +202,7 @@ counters and above input sizes. We measured with $2$ threads.
 doStuff <- function() {
 	plotWork("../1-prefix_sums/data/work.csv")
 
-	readAndPlot("../1-prefix_sums/data/bench.csv")
+	tableAndPlot("../1-prefix_sums/data/bench.csv")
 }
 
 doStuff()
@@ -278,7 +278,7 @@ algorithm. Test cases include:
 %       What is missing?
 
 <<results=tex,echo=FALSE>>=
-readAndPlot("../1-merge/data/bench.csv")
+tableAndPlot("../1-merge/data/bench.csv")
 @
 
 % =============================================================================
@@ -373,7 +373,7 @@ before the $100000000$ benchmark. Additionally, at lower input sizes the threadi
 is so large, that increasing the number of parallel threads actually slows down execution.
 
 <<results=tex,echo=FALSE>>=
-readAndPlot("../2-merge/data/bench.csv")
+tableAndPlot("../2-merge/data/bench.csv")
 @
 
 % =============================================================================
@@ -485,7 +485,7 @@ outperforming the other partitions ($500 \times 50$ and $1000 \times 25$) by alm
 of $2$.
 
 <<results=tex,echo=FALSE>>=
-readAndPlot("../3-stencil/data/bench.csv")
+tableAndPlot("../3-stencil/data/bench.csv")
 @
 
 
@@ -574,7 +574,7 @@ in the calls to \lstinline|MPI_Alltoall| and \lstinline|MPI_Alltoallv| calls, wh
 cannot influence.
 
 <<results=tex,echo=FALSE>>=
-readAndPlot("../3-bucket_sort/data/bench.csv")
+tableAndPlot("../3-bucket_sort/data/bench.csv")
 @
 
 % TODO: Bonus radix sort
