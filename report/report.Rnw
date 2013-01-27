@@ -137,7 +137,19 @@ Test and benchmark the implementations, for OpenMP compare performance to
 
 \subsubsection{Implementation}
 
-% TODO
+We implemented the recursive, iterative and Hillis-Steele algorithms as shown in
+the lecture and use OpenMP's ''parallel for`` to parallelize the loops.
+We use the ''guided`` scheduler.
+
+Additionally, we implemented a reduction clause for comparison.\\
+
+Each parallel algorithm takes a pointer to a \lstinline|perf_t| structure. It
+contains a counter for each thread, which is initialized to $0$. Whenever a thread
+does work (usually an addition) it can increment its counter with the
+\lstinline|PERF_INC()| macro. If these performance counters are not needed (i.e.
+when benchmarking the runtime) the macro can be disabled by defining
+\lstinline|NOPERF|. This way, they don't have any performance impact except when
+needed.\\
 
 A few of these algorithms may also be simplified to compute only the total
 sum instead of all prefix sums:
