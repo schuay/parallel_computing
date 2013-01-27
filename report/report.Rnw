@@ -630,7 +630,21 @@ entire Arrayscan algorithm is $O(\frac{3 * n}{p} + 2 * \log p)$. Assuming, that 
 have to collect the the data it can be cut down to $O(\frac{2 * n}{p} + \log p)$.
 
 \subsubsection{Correctness}
-% TODO
+
+The sequential scan algorithm simply computes $y_i = \sum_{j = 0}^{i} x_i$.
+Since our $+$ operation is associative, it doesn't matter in what order additions are performed.
+This means, that for any $i$, where $i \in [ 0 \dots n ]$, we may compute
+$y_i = \sum_{j = 0}^{k - 1} x_j + \sum_{l = k}^{i} x_k$. Thus, we can compute
+prefix-sums for our own segment and are then allowed to add the sum of the all previous
+ones. This is essentially what we do in the Arrayscan algorithm.\\
+
+However, the sum of all elements before a process' local segment is computed using the
+Hillis-Steele Exscan. As we have already seen in the lecture, the Hillis-Steele algorithm
+also only exploits associativity. It starts by adding two adjacent elements forming a
+group and continues to double these groups, while never adding a summand more than once.
+The only difference in the Exscan application of this algorithm is, that the summands
+already are the sums of groups of elements. This doesn't violate our constraints
+(only use associativity), however.
 
 \subsubsection{Testing}
 
