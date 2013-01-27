@@ -17,6 +17,26 @@ texPlot <- function(x, y, pch, text, xlab, ylab, main, log) {
 	cat("\\includegraphics{", file, "}\n\n", sep="")
 }
 
+plotWork <- function(file) {
+	par <- read.table(file, sep=",")
+
+	pars <- split(par, par[,1])
+	pch <- 1:length(pars)
+	addPar <- function(p) {
+		if (nrow(p) > 0) {
+			x <<- cbind(x,p[,3])
+			y <<- cbind(y,p[,4])
+			txt <<- c(txt,as.character(p[1,1]))
+		}
+	}
+	txt <- NULL
+	x <- NULL
+	y <- NULL
+	sapply(pars, FUN=addPar)
+
+	texPlot(x,y, pch, txt, "input size", "work", "Work as function of input size", "")
+}
+
 plotByNumThreads <- function(par, seq, prefix) {
 	pars <- split(par, par[,1])
 	pch <- 1:length(pars)
